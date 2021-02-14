@@ -1,0 +1,10 @@
+{% extends "base" %}
+{% block content %}
+    <h1>{{ header }}</h1>
+    <h3>Here are some things:</h3>
+    <ul>
+        {% for s in items %}
+            <li>{{ s }}</li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
