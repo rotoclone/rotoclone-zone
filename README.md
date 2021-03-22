@@ -1,1 +1,1 @@
-# rust-server-test
+# blog-server

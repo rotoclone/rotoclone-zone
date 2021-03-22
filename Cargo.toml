@@ -1,5 +1,5 @@
 [package]
-name = "rust-server-test"
+name = "blog-server"
 version = "0.1.0"
 authors = ["Steven Goldberg"]
 edition = "2018"
