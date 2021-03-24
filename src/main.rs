@@ -13,14 +13,9 @@ struct IndexContext {
 
 #[get("/")]
 fn index() -> Template {
-    greeting("there".to_string())
-}
-
-#[get("/<name>")]
-fn greeting(name: String) -> Template {
     let context = IndexContext {
         title: "Sup".to_string(),
-        header: format!("Hello {}", name),
+        header: format!("You are now entering The Rotoclone Zone"),
         items: vec!["boop".to_string(), "doop".to_string(), "floop".to_string()],
     };
     Template::render("index", &context)
@@ -29,6 +24,6 @@ fn greeting(name: String) -> Template {
 #[launch]
 fn rocket() -> rocket::Rocket {
     rocket::ignite()
-        .mount("/", routes![index, greeting])
+        .mount("/", routes![index])
         .attach(Template::fairing())
 }
