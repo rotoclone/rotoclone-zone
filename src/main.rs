@@ -15,7 +15,7 @@ struct IndexContext {
 fn index() -> Template {
     let context = IndexContext {
         title: "Sup".to_string(),
-        header: format!("You are now entering The Rotoclone Zone"),
+        header: format!("You have entered The Rotoclone Zone"),
         items: vec!["boop".to_string(), "doop".to_string(), "floop".to_string()],
     };
     Template::render("index", &context)
