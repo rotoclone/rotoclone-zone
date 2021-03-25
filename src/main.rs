@@ -1,3 +1,4 @@
+use rocket_contrib::serve::{crate_relative, StaticFiles};
 use rocket_contrib::templates::Template;
 use serde::Serialize;
 
@@ -15,7 +16,7 @@ struct IndexContext {
 fn index() -> Template {
     let context = IndexContext {
         title: "Sup".to_string(),
-        header: format!("You have entered The Rotoclone Zone"),
+        header: "You have entered The Rotoclone Zone".to_string(),
         items: vec!["boop".to_string(), "doop".to_string(), "floop".to_string()],
     };
     Template::render("index", &context)
@@ -25,5 +26,6 @@ fn index() -> Template {
 fn rocket() -> rocket::Rocket {
     rocket::ignite()
         .mount("/", routes![index])
+        .mount("/", StaticFiles::from(crate_relative!("static")))
         .attach(Template::fairing())
 }

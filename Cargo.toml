@@ -12,4 +12,4 @@ serde = "1.0"
 git = "https://github.com/SergioBenitez/Rocket"
 branch = "master"
 default-features = false
-features = ["tera_templates"]
+features = ["tera_templates", "serve"]
