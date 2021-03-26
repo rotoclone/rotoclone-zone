@@ -28,7 +28,7 @@ fn index() -> Template {
 fn rocket() -> rocket::Rocket {
     let mut rocket = rocket::ignite()
         .mount("/", routes![index])
-        .mount("/", StaticFiles::from(crate_relative!("static")))
+        .mount("/", StaticFiles::from(crate_relative!("static")).rank(10))
         .attach(Template::fairing());
 
     let config = rocket.figment();
@@ -37,7 +37,7 @@ fn rocket() -> rocket::Rocket {
         println!("Serving static files from {}", dir);
         rocket = rocket.mount(
             "/",
-            StaticFiles::new(dir, Options::Index | Options::DotFiles),
+            StaticFiles::new(dir, Options::Index | Options::DotFiles).rank(9),
         );
     }
 
