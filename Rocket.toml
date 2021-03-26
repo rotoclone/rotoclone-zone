@@ -2,3 +2,7 @@
 address = "0.0.0.0"
 port = 8000
 static_files_dir = "/var/www/static"
+
+[default.tls]
+certs = "/etc/letsencrypt/live/rotoclone.zone/fullchain.pem"
+key = "/etc/letsencrypt/live/rotoclone.zone/privkey.pem"
