@@ -1,9 +1,11 @@
-use rocket_contrib::serve::{crate_relative, StaticFiles};
+use rocket_contrib::serve::{crate_relative, Options, StaticFiles};
 use rocket_contrib::templates::Template;
 use serde::Serialize;
 
 #[macro_use]
 extern crate rocket;
+
+const ADDITIONAL_STATIC_FILES_DIR_CONFIG_KEY: &str = "static_files_dir";
 
 #[derive(Serialize)]
 struct IndexContext {
@@ -24,8 +26,20 @@ fn index() -> Template {
 
 #[launch]
 fn rocket() -> rocket::Rocket {
-    rocket::ignite()
+    let mut rocket = rocket::ignite()
         .mount("/", routes![index])
         .mount("/", StaticFiles::from(crate_relative!("static")))
-        .attach(Template::fairing())
+        .attach(Template::fairing());
+
+    let config = rocket.figment();
+
+    if let Ok(dir) = config.extract_inner::<String>(ADDITIONAL_STATIC_FILES_DIR_CONFIG_KEY) {
+        println!("Serving static files from {}", dir);
+        rocket = rocket.mount(
+            "/",
+            StaticFiles::new(dir, Options::Index | Options::DotFiles),
+        );
+    }
+
+    rocket
 }
