@@ -9,5 +9,7 @@
         <title>{{ title }}</title>
     </head>
     <body style="font-family:sans-serif;"> {% block content %}{% endblock content %}
-        </body>
-    </html>
+        <noscript><img src="https://analytics.rotoclone.zone/ingress/ffee66b9-8e0a-469e-ad36-6e2b8e17bf85/pixel.gif"/></noscript>
+        <script src="https://analytics.rotoclone.zone/ingress/ffee66b9-8e0a-469e-ad36-6e2b8e17bf85/script.js"></script>
+    </body>
+</html>
