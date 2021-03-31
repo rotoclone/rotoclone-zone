@@ -7,9 +7,8 @@
         <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
         <link href="/site.webmanifest" rel="manifest"/>
         <title>{{ title }}</title>
+        <script async defer data-website-id="0fb9897a-2078-4060-ab2e-5e8244f8e3cc" src="https://analytics.rotoclone.zone/umami.js"></script>
     </head>
     <body style="font-family:sans-serif;"> {% block content %}{% endblock content %}
-        <noscript><img src="https://analytics.rotoclone.zone/ingress/ffee66b9-8e0a-469e-ad36-6e2b8e17bf85/pixel.gif"/></noscript>
-        <script src="https://analytics.rotoclone.zone/ingress/ffee66b9-8e0a-469e-ad36-6e2b8e17bf85/script.js"></script>
     </body>
 </html>
