@@ -6,7 +6,7 @@
         <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
         <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
         <link href="/site.webmanifest" rel="manifest"/>
-        <script async defer data-website-id="0fb9897a-2078-4060-ab2e-5e8244f8e3cc" src="https://www.rotoclone.zone/umami.js"></script>
+        <script async defer data-website-id="0fb9897a-2078-4060-ab2e-5e8244f8e3cc" src="https://www.rotoclone.zone/umami/rotoclone_umami.js"></script>
         <title>{{ title }}</title>
     </head>
     <body style="font-family:sans-serif;"> {% block content %}{% endblock content %}
