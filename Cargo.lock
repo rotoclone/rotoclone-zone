@@ -92,15 +92,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "blog-server"
-version = "0.1.0"
-dependencies = [
- "rocket",
- "rocket_contrib",
- "serde",
-]
-
-[[package]]
 name = "bstr"
 version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1310,6 +1301,15 @@ dependencies = [
  "uncased",
  "unicode-xid",
  "version_check",
+]
+
+[[package]]
+name = "rotoclone-zone"
+version = "0.1.0"
+dependencies = [
+ "rocket",
+ "rocket_contrib",
+ "serde",
 ]
 
 [[package]]
