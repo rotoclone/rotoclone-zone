@@ -1,0 +1,7 @@
+{% extends "base" %}
+{% block content %}
+    <div style="text-align: center;">
+        <h1>{{ header }}</h1>
+        <p>{{ message }}</p>
+    </div>
+{% endblock content %}

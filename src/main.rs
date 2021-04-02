@@ -14,6 +14,13 @@ struct IndexContext {
     items: Vec<String>,
 }
 
+#[derive(Serialize)]
+struct ErrorContext {
+    title: String,
+    header: String,
+    message: String,
+}
+
 #[get("/")]
 fn index() -> Template {
     let context = IndexContext {
@@ -24,11 +31,22 @@ fn index() -> Template {
     Template::render("index", &context)
 }
 
+#[catch(404)]
+fn not_found() -> Template {
+    let context = ErrorContext {
+        title: "404".to_string(),
+        header: "404".to_string(),
+        message: "That's not a page".to_string(),
+    };
+    Template::render("error", &context)
+}
+
 #[launch]
 fn rocket() -> rocket::Rocket {
     let mut rocket = rocket::ignite()
         .mount("/", routes![index])
         .mount("/", StaticFiles::from(crate_relative!("static")).rank(10))
+        .register(catchers![not_found])
         .attach(Template::fairing());
 
     let config = rocket.figment();
