@@ -131,8 +131,8 @@ fn extract_front_matter(file_path: &PathBuf) -> Result<FrontMatter, std::io::Err
 pub struct BlogEntryContext {
     title: String,
     tags: Vec<String>,
-    created_at: DateTime<Utc>,
-    updated_at: Option<DateTime<Utc>>,
+    created_at: String,
+    updated_at: Option<String>,
     entry_content: String,
 }
 
@@ -145,9 +145,13 @@ impl BlogEntryContext {
         BlogEntryContext {
             title: entry.title.clone(),
             tags: entry.tags.clone(),
-            created_at: entry.created_at,
-            updated_at: entry.updated_at,
+            created_at: format_time(entry.created_at),
+            updated_at: entry.updated_at.map(format_time),
             entry_content,
         }
     }
+}
+
+fn format_time(time: DateTime<Utc>) -> String {
+    time.format("%B %e %Y").to_string()
 }
