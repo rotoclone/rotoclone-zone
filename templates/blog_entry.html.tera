@@ -1,0 +1,16 @@
+{% extends "base" %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <p>Posted {{ created_at }}</p>
+    {% if updated_at %}
+        <p>Updated {{ updated_at }}</p>
+    {% endif %}
+    {% if tags|length > 0 %}
+        <ul>
+            {% for tag in tags %}
+                <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <p>{{ entry_content | safe }}</p>
+{% endblock content %}

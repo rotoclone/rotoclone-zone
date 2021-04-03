@@ -151,6 +151,7 @@ dependencies = [
  "libc",
  "num-integer",
  "num-traits",
+ "serde",
  "time 0.1.44",
  "winapi 0.3.9",
 ]
@@ -510,6 +511,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "322f4de77956e22ed0e5032c359a0f1273f1f7f0d79bfa3b8ffbc730d7fbcc5c"
 dependencies = [
  "libc",
+]
+
+[[package]]
+name = "hotwatch"
+version = "0.4.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d61ee702e77f237b41761361a82e5c4bf6277dbb4bc8b6b7d745cb249cc82b31"
+dependencies = [
+ "log",
+ "notify",
 ]
 
 [[package]]
@@ -1307,9 +1318,12 @@ dependencies = [
 name = "rotoclone-zone"
 version = "0.1.0"
 dependencies = [
+ "chrono",
+ "hotwatch",
  "rocket",
  "rocket_contrib",
  "serde",
+ "toml",
 ]
 
 [[package]]
