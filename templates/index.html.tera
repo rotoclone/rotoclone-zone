@@ -1,10 +1,12 @@
 {% extends "base" %}
 {% block content %}
-    <h1 style="text-shadow:8px 8px 5px #0000ff66, 16px 16px 5px #00ff0066, 24px 24px 5px #ff000066, -8px -8px 5px #0000ff66, -16px -16px 5px #00ff0066, -24px -24px 5px #ff000066;">{{ header }}</h1>
-    <h3>Here are some things:</h3>
-    <ul>
-        {% for s in items %}
-            <li>{{ s }}</li>
-        {% endfor %}
-    </ul>
+    <div class="margin-sm">
+        <h1 style="text-shadow:8px 8px 5px #0000ff66, 16px 16px 5px #00ff0066, 24px 24px 5px #ff000066, -8px -8px 5px #0000ff66, -16px -16px 5px #00ff0066, -24px -24px 5px #ff000066;">{{ header }}</h1>
+        <h3>Here are some things:</h3>
+        <ul>
+            {% for s in items %}
+                <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock content %}

@@ -1,0 +1,115 @@
+/* Font */
+
+.font-sans {
+    font-family: sans-serif;
+}
+
+/* Width */
+
+.width-sm {
+    width: min(75em, 100%);
+}
+
+.width-md {
+    width: min(100em, 100%);
+}
+
+.width-lg {
+    width: min(150em, 100%);
+}
+
+/* Alignment */
+
+.center-hz {
+    margin: auto;
+}
+
+.text-center-hz {
+    text-align: center;
+}
+
+/* Padding */
+
+.padding-none {
+    padding: 0;
+}
+
+.padding-sm {
+    padding: 0.5em;
+}
+
+.padding-md {
+    padding: 0.75em;
+}
+
+.padding-lg {
+    padding: 1.5em;
+}
+
+/* Margin */
+
+.margin-none {
+    margin: 0;
+}
+
+.margin-sm {
+    margin: 0.5em;
+}
+
+.margin-md {
+    margin: 0.75em;
+}
+
+.margin-lg {
+    margin: 1.5em;
+}
+
+/* Color */
+
+:root {
+    --color-extralightblue: rgb(210, 224, 255);
+    --color-lightblue: rgb(187, 209, 255);
+    --color-darkblue: rgb(0, 75, 160);
+    --color-lightgray: rgb(240, 240, 240);
+    --color-medgray: rgb(230, 230, 230);
+}
+
+.bgcolor-extralightblue {
+    background-color: var(--color-extralightblue);
+}
+
+.textcolor-extralightblue {
+    color: var(--color-extralightblue);
+}
+
+.bgcolor-lightblue {
+    background-color: var(--color-lightblue);
+}
+
+.textcolor-lightblue {
+    color: var(--color-lightblue);
+}
+
+.bgcolor-darkblue {
+    background-color: var(--color-darkblue);
+}
+
+.textcolor-darkblue {
+    color: var(--color-darkblue);
+}
+
+.bgcolor-lightgray {
+    background-color: var(--color-lightgray);
+}
+
+.textcolor-lightgray {
+    color: var(--color-lightgray);
+}
+
+.bgcolor-medgray {
+    background-color: var(--color-medgray);
+}
+
+.textcolor-medgray {
+    color: var(--color-medgray);
+}

@@ -1,20 +1,30 @@
 {% extends "base" %}
 {% block content %}
-    <h1>{{ title }}</h1>
-    <p>Posted {{ created_at }}</p>
-    {% if updated_at %}
-        <p>Updated {{ updated_at }}</p>
-    {% endif %}
-    {% if tags|length > 0 %}
-        <p>Tags:</p>
-        <ul>
-            {% for tag in tags %}
-                <li>{{ tag }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <hr />
-    <p>{{ entry_content | safe }}</p>
-    <hr />
-    <a href="/">Home</a>
+    <div class="bgcolor-extralightblue">
+        <div class="width-md center-hz">
+            <div class="bgcolor-medgray padding-md">
+                <h1>{{ title }}</h1>
+                <p>Posted {{ created_at }}</p>
+                {% if updated_at %}
+                    <p>Updated {{ updated_at }}</p>
+                {% endif %}
+                {% if tags|length > 0 %}
+                    <p>Tags:</p>
+                    <ul>
+                        {% for tag in tags %}
+                            <li>{{ tag }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div class="padding-md"></div>
+            <div class="bgcolor-medgray padding-md">
+                <p>{{ entry_content | safe }}</p>
+            </div>
+            <div class="padding-sm"></div>
+            <div class="text-center-hz padding-sm">
+                <a href="/">Home</a>
+            </div>
+        </div>
+    <div>
 {% endblock content %}
