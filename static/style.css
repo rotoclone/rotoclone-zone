@@ -123,7 +123,7 @@
     --color-lightgray: rgb(240, 240, 240);
     --color-medgray: rgb(230, 230, 230);
     --color-extradarkgray: rgb(30, 30, 30);
-    --color-shadow: rgba(0, 0, 0, 0.2);
+    --color-shadow: rgba(0, 0, 0, 0.18);
 
     --color-pagebg: var(--color-extralightblue);
     --color-contentbg: var(--color-lightgray);
