@@ -1,3 +1,6 @@
+use chrono::{DateTime, Datelike, Utc};
+use ordinal::Ordinal;
+use pulldown_cmark::{html, Options, Parser};
 use serde::Deserialize;
 use serde::Serialize;
 use std::{
@@ -5,8 +8,6 @@ use std::{
     io::{BufRead, BufReader, ErrorKind},
     path::PathBuf,
 };
-
-use chrono::{DateTime, Utc};
 
 /// The name of the directory blog entry files are stored under.
 const BLOG_ENTRIES_DIR_NAME: &str = "blog";
@@ -127,6 +128,36 @@ fn extract_front_matter(file_path: &PathBuf) -> Result<FrontMatter, std::io::Err
     Ok(toml::from_str(&front_matter_string)?)
 }
 
+/// Extracts the contents of the provided file (ignoring the front matter) and converts it from markdown to HTML.
+///
+/// # Errors
+/// Returns an error if there are any issues reading from the file.
+fn extract_content_as_html(file_path: &PathBuf) -> Result<String, std::io::Error> {
+    let file = File::open(file_path)?;
+    let mut done_with_front_matter = false;
+    let mut file_lines = Vec::new();
+    for line in BufReader::new(file).lines().skip(1) {
+        let line = line?;
+        if done_with_front_matter {
+            file_lines.push(line);
+        } else if line == FRONT_MATTER_DELIMITER {
+            done_with_front_matter = true;
+        }
+    }
+
+    let mut options = Options::empty();
+    options.insert(Options::ENABLE_STRIKETHROUGH);
+    options.insert(Options::ENABLE_FOOTNOTES);
+    options.insert(Options::ENABLE_TABLES);
+    let markdown = file_lines.join("\n");
+    let parser = Parser::new_ext(&markdown, options);
+
+    let mut html: String = String::with_capacity(markdown.len() * 3 / 2);
+    html::push_html(&mut html, parser);
+
+    Ok(html)
+}
+
 #[derive(Serialize)]
 pub struct BlogEntryContext {
     title: String,
@@ -137,21 +168,21 @@ pub struct BlogEntryContext {
 }
 
 impl BlogEntryContext {
-    pub fn from_blog_entry(entry: &BlogEntry) -> BlogEntryContext {
-        //TODO parse content
-        // let entry_content = entry.metadata.content_file
-        let entry_content = "<h1>Yo</h1><p>dis a blog entry</p>".to_string();
-
-        BlogEntryContext {
+    pub fn from_blog_entry(entry: &BlogEntry) -> Result<BlogEntryContext, std::io::Error> {
+        Ok(BlogEntryContext {
             title: entry.title.clone(),
             tags: entry.tags.clone(),
             created_at: format_time(entry.created_at),
             updated_at: entry.updated_at.map(format_time),
-            entry_content,
-        }
+            entry_content: extract_content_as_html(&entry.metadata.content_file)?,
+        })
     }
 }
 
 fn format_time(time: DateTime<Utc>) -> String {
-    time.format("%B %e %Y").to_string()
+    let month = time.format("%B");
+    let day = Ordinal(time.day()).to_string();
+    let year = time.format("%Y");
+
+    format!("{} {} {}", month, day, year)
 }

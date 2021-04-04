@@ -6,11 +6,15 @@
         <p>Updated {{ updated_at }}</p>
     {% endif %}
     {% if tags|length > 0 %}
+        <p>Tags:</p>
         <ul>
             {% for tag in tags %}
-                <li>{{ s }}</li>
+                <li>{{ tag }}</li>
             {% endfor %}
         </ul>
     {% endif %}
+    <hr />
     <p>{{ entry_content | safe }}</p>
+    <hr />
+    <a href="/">Home</a>
 {% endblock content %}

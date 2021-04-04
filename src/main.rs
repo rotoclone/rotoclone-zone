@@ -47,7 +47,8 @@ fn get_blog_entry(entry_name: String, site: State<Site>) -> Option<Template> {
     entry.map(|x| {
         Template::render(
             x.metadata.template_name.clone(),
-            BlogEntryContext::from_blog_entry(&x),
+            BlogEntryContext::from_blog_entry(&x)
+                .unwrap_or_else(|e| panic!("error rendering blog entry {}: {}", entry_name, e)),
         )
     })
 }
@@ -78,7 +79,7 @@ fn rocket() -> rocket::Rocket {
         .unwrap_or_else(|_| DEFAULT_SITE_CONTENT_BASE_DIR.to_string());
 
     let site = Site::from_dir(&site_base_dir.into()).expect("error building site");
-    println!("Built site: {:?}", site); //TODO remove
+    println!("Built site: {:#?}", site); //TODO remove
     rocket = rocket.manage(site);
 
     if let Ok(dir) = additional_static_files_dir {
