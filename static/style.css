@@ -64,6 +64,56 @@
     margin: 1.5em;
 }
 
+.margin-top-neg {
+    margin-top: -1em;
+}
+
+.margin-top-md {
+    margin-top: 0.75em;
+}
+
+/* Border */
+
+.rounded-corners-sm {
+    border-radius: 6px;
+}
+
+.rounded-corners-md {
+    border-radius: 10px;
+}
+
+.rounded-corners-lg {
+    border-radius: 20px;
+}
+
+/* Shadow */
+
+.shadow-diag-sm {
+    box-shadow: 2px 2px 5px var(--color-shadow);
+}
+
+.shadow-diag-md {
+    box-shadow: 2px 5px 12px var(--color-shadow);
+}
+
+.shadow-down-sm {
+    box-shadow: 0px 2px 5px var(--color-shadow);
+}
+
+.shadow-down-md {
+    box-shadow: 0px 5px 10px var(--color-shadow);
+}
+
+.shadow-down-lg {
+    box-shadow: 0px 8px 15px var(--color-shadow);
+}
+
+/* Text size */
+
+.textsize-extralg {
+    font-size: 50pt;
+}
+
 /* Color */
 
 :root {
@@ -72,6 +122,12 @@
     --color-darkblue: rgb(0, 75, 160);
     --color-lightgray: rgb(240, 240, 240);
     --color-medgray: rgb(230, 230, 230);
+    --color-extradarkgray: rgb(30, 30, 30);
+    --color-shadow: rgba(0, 0, 0, 0.2);
+
+    --color-pagebg: var(--color-extralightblue);
+    --color-contentbg: var(--color-lightgray);
+    --color-contenttext: var(--color-extradarkgray);
 }
 
 .bgcolor-extralightblue {
@@ -112,4 +168,21 @@
 
 .textcolor-medgray {
     color: var(--color-medgray);
+}
+
+/* Composite classes */
+
+div .text-container {
+    background-color: var(--color-contentbg);
+    color: var(--color-contenttext);
+    box-shadow: 0px 5px 10px var(--color-shadow);
+    border-radius: 6px;
+    padding: 0.75em;
+    width: min(100em, 100%);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    background-color: var(--color-pagebg);
 }

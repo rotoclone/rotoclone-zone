@@ -18,13 +18,6 @@ const RENDERED_HTML_BASE_DIR_CONFIG_KEY: &str = "rendered_html_base_dir";
 const DEFAULT_RENDERED_HTML_BASE_DIR: &str = "./rendered_html";
 
 #[derive(Serialize)]
-struct IndexContext {
-    title: String,
-    header: String,
-    items: Vec<String>,
-}
-
-#[derive(Serialize)]
 struct ErrorContext {
     title: String,
     header: String,
@@ -32,12 +25,8 @@ struct ErrorContext {
 }
 
 #[get("/")]
-fn index() -> Template {
-    let context = IndexContext {
-        title: "Sup".to_string(),
-        header: "You have entered The Rotoclone Zone".to_string(),
-        items: vec!["boop".to_string(), "doop".to_string(), "floop".to_string()],
-    };
+fn index(site: State<Site>) -> Template {
+    let context = site.build_index_context();
     Template::render("index", &context)
 }
 

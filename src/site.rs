@@ -19,6 +19,21 @@ const DEFAULT_BLOG_ENTRY_TEMPLATE_NAME: &str = "blog_entry";
 /// The string used to delimit the beginning and end of the front matter
 const FRONT_MATTER_DELIMITER: &str = "+++";
 
+const RECENT_BLOG_ENTRIES_LIMIT: usize = 5;
+
+#[derive(Serialize)]
+pub struct IndexContext {
+    title: String,
+    recent_blog_entries: Vec<BlogEntryStub>,
+}
+
+#[derive(Serialize)]
+struct BlogEntryStub {
+    title: String,
+    url: String,
+    created_at: String,
+}
+
 #[derive(Debug)]
 pub struct Site {
     pub blog_entries: Vec<BlogEntry>,
@@ -44,11 +59,11 @@ pub struct PageMetadata {
 
 #[derive(Debug)]
 pub struct BlogEntry {
-    title: String,
+    pub title: String,
     pub metadata: PageMetadata,
-    tags: Vec<String>,
-    created_at: DateTime<Utc>,
-    updated_at: Option<DateTime<Utc>>,
+    pub tags: Vec<String>,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: Option<DateTime<Utc>>,
 }
 
 impl Site {
@@ -95,7 +110,26 @@ impl Site {
             blog_entries.push(entry);
         }
 
+        blog_entries.sort_by(|a, b| a.created_at.cmp(&b.created_at).reverse());
         Ok(Site { blog_entries })
+    }
+
+    pub fn build_index_context(&self) -> IndexContext {
+        let recent_blog_entries = self
+            .blog_entries
+            .iter()
+            .take(RECENT_BLOG_ENTRIES_LIMIT)
+            .map(|entry| BlogEntryStub {
+                title: entry.title.clone(),
+                url: format!("/blog/{}", entry.metadata.slug),
+                created_at: format_time(entry.created_at),
+            })
+            .collect();
+
+        IndexContext {
+            title: "Sup".to_string(),
+            recent_blog_entries,
+        }
     }
 }
 

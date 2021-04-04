@@ -2,7 +2,7 @@
 {% block content %}
     <div class="bgcolor-extralightblue">
         <div class="width-md center-hz">
-            <div class="bgcolor-medgray padding-md">
+            <div class="text-container margin-top-md">
                 <h1>{{ title }}</h1>
                 <p>Posted {{ created_at }}</p>
                 {% if updated_at %}
@@ -18,7 +18,7 @@
                 {% endif %}
             </div>
             <div class="padding-md"></div>
-            <div class="bgcolor-medgray padding-md">
+            <div class="text-container">
                 <p>{{ entry_content | safe }}</p>
             </div>
             <div class="padding-sm"></div>
