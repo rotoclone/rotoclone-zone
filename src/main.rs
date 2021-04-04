@@ -10,8 +10,12 @@ mod site;
 use site::*;
 
 const ADDITIONAL_STATIC_FILES_DIR_CONFIG_KEY: &str = "static_files_dir";
+
 const SITE_CONTENT_BASE_DIR_CONFIG_KEY: &str = "site_content_base_dir";
 const DEFAULT_SITE_CONTENT_BASE_DIR: &str = "./site_content";
+
+const RENDERED_HTML_BASE_DIR_CONFIG_KEY: &str = "rendered_html_base_dir";
+const DEFAULT_RENDERED_HTML_BASE_DIR: &str = "./rendered_html";
 
 #[derive(Serialize)]
 struct IndexContext {
@@ -77,8 +81,12 @@ fn rocket() -> rocket::Rocket {
     let site_base_dir = config
         .extract_inner::<String>(SITE_CONTENT_BASE_DIR_CONFIG_KEY)
         .unwrap_or_else(|_| DEFAULT_SITE_CONTENT_BASE_DIR.to_string());
+    let html_base_dir = config
+        .extract_inner::<String>(RENDERED_HTML_BASE_DIR_CONFIG_KEY)
+        .unwrap_or_else(|_| DEFAULT_RENDERED_HTML_BASE_DIR.to_string());
 
-    let site = Site::from_dir(&site_base_dir.into()).expect("error building site");
+    let site =
+        Site::from_dir(&site_base_dir.into(), &html_base_dir.into()).expect("error building site");
     println!("Built site: {:#?}", site); //TODO remove
     rocket = rocket.manage(site);
 
