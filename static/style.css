@@ -184,5 +184,9 @@ div .text-container {
 }
 
 body {
-    background-color: var(--color-pagebg);
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    /* background-color: var(--color-pagebg); */
+    background: linear-gradient(180deg, #bfd8ff, #c5dbff, #cbdeff, #d0e1ff, #d6e4ff, #dbe8ff, #e1ebff, #e6eeff) fixed;
 }

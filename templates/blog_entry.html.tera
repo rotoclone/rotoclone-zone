@@ -1,6 +1,6 @@
 {% extends "base" %}
 {% block content %}
-    <div class="bgcolor-extralightblue">
+    <div>
         <div class="width-md center-hz">
             <div class="text-container margin-top-md">
                 <h1>{{ title }}</h1>

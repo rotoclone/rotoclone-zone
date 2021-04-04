@@ -11,6 +11,6 @@
         <script async defer data-website-id="0fb9897a-2078-4060-ab2e-5e8244f8e3cc" data-domains="rotoclone.zone,www.rotoclone.zone" src="https://www.rotoclone.zone/umami/rotoclone_umami.js"></script>
         <title>{{ title }}</title>
     </head>
-    <body class="font-sans padding-none margin-none bgcolor-extralightblue"> {% block content %}{% endblock content %}
+    <body> {% block content %}{% endblock content %}
     </body>
 </html>
