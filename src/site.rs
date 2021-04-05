@@ -7,6 +7,7 @@ use std::{
     ffi::OsString,
     fs::{create_dir_all, read_to_string, DirEntry, File, OpenOptions},
     io::{BufRead, BufReader, ErrorKind, Write},
+    num::NonZeroUsize,
     path::PathBuf,
 };
 
@@ -20,11 +21,20 @@ const DEFAULT_BLOG_ENTRY_TEMPLATE_NAME: &str = "blog_entry";
 const FRONT_MATTER_DELIMITER: &str = "+++";
 
 const RECENT_BLOG_ENTRIES_LIMIT: usize = 5;
+const BLOG_INDEX_PAGE_SIZE: usize = 10;
 
 #[derive(Serialize)]
 pub struct IndexContext {
     title: String,
     recent_blog_entries: Vec<BlogEntryStub>,
+}
+
+#[derive(Serialize)]
+pub struct BlogIndexContext {
+    title: String,
+    entries: Vec<BlogEntryStub>,
+    previous_page: Option<usize>,
+    next_page: Option<usize>,
 }
 
 #[derive(Serialize)]
@@ -66,6 +76,16 @@ pub struct BlogEntry {
     pub updated_at: Option<DateTime<Utc>>,
 }
 
+impl BlogEntry {
+    fn to_stub(&self) -> BlogEntryStub {
+        BlogEntryStub {
+            title: self.title.clone(),
+            url: format!("/blog/{}", self.metadata.slug),
+            created_at: format_time(self.created_at),
+        }
+    }
+}
+
 impl Site {
     /// Builds the site model from the provided source directory, and puts rendered HTML in the provided HTML directory.
     ///
@@ -74,6 +94,8 @@ impl Site {
     pub fn from_dir(source_dir: &PathBuf, html_dir: &PathBuf) -> Result<Site, std::io::Error> {
         let blog_entries_source_dir = source_dir.join(BLOG_ENTRIES_DIR_NAME);
         let blog_entries_html_dir = html_dir.join(BLOG_ENTRIES_DIR_NAME);
+
+        //TODO recursively delete html_dir
 
         let mut blog_entries = Vec::new();
         for blog_file in blog_entries_source_dir.read_dir()? {
@@ -119,16 +141,42 @@ impl Site {
             .blog_entries
             .iter()
             .take(RECENT_BLOG_ENTRIES_LIMIT)
-            .map(|entry| BlogEntryStub {
-                title: entry.title.clone(),
-                url: format!("/blog/{}", entry.metadata.slug),
-                created_at: format_time(entry.created_at),
-            })
+            .map(BlogEntry::to_stub)
             .collect();
 
         IndexContext {
             title: "Sup".to_string(),
             recent_blog_entries,
+        }
+    }
+
+    pub fn build_blog_index_context(&self, page: NonZeroUsize) -> BlogIndexContext {
+        let page = page.get();
+        let start_index = (page - 1) * BLOG_INDEX_PAGE_SIZE;
+        let entries = self
+            .blog_entries
+            .iter()
+            .skip(start_index)
+            .take(BLOG_INDEX_PAGE_SIZE)
+            .map(BlogEntry::to_stub)
+            .collect();
+
+        let previous_page = match page {
+            1 => None,
+            _ => Some(page - 1),
+        };
+
+        let next_page = if self.blog_entries.len() > (start_index + BLOG_INDEX_PAGE_SIZE) {
+            Some(page + 1)
+        } else {
+            None
+        };
+
+        BlogIndexContext {
+            title: "The Rotoclone Zone Blog".to_string(),
+            entries,
+            previous_page,
+            next_page,
         }
     }
 }

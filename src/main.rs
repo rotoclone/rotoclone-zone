@@ -1,3 +1,5 @@
+use std::num::NonZeroUsize;
+
 use rocket::State;
 use rocket_contrib::serve::{crate_relative, Options, StaticFiles};
 use rocket_contrib::templates::Template;
@@ -30,6 +32,13 @@ fn index(site: State<Site>) -> Template {
     Template::render("index", &context)
 }
 
+#[get("/blog?<page>")]
+fn get_blog_index(page: Option<NonZeroUsize>, site: State<Site>) -> Template {
+    let context =
+        site.build_blog_index_context(page.unwrap_or_else(|| NonZeroUsize::new(1).unwrap()));
+    Template::render("blog_index", &context)
+}
+
 #[get("/blog/<entry_name>")]
 fn get_blog_entry(entry_name: String, site: State<Site>) -> Option<Template> {
     let entry = site
@@ -46,6 +55,27 @@ fn get_blog_entry(entry_name: String, site: State<Site>) -> Option<Template> {
     })
 }
 
+#[get("/blog/tags")]
+fn get_blog_tags(site: State<Site>) -> Template {
+    //let context = site.build_blog_tags_context(q);
+    //Template::render("blog_tags", &context)
+    unimplemented!() //TODO
+}
+
+#[get("/blog/tags/<tag>")]
+fn get_blog_tag(tag: String, site: State<Site>) -> Template {
+    //let context = site.build_blog_tag_context(q);
+    //Template::render("blog_tag", &context)
+    unimplemented!() //TODO
+}
+
+#[get("/blog/search?<q>")]
+fn get_blog_search(q: Option<String>, site: State<Site>) -> Template {
+    //let context = site.build_blog_search_context(q);
+    //Template::render("blog_search", &context)
+    unimplemented!() //TODO
+}
+
 #[catch(404)]
 fn not_found() -> Template {
     let context = ErrorContext {
@@ -59,7 +89,17 @@ fn not_found() -> Template {
 #[launch]
 fn rocket() -> rocket::Rocket {
     let mut rocket = rocket::ignite()
-        .mount("/", routes![index, get_blog_entry])
+        .mount(
+            "/",
+            routes![
+                index,
+                get_blog_index,
+                get_blog_entry,
+                get_blog_tags,
+                get_blog_tag,
+                get_blog_search
+            ],
+        )
         .mount("/", StaticFiles::from(crate_relative!("static")).rank(10))
         .register(catchers![not_found])
         .attach(Template::fairing());

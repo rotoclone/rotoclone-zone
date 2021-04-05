@@ -2,12 +2,13 @@
 {% block content %}
     <div class="text-container margin-top-md">
         <h1 class="textsize-extralg text-center-hz">You Have Entered The Rotoclone Zone</h1>
-        <h1>Recent blog entries</h1>
+        <h1>Recent blog posts</h1>
         {% for entry in recent_blog_entries %}
             <div class="padding-sm">
                 <h2 class="font-title"><a href={{ entry.url }}>{{ entry.title }}</a></h2>
                 <p>{{ entry.created_at }}</p>
             </div>
         {% endfor %}
+        <p class="padding-bottom-md"><a href="/blog">More blog posts</a></p>
     </div>
 {% endblock content %}

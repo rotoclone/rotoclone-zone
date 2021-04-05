@@ -1,0 +1,25 @@
+{% extends "base" %}
+{% block content %}
+    <div class="text-container margin-top-md">
+        <h1>The Rotoclone Zone Blog</h1>
+        {% for entry in entries %}
+            <div class="padding-sm">
+                <h2 class="font-title"><a href={{ entry.url }}>{{ entry.title }}</a></h2>
+                <p>{{ entry.created_at }}</p>
+            </div>
+        {% endfor %}
+        <div class="blog-footer">
+            {% if previous_page %}
+                <div class="blog-footer-left"><span class="blog-footer-arrow">← </span><a href="/blog?page={{ previous_page }}">Newer posts</a></div>
+            {% else %}
+                <div></div>
+            {% endif %}
+            <div class="blog-footer-center"><a href="/">Home</a></div>
+            {% if next_page %}
+                <div class="blog-footer-right"><a href="/blog?page={{ next_page }}">Older posts</a><span class="blog-footer-arrow"> →</span></div>
+            {% else %}
+                <div></div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
