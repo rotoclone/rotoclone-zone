@@ -11,6 +11,9 @@ extern crate rocket;
 mod site;
 use site::*;
 
+mod context;
+use context::*;
+
 const ADDITIONAL_STATIC_FILES_DIR_CONFIG_KEY: &str = "static_files_dir";
 
 const SITE_CONTENT_BASE_DIR_CONFIG_KEY: &str = "site_content_base_dir";
@@ -116,7 +119,7 @@ fn rocket() -> rocket::Rocket {
 
     let site =
         Site::from_dir(&site_base_dir.into(), &html_base_dir.into()).expect("error building site");
-    println!("Built site: {:#?}", site); //TODO remove
+    println!("Built site: {:#?}", site); //TODO remove?
     rocket = rocket.manage(site);
 
     if let Ok(dir) = additional_static_files_dir {

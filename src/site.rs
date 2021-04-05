@@ -1,13 +1,10 @@
-use chrono::{DateTime, Datelike, Utc};
-use ordinal::Ordinal;
+use chrono::{DateTime, Utc};
 use pulldown_cmark::{html, Options, Parser};
 use serde::Deserialize;
-use serde::Serialize;
 use std::{
     ffi::OsString,
-    fs::{create_dir_all, read_to_string, DirEntry, File, OpenOptions},
+    fs::{create_dir_all, DirEntry, File, OpenOptions},
     io::{BufRead, BufReader, ErrorKind, Write},
-    num::NonZeroUsize,
     path::PathBuf,
 };
 
@@ -19,30 +16,6 @@ const DEFAULT_BLOG_ENTRY_TEMPLATE_NAME: &str = "blog_entry";
 
 /// The string used to delimit the beginning and end of the front matter
 const FRONT_MATTER_DELIMITER: &str = "+++";
-
-const RECENT_BLOG_ENTRIES_LIMIT: usize = 5;
-const BLOG_INDEX_PAGE_SIZE: usize = 10;
-
-#[derive(Serialize)]
-pub struct IndexContext {
-    title: String,
-    recent_blog_entries: Vec<BlogEntryStub>,
-}
-
-#[derive(Serialize)]
-pub struct BlogIndexContext {
-    title: String,
-    entries: Vec<BlogEntryStub>,
-    previous_page: Option<usize>,
-    next_page: Option<usize>,
-}
-
-#[derive(Serialize)]
-struct BlogEntryStub {
-    title: String,
-    url: String,
-    created_at: String,
-}
 
 #[derive(Debug)]
 pub struct Site {
@@ -62,7 +35,7 @@ pub struct FrontMatter {
 #[derive(Debug)]
 pub struct PageMetadata {
     source_file: PathBuf,
-    html_content_file: PathBuf,
+    pub html_content_file: PathBuf,
     pub slug: String,
     pub template_name: String,
 }
@@ -74,16 +47,6 @@ pub struct BlogEntry {
     pub tags: Vec<String>,
     pub created_at: DateTime<Utc>,
     pub updated_at: Option<DateTime<Utc>>,
-}
-
-impl BlogEntry {
-    fn to_stub(&self) -> BlogEntryStub {
-        BlogEntryStub {
-            title: self.title.clone(),
-            url: format!("/blog/{}", self.metadata.slug),
-            created_at: format_time(self.created_at),
-        }
-    }
 }
 
 impl Site {
@@ -135,52 +98,9 @@ impl Site {
         blog_entries.sort_by(|a, b| a.created_at.cmp(&b.created_at).reverse());
         Ok(Site { blog_entries })
     }
-
-    pub fn build_index_context(&self) -> IndexContext {
-        let recent_blog_entries = self
-            .blog_entries
-            .iter()
-            .take(RECENT_BLOG_ENTRIES_LIMIT)
-            .map(BlogEntry::to_stub)
-            .collect();
-
-        IndexContext {
-            title: "Sup".to_string(),
-            recent_blog_entries,
-        }
-    }
-
-    pub fn build_blog_index_context(&self, page: NonZeroUsize) -> BlogIndexContext {
-        let page = page.get();
-        let start_index = (page - 1) * BLOG_INDEX_PAGE_SIZE;
-        let entries = self
-            .blog_entries
-            .iter()
-            .skip(start_index)
-            .take(BLOG_INDEX_PAGE_SIZE)
-            .map(BlogEntry::to_stub)
-            .collect();
-
-        let previous_page = match page {
-            1 => None,
-            _ => Some(page - 1),
-        };
-
-        let next_page = if self.blog_entries.len() > (start_index + BLOG_INDEX_PAGE_SIZE) {
-            Some(page + 1)
-        } else {
-            None
-        };
-
-        BlogIndexContext {
-            title: "The Rotoclone Zone Blog".to_string(),
-            entries,
-            previous_page,
-            next_page,
-        }
-    }
 }
 
+/// Determines the default slug for the provided file.
 fn default_slug_for_file(file: &DirEntry) -> String {
     file.path()
         .file_stem()
@@ -229,6 +149,16 @@ fn extract_front_matter_and_content(
     Ok((front_matter, content_lines.join("\n")))
 }
 
+/// Converts the provided markdown to HTML and writes it to a file.
+/// Returns the path to the written file.
+///
+/// # Arguments
+/// * `output_dir` - The directory to write the HTML file to.
+/// * `file_name` - The name of the source file the markdown is from.
+/// * `markdown` - The markdown to convert to HTML.
+///
+/// # Errors
+/// Returns any errors encountered while writing the file.
 fn write_content_as_html(
     output_dir: &PathBuf,
     mut file_name: OsString,
@@ -263,37 +193,4 @@ fn markdown_to_html(markdown: &str) -> String {
     html::push_html(&mut html, parser);
 
     html
-}
-
-#[derive(Serialize)]
-pub struct BlogEntryContext {
-    title: String,
-    tags: Vec<String>,
-    created_at: String,
-    updated_at: Option<String>,
-    entry_content: String,
-    previous_entry: Option<BlogEntryStub>,
-    next_entry: Option<BlogEntryStub>,
-}
-
-impl BlogEntryContext {
-    pub fn from_blog_entry(entry: &BlogEntry) -> Result<BlogEntryContext, std::io::Error> {
-        Ok(BlogEntryContext {
-            title: entry.title.clone(),
-            tags: entry.tags.clone(),
-            created_at: format_time(entry.created_at),
-            updated_at: entry.updated_at.map(format_time),
-            entry_content: read_to_string(&entry.metadata.html_content_file)?,
-            previous_entry: None, //TODO
-            next_entry: None,     //TODO
-        })
-    }
-}
-
-fn format_time(time: DateTime<Utc>) -> String {
-    let month = time.format("%B");
-    let day = Ordinal(time.day()).to_string();
-    let year = time.format("%Y");
-
-    format!("{} {} {}", month, day, year)
 }
