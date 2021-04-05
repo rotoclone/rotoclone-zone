@@ -5,7 +5,17 @@
         {% for entry in entries %}
             <div class="padding-sm">
                 <h2 class="font-title"><a href={{ entry.url }}>{{ entry.title }}</a></h2>
-                <p>{{ entry.created_at }}</p>
+                <span>{{ entry.created_at }}</span>
+                {% if entry.tags|length > 0 %}
+                    <span> • </span>
+                    <div class="blog-tags inline">
+                        <ul>
+                            {% for tag in entry.tags %}
+                                <li><a href="/tags/{{ tag }}">{{ tag }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
             </div>
         {% endfor %}
         <div class="blog-footer">

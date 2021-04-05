@@ -293,6 +293,12 @@ hr {
     text-align: right;
 }
 
+/* Arrangement */
+
+.inline {
+    display: inline;
+}
+
 /* Padding */
 
 .padding-none {

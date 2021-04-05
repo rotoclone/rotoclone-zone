@@ -11,6 +11,7 @@ const BLOG_INDEX_PAGE_SIZE: usize = 10;
 #[derive(Serialize)]
 pub struct BlogEntryStub {
     pub title: String,
+    pub tags: Vec<String>,
     pub url: String,
     pub created_at: String,
 }
@@ -20,6 +21,7 @@ impl BlogEntry {
     fn to_stub(&self) -> BlogEntryStub {
         BlogEntryStub {
             title: self.title.clone(),
+            tags: self.tags.clone(),
             url: format!("/blog/{}", self.metadata.slug),
             created_at: format_datetime(self.created_at),
         }
