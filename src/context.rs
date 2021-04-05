@@ -101,9 +101,15 @@ pub struct BlogEntryContext {
     next_entry: Option<BlogEntryStub>,
 }
 
-impl BlogEntryContext {
+impl Site {
     /// Builds the context for the blog entry page for the provided blog entry.
-    pub fn from_blog_entry(entry: &BlogEntry) -> Result<BlogEntryContext, std::io::Error> {
+    ///
+    /// # Errors
+    /// Returns any errors encountered while reading the content of the blog entry from the filesystem.
+    pub fn build_blog_entry_context(
+        &self,
+        entry: &BlogEntry,
+    ) -> Result<BlogEntryContext, std::io::Error> {
         Ok(BlogEntryContext {
             title: entry.title.clone(),
             tags: entry.tags.clone(),
