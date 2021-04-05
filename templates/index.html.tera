@@ -1,15 +1,13 @@
 {% extends "base" %}
 {% block content %}
-    <div>
-        <div class="text-container margin-top-md">
-            <h1 class="textsize-extralg text-center-hz">You Have Entered The Rotoclone Zone</h1>
-            <h1>Recent blog entries</h1>
-            {% for entry in recent_blog_entries %}
-                <div class="padding-sm">
-                    <h2><a href={{ entry.url }}>{{ entry.title }}</a></h2>
-                    <p>{{ entry.created_at }}</p>
-                </div>
-            {% endfor %}
-        </div>
-    <div>
+    <div class="text-container margin-top-md">
+        <h1 class="textsize-extralg text-center-hz">You Have Entered The Rotoclone Zone</h1>
+        <h1>Recent blog entries</h1>
+        {% for entry in recent_blog_entries %}
+            <div class="padding-sm">
+                <h2 class="font-title"><a href={{ entry.url }}>{{ entry.title }}</a></h2>
+                <p>{{ entry.created_at }}</p>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock content %}

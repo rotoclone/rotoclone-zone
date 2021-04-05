@@ -25,7 +25,7 @@ Let's try a ~~tlable~~ ~~talbal~~ ~~trambampoline~~ table
 |value 1|value 2|
 |value 3|value 4|
 
-This text has to be long enough to test out the footnotes.
+This text has to be long enough to test out the footnotes. Also I want a line long enough that it has to wrap around. I'll have to type some more stuff to get that to happen. Ok I think that should be long enough.
 
 Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaah

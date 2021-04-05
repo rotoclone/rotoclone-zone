@@ -196,6 +196,7 @@ fn write_content_as_html(
     let mut output_file = OpenOptions::new()
         .create(true)
         .write(true)
+        .truncate(true)
         .open(&output_path)?;
     writeln!(output_file, "{}", markdown_to_html(markdown))?;
 
@@ -223,6 +224,8 @@ pub struct BlogEntryContext {
     created_at: String,
     updated_at: Option<String>,
     entry_content: String,
+    previous_entry: Option<BlogEntryStub>,
+    next_entry: Option<BlogEntryStub>,
 }
 
 impl BlogEntryContext {
@@ -233,6 +236,8 @@ impl BlogEntryContext {
             created_at: format_time(entry.created_at),
             updated_at: entry.updated_at.map(format_time),
             entry_content: read_to_string(&entry.metadata.html_content_file)?,
+            previous_entry: None, //TODO
+            next_entry: None,     //TODO
         })
     }
 }
