@@ -23,17 +23,28 @@ body {
     color: var(--color-maintext);
     padding: 0;
     margin: 0;
-    background-color: var(--color-pagebg);
+    /* background-color: var(--color-pagebg); */
     /* background: linear-gradient(180deg, #9de4fc, #a2e5fc, #a8e6fc, #ade7fc, #b2e8fc, #b7e9fc, #bbeafc, #c0ebfc) fixed; */
     /* background: linear-gradient(180deg, #ffcf9c, #ffd1a1, #ffd4a6, #ffd6ab, #ffd9b0, #ffdbb5, #ffdeba, #ffe0bf) fixed; */
     /* background: linear-gradient(180deg, #fff6eb, #fff7ec, #fff7ee, #fff8ef, #fff8f1, #fff9f2, #fff9f4, #fffaf5) fixed; */
     /* background: linear-gradient(180deg, #fffaf5, #fff9f4, #fff9f2, #fff8f1, #fff8ef, #fff7ee, #fff7ec, #fff6eb) fixed; */
+    /* background: linear-gradient(0deg, #ff8e58, #ff955e, #ff9c65, #ffa26c, #ffa973, #ffaf7a, #ffb582, #ffbb8a) fixed; */
+    /* background: linear-gradient(0deg, #ffe4cf, #ffe2cc, #ffdfc8, #ffddc5, #ffdac2, #ffd8be, #ffd5bb, #ffd3b8) fixed; */
+    background: linear-gradient(0deg, #fff5ed, #fff3e9, #fff0e4, #ffeee0, #ffebdc, #ffe9d7, #ffe6d3, #ffe4cf) fixed;
 }
 
 .main-content-container {
     width: min(90em, 100%);
     margin-left: auto;
     margin-right: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-radius: 5px;
+    background-color: var(--color-contentbg);
+    box-shadow: 0px 5px 10px var(--color-dark-shadow);
+    /* clip-path: inset(0px -20px 0px -20px); */
+    /* box-shadow: -10px 0 8px -8px var(--color-dark-shadow), 10px 0 8px -8px var(--color-dark-shadow); */
+    z-index: -1;
 }
 
 .text-container {
@@ -44,24 +55,26 @@ body {
     /* width: min(90em, 100%); */
     /* margin-left: auto; */
     /* margin-right: auto; */
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    padding: 1em;
 }
 
 .navigation {
     /* background-color: var(--color-navbg); */
-    background: linear-gradient(90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2, #f4d4ca, #fbf0e7, #fffaf5);
+    /* background: linear-gradient(90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2, #f4d4ca, #fbf0e7, #fffaf5); */
+    background: linear-gradient(90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2);
+    box-shadow: 0px 1px 10px var(--color-dark-shadow);
     /* box-shadow: 0px 5px 10px var(--color-shadow); */
     width: 100%;
     padding-top: 1em;
     padding-bottom: 1em;
+    z-index: 1;
 }
 
 .navigation:after {
     border-radius: 0 0 100em 0;
     box-shadow: 0 -5px 20px rgba(0, 0, 0, 1);
     content: '';
-    display: block;
+    display: none; /* TODO */
     height: 200em;
     left: 0;
     position: absolute;
@@ -72,7 +85,8 @@ body {
 
 .footer {
     /* background-color: var(--color-navbg); */
-    background: linear-gradient(-90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2, #f4d4ca, #fbf0e7, #fffaf5);
+    /* background: linear-gradient(-90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2, #f4d4ca, #fbf0e7, #fffaf5); */
+    background: linear-gradient(-90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2);
     /* box-shadow: 0px 5px 10px var(--color-shadow); */
     width: 100%;
     padding-top: 1em;
@@ -227,10 +241,18 @@ hr {
     }
 }
 
-@media only screen and (max-width: 75em) {
+@media only screen and (max-width: 90em) {
     .navigation {
         background: linear-gradient(90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2);
         box-shadow: 0px 1px 10px var(--color-dark-shadow);
+    }
+
+    .main-content-container {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        border-radius: 0px;
     }
 
     .navigation:after {
@@ -463,6 +485,8 @@ hr {
     --color-med-blue-alt: #0774da;
     --color-dark-blue-alt: #0563BD;
     --color-dark-blue-alt-75pct: rgba(5, 99, 189, 0.75);
+    --color-light-orange-alt: #FF8E58;
+    --color-dark-orange-alt: #FF6C26;
 
     --color-extralight-orange: #ffe9d2;
     --color-extradark-red: #ca001c;
@@ -482,7 +506,8 @@ hr {
     --color-black-90pct: rgba(0, 0, 0, 0.90);
     --color-black-95pct: rgba(0, 0, 0, 0.95);
 
-    --color-pagebg: var(--color-moreextralight-orange);
+    /*--color-pagebg: var(--color-moreextralight-orange);*/
+    --color-pagebg: var(--color-light-orange-alt);
     --color-contentbg: var(--color-white-50pct);
     --color-maintext: var(--color-black-90pct);
     --color-lighttext: var(--color-white-95pct);
