@@ -12,10 +12,12 @@
         <title>{{ title }}</title>
     </head>
     <body>
-        {% include "navigation" %}
-        <div class="main-content-container">
-            {% block content %}{% endblock content %}
+        <div class="page-container">
+            <div class="main-content-container">
+                {% include "navigation" %}
+                {% block content %}{% endblock content %}
+                {% include "footer" %}
+            </div>
         </div>
-        {% include "footer" %}
     </body>
 </html>

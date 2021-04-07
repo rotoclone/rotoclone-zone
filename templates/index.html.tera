@@ -1,10 +1,10 @@
 {% extends "base" %}
 {% block content %}
-    <div class="text-container margin-top-md">
+    <div class="text-container">
         <h1 class="textsize-extralg text-center-hz">You Have Entered <span class="font-logo text-shadow-obnoxious">The Rotoclone Zone</span></h1>
         <h1>Recent blog posts</h1>
         {% for entry in recent_blog_entries %}
-            <div class="padding-sm">
+            <div class="blog-stub">
                 <h2 class="font-title"><a href={{ entry.url }}>{{ entry.title }}</a></h2>
                 <span>{{ entry.created_at }}</span>
                 {% if entry.tags|length > 0 %}

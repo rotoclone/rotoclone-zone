@@ -1,6 +1,6 @@
 {% extends "base" %}
 {% block content %}
-    <div class="text-container margin-top-md">
+    <div class="text-container">
         <h1 class="blog-title">{{ title }}</h1>
         <div class="blog-metadata">
             <p>Posted {{ created_at }}</p>
