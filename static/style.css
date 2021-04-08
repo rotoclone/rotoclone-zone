@@ -110,6 +110,7 @@ a:visited {
 .navigation .home-link {
     font-family: "logo-font", sans-serif;
     font-weight: bold;
+    margin-left: -2em;
 }
 
 .vertical-spacer-sm {
