@@ -118,7 +118,7 @@ body {
     content: "";
     background: linear-gradient(90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2);
     box-shadow: 0px 1px 10px var(--color-shadow);
-    transform: skew(30deg);
+    transform: skew(15deg);
     position: absolute;
     width: calc(100% + 4em);
     height: 100%;
@@ -155,13 +155,17 @@ body {
     padding-top: 1em;
     padding-bottom: 1em;
     text-align: right;
+
+    background: linear-gradient(-90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2);
+    box-shadow: 0px 1px 10px var(--color-shadow);
 }
 
+/*
 .footer::after {
     content: "";
     background: linear-gradient(-90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2);
     box-shadow: 0px 1px 10px var(--color-shadow);
-    transform: skew(30deg);
+    transform: skew(50deg);
     position: absolute;
     width: calc(100% + 4em);
     height: 100%;
@@ -169,6 +173,7 @@ body {
     top: 0;
     z-index: -1;
 }
+*/
 
 .footer a {
     padding: 1em;
