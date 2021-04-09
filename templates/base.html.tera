@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8"/>
+        <link rel="preload" href="/raleway-bold.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/martel-regular.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/open-sans-regular.woff2" as="font" type="font/woff2" crossorigin>
         <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
         <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
         <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
         <link href="/site.webmanifest" rel="manifest"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="/style.css" rel="stylesheet">
         <script async defer data-website-id="0fb9897a-2078-4060-ab2e-5e8244f8e3cc" data-domains="rotoclone.zone,www.rotoclone.zone" src="https://www.rotoclone.zone/umami/rotoclone_umami.js"></script>
-        <title>{{ title }}</title>
+        <title>{{ base.title }}</title>
+        <meta name="description" content="{{ base.meta_description }}">
     </head>
-    <body style="font-family:sans-serif;"> {% block content %}{% endblock content %}
+    <body>
+        <div class="page-container">
+            <div class="main-content-container">
+                {% include "navigation" %}
+                {% block content %}{% endblock content %}
+                {% include "footer" %}
+            </div>
+        </div>
     </body>
 </html>

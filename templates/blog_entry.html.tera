@@ -1,0 +1,28 @@
+{% extends "base" %}
+{% block content %}
+    <div class="text-container">
+        <div class="blog-heading">
+            <h1 class="blog-title">{{ title }}</h1>
+            <div class="blog-metadata">
+                <p>Posted {{ created_at }}</p>
+                {% if updated_at %}
+                    <p class="blog-updated-at">Updated {{ updated_at }}</p>
+                {% endif %}
+                {% if tags|length > 0 %}
+                    <div class="blog-tags">
+                        <ul>
+                            {% for tag in tags %}
+                                <li><a href="/tags/{{ tag }}">{{ tag }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="text-container blog-content">
+        <p>{{ entry_content | safe }}</p>
+    </div>
+    {% include "blog_footer" %}
+{% endblock content %}
