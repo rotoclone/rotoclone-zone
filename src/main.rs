@@ -4,6 +4,7 @@ use rocket::State;
 use rocket_contrib::serve::{crate_relative, Options, StaticFiles};
 use rocket_contrib::templates::Template;
 use serde::Serialize;
+use std::path::Path;
 
 #[macro_use]
 extern crate rocket;
@@ -119,8 +120,8 @@ fn rocket() -> rocket::Rocket {
         .extract_inner::<String>(RENDERED_HTML_BASE_DIR_CONFIG_KEY)
         .unwrap_or_else(|_| DEFAULT_RENDERED_HTML_BASE_DIR.to_string());
 
-    let site =
-        Site::from_dir(&site_base_dir.into(), &html_base_dir.into()).expect("error building site");
+    let site = Site::from_dir(Path::new(&site_base_dir), Path::new(&html_base_dir))
+        .expect("error building site");
     println!("Built site: {:#?}", site); //TODO remove?
     rocket = rocket.manage(site);
 

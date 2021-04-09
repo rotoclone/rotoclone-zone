@@ -29,8 +29,14 @@ impl BlogEntry {
 }
 
 #[derive(Serialize)]
-pub struct IndexContext {
+pub struct BaseContext {
     pub title: String,
+    pub meta_description: String,
+}
+
+#[derive(Serialize)]
+pub struct IndexContext {
+    pub base: BaseContext,
     pub recent_blog_entries: Vec<BlogEntryStub>,
 }
 
@@ -45,7 +51,10 @@ impl Site {
             .collect();
 
         IndexContext {
-            title: "Sup".to_string(),
+            base: BaseContext {
+                title: "Sup".to_string(),
+                meta_description: "It's The Rotoclone Zone".to_string(),
+            },
             recent_blog_entries,
         }
     }
@@ -53,7 +62,7 @@ impl Site {
 
 #[derive(Serialize)]
 pub struct BlogIndexContext {
-    title: String,
+    base: BaseContext,
     entries: Vec<BlogEntryStub>,
     previous_page: Option<usize>,
     next_page: Option<usize>,
@@ -84,7 +93,10 @@ impl Site {
         };
 
         BlogIndexContext {
-            title: "The Rotoclone Zone Blog".to_string(),
+            base: BaseContext {
+                title: "The Rotoclone Zone Blog".to_string(),
+                meta_description: "It's The Rotoclone Zone Blog".to_string(),
+            },
             entries,
             previous_page,
             next_page,
@@ -94,7 +106,7 @@ impl Site {
 
 #[derive(Serialize)]
 pub struct BlogEntryContext {
-    title: String,
+    base: BaseContext,
     tags: Vec<String>,
     created_at: String,
     updated_at: Option<String>,
@@ -113,7 +125,10 @@ impl Site {
         entry: &BlogEntry,
     ) -> Result<BlogEntryContext, std::io::Error> {
         Ok(BlogEntryContext {
-            title: entry.title.clone(),
+            base: BaseContext {
+                title: format!("The Rotoclone Zone Blog - {}", entry.title),
+                meta_description: entry.title.clone(),
+            },
             tags: entry.tags.clone(),
             created_at: format_datetime(entry.created_at),
             updated_at: entry.updated_at.map(format_datetime),

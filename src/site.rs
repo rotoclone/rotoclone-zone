@@ -5,7 +5,7 @@ use std::{
     ffi::OsString,
     fs::{create_dir_all, DirEntry, File, OpenOptions},
     io::{BufRead, BufReader, ErrorKind, Write},
-    path::PathBuf,
+    path::{Path, PathBuf},
 };
 
 /// The name of the directory blog entry files are stored under.
@@ -54,7 +54,7 @@ impl Site {
     ///
     /// # Errors
     /// Returns any errors that occur while reading from the file system or parsing file contents.
-    pub fn from_dir(source_dir: &PathBuf, html_dir: &PathBuf) -> Result<Site, std::io::Error> {
+    pub fn from_dir(source_dir: &Path, html_dir: &Path) -> Result<Site, std::io::Error> {
         let blog_entries_source_dir = source_dir.join(BLOG_ENTRIES_DIR_NAME);
         let blog_entries_html_dir = html_dir.join(BLOG_ENTRIES_DIR_NAME);
 
@@ -114,7 +114,7 @@ fn default_slug_for_file(file: &DirEntry) -> String {
 /// # Errors
 /// Returns an error if there are any errors reading the file or parsing the front matter from it.
 fn extract_front_matter_and_content(
-    file_path: &PathBuf,
+    file_path: &Path,
 ) -> Result<(FrontMatter, String), std::io::Error> {
     let file = File::open(file_path)?;
     let mut front_matter_string = "".to_string();
@@ -160,13 +160,13 @@ fn extract_front_matter_and_content(
 /// # Errors
 /// Returns any errors encountered while writing the file.
 fn write_content_as_html(
-    output_dir: &PathBuf,
+    output_dir: &Path,
     mut file_name: OsString,
     markdown: &str,
 ) -> Result<PathBuf, std::io::Error> {
     file_name.push(".html");
 
-    let mut output_path = output_dir.clone();
+    let mut output_path = output_dir.to_owned();
     output_path.push(file_name);
 
     create_dir_all(output_dir)?;
