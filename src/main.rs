@@ -12,7 +12,6 @@ mod site;
 use site::*;
 
 mod context;
-use context::*;
 
 const ADDITIONAL_STATIC_FILES_DIR_CONFIG_KEY: &str = "static_files_dir";
 
@@ -59,6 +58,7 @@ fn get_blog_entry(entry_name: String, site: State<Site>) -> Option<Template> {
 }
 
 #[get("/blog/tags")]
+#[allow(unused_variables)]
 fn get_blog_tags(site: State<Site>) -> Template {
     //let context = site.build_blog_tags_context(q);
     //Template::render("blog_tags", &context)
@@ -66,6 +66,7 @@ fn get_blog_tags(site: State<Site>) -> Template {
 }
 
 #[get("/blog/tags/<tag>")]
+#[allow(unused_variables)]
 fn get_blog_tag(tag: String, site: State<Site>) -> Template {
     //let context = site.build_blog_tag_context(q);
     //Template::render("blog_tag", &context)
@@ -73,6 +74,7 @@ fn get_blog_tag(tag: String, site: State<Site>) -> Template {
 }
 
 #[get("/blog/search?<q>")]
+#[allow(unused_variables)]
 fn get_blog_search(q: Option<String>, site: State<Site>) -> Template {
     //let context = site.build_blog_search_context(q);
     //Template::render("blog_search", &context)
