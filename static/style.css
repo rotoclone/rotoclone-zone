@@ -28,11 +28,33 @@ body {
 
 a {
     color: var(--color-link);
+    /*text-decoration: none;
+    border-bottom: 3px solid var(--color-tertiary);*/
 }
 
 a:visited {
     color: var(--color-link-visited);
 }
+
+/*
+h1, h2, h3, h4, h5, h6 {
+    /*background-color: rgba(var(--color-main-green-triple), 0.30);*/
+    /*text-shadow: 1px 1px 1px var(--color-dark-shadow);*//*
+    padding-right: 1em;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-left: -30px;
+    display: table;
+    /*clip-path: polygon(0 0, calc(100% - 0.5em) 0, 100% 100%, 0 100%);*//*
+    box-shadow: 0px 5px 0px var(--color-primary);
+}
+*/
+
+/*
+h1 {
+    background-color: rgba(var(--color-main-blue-triple), 0.30);
+}
+*/
 
 .page-container {
     width: min(90em, 100%);
@@ -61,11 +83,8 @@ a:visited {
 
 .navigation::after {
     content: "";
-    /*background: linear-gradient(90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2);*/
-    background-color: #0563bd;
-    /*box-shadow: 0px 1px 10px var(--color-shadow);*/
-    /*box-shadow: -15px 10px 0px #00C17D, -20px 5px 0px #ffc300, 6px 5px 0px #ffc300;*/
-    box-shadow: -15px 10px 0px #00C17D, 10px -5px 0px #ffc300;
+    background-color: var(--color-primary);
+    box-shadow: -15px 10px 0px var(--color-secondary), 10px -5px 0px var(--color-tertiary);
     transform: skew(15deg);
     position: absolute;
     width: calc(100% + 4em);
@@ -81,8 +100,7 @@ a:visited {
     padding-top: 1em;
     padding-bottom: 1em;
     text-align: right;
-    /*background: linear-gradient(-90deg, #0563bd, #4f66bd, #976fb9, #cd87b0, #e9adb2);*/
-    background-color: #0563bd;
+    background-color: var(--color-primary);
     box-shadow: 0px 1px 10px var(--color-shadow);
 }
 
@@ -92,6 +110,7 @@ a:visited {
     color: var(--color-white-95pct);
     /* text-decoration: none; */
     text-shadow: 1px 1px 1px var(--color-dark-shadow);
+    border: none;
 }
 
 .navigation a {
@@ -100,7 +119,7 @@ a:visited {
     color: var(--color-white-95pct);
     text-decoration: none;
     text-shadow: 1px 1px 1px var(--color-dark-shadow);
-    transform: skew(30deg);
+    border: none;
 }
 
 .navigation a:hover {
@@ -118,9 +137,34 @@ a:visited {
     padding-bottom: 0.25em;
 }
 
+/*
+.blog-heading {
+    background-color: var(--color-primary);
+}
+*/
+
 .blog-title {
-    font-family: "title-font", sans-serif;
+    /*width: 100%;*/
+    padding-left: 0;
+    padding-right: 0;
+    background: none;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "title-font", serif;
     text-align: center;
+    clip-path: none;
+    box-shadow: none;
+    /*box-shadow: 0px 8px 0px var(--color-primary);*/
+}
+
+.blog-title::after {
+    display: block;
+    content: "";
+    margin: auto;
+    position: relative;
+    width: 10em;
+    height: 8px;
+    background-color: var(--color-primary);
 }
 
 .blog-stub {
@@ -135,6 +179,15 @@ a:visited {
 .blog-stub:hover {
     background-color: rgba(255, 255, 255, 0.02);
 }
+
+/*
+.blog-metadata {
+    display: table;
+    margin: auto;
+    padding-top: 0.5em;
+    box-shadow: 0px -8px 0px var(--color-primary);
+}
+*/
 
 .blog-metadata, .blog-metadata a {
     text-align: center;
@@ -200,7 +253,7 @@ hr {
     height: 0.2em;
     margin-top: 1em;
     margin-bottom: 1em;
-    background: radial-gradient(circle at 50% 50%, var(--color-dark-blue-alt-75pct), rgba(0, 0, 0, 0));
+    background: radial-gradient(circle at 50% 50%, var(--color-main-yellow), rgba(0, 0, 0, 0));
 }
 
 @media only screen and (max-width: 96em) {
@@ -415,51 +468,26 @@ hr {
 :root {
     --content-width: 90em;
 
-    --color-extralightblue: rgb(210, 224, 255);
-    --color-lightblue: rgb(187, 209, 255);
-    --color-darkblue: rgb(0, 75, 160);
-    --color-lightgray: rgb(240, 240, 240);
-    --color-extralightgray: rgb(250, 250, 250);
-    --color-moreextralight-orange: #fffaf5;
-    --color-medgray: rgb(230, 230, 230);
-    --color-extradarkgray: rgb(30, 30, 30);
+    /* https://paletton.com/#uid=33-0u0kPwDppxNnzvOxPYrIQDls */
+    --color-main-blue: #0563BD;
+    --color-main-blue-triple: 5, 99, 189;
+    --color-light-blue: #398AD9;
+    --color-dark-blue: #044B8F;
+    --color-main-yellow: #ffc300;
+    --color-main-yellow-triple: 255, 195, 0;
+    --color-light-yellow: #FFCF34;
+    --color-dark-yellow: #DDA900;
+
+    /* https://paletton.com/#uid=53-0u0kPwDppxNnzvOxPYrIQDls */
+    --color-main-green: #00C17D;
+    --color-main-green-triple: 0, 193, 125;
+    --color-light-green: #2CDB9D;
+    --color-dark-green: #009460;
+
+    --color-lighter-yellow: #facf46;
+
     --color-shadow: rgba(0, 0, 0, 0.18);
     --color-dark-shadow: rgba(0, 0, 0, 0.4);
-
-    /* https://paletton.com/#uid=73p0G0kolZkcuZWiUZEtTY6J4Ux */
-    --color-main-blue: #43ccfa;
-    --color-light-blue: #9de4fc;
-    --color-dark-blue: #05b2ec;
-    --color-main-purple: #6556fb;
-    --color-light-purple: #afa7fc;
-    --color-main-yellow: #ffd43d;
-    --color-light-yellow: #ffe99c;
-    --color-dark-yellow: #ffc600;
-    --color-main-orange: #ffa13d;
-    --color-light-orange: #ffcf9c;
-    --color-dark-orange: #ff8300;
-
-    /* https://paletton.com/#uid=33p0G0kolZkcuZWiUZEtTY6J4Ux */
-    --color-main-red: #fe3d58;
-    --color-light-red: #ff9ba9;
-    --color-dark-red: #fd0023;
-
-    /* https://paletton.com/#uid=33-0u0kAXQZkZS3rcRuPLDyN+qF */
-    --color-main-blue-alt: #0E7AE3;
-    --color-light-blue-alt: #398ad9;
-    --color-med-blue-alt: #0774da;
-    --color-dark-blue-alt: #0563BD;
-    --color-dark-blue-alt-15pct: rgba(5, 99, 189, 0.15);
-    --color-dark-blue-alt-75pct: rgba(5, 99, 189, 0.75);
-    --color-light-orange-alt: #FF8E58;
-    --color-dark-orange-alt: #FF6C26;
-
-    --color-extralight-orange: #ffe9d2;
-    --color-extradark-red: #ca001c;
-    --color-moreextradark-red: #bb0019;
-
-    --color-extradark-blue: #016484;
-    --color-moreextradark-blue: #005774;
 
     --color-white-10pct: rgba(255, 255, 255, 0.1);
     --color-white-15pct: rgba(255, 255, 255, 0.15);
@@ -479,14 +507,18 @@ hr {
     --color-black-90pct: rgba(0, 0, 0, 0.90);
     --color-black-95pct: rgba(0, 0, 0, 0.95);
 
+    --color-primary: var(--color-main-blue);
+    --color-secondary: var(--color-main-green);
+    --color-tertiary: var(--color-main-yellow);
+
     --color-pagebg: var(--color-black-90pct);
     --color-contentbg: var(--color-white-10pct);
     --color-maintext: var(--color-white-90pct);
     --color-lighttext: var(--color-white-95pct);
-    --color-navbg: var(--color-dark-blue-alt);
+    --color-navbg: var(--color-primary);
     --color-navhover: var(--color-white-15pct);
-    --color-link: var(--color-light-blue);
-    --color-link-visited: var(--color-light-purple);
+    --color-link: var(--color-lighter-yellow);
+    --color-link-visited: var(--color-lighter-yellow);
 }
 
 .bgcolor-extralightblue {
