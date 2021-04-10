@@ -2,7 +2,7 @@
 {% block content %}
     <div class="text-container">
         <div class="blog-heading">
-            <h1 class="blog-title">{{ title }}</h1>
+            <h1 class="blog-title">{{ base.title }}</h1>
             <div class="blog-metadata">
                 <p>Posted {{ created_at }}</p>
                 {% if updated_at %}
