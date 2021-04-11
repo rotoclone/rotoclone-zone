@@ -259,6 +259,7 @@ hr {
     --color-barely-orange-dark: #fff6ea;
     --color-barely-orange: #fdf9f4;
     --color-offwhite: rgb(245, 245, 245);
+    --color-offblack: rgb(40, 40, 40);
 
     --color-shadow: rgba(0, 0, 0, 0.18);
     --color-dark-shadow: rgba(0, 0, 0, 0.4);
@@ -345,8 +346,8 @@ body.light-theme .theme-toggle::after {
 }
 
 body {
-    --color-pagebg: var(--color-black-85pct);
-    --color-contentbg: none;
+    --color-pagebg: var(--color-offblack);
+    --color-contentbg: var(--color-offblack);
     --color-maintext: var(--color-white-90pct);
     --color-fadedtext: var(--color-white-70pct);
     --color-navbg: var(--color-primary);
