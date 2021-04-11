@@ -99,7 +99,7 @@ a:visited {
 }
 
 .navigation a {
-    padding: 1em;
+    padding: 0.75em;
     margin: 0;
     color: var(--color-white-95pct);
     text-decoration: none;
