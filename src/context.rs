@@ -126,7 +126,7 @@ impl Site {
     ) -> Result<BlogEntryContext, std::io::Error> {
         Ok(BlogEntryContext {
             base: BaseContext {
-                title: format!("The Rotoclone Zone Blog - {}", entry.title),
+                title: entry.title.clone(),
                 meta_description: entry.title.clone(),
             },
             tags: entry.tags.clone(),
@@ -145,5 +145,5 @@ fn format_datetime(datetime: DateTime<Utc>) -> String {
     let day = Ordinal(datetime.day()).to_string();
     let year = datetime.format("%Y");
 
-    format!("{} {} {}", month, day, year)
+    format!("{} {}, {}", month, day, year)
 }

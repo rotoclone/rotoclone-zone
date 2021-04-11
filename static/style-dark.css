@@ -23,7 +23,6 @@
 
 body {
     font-family: "main-font", sans-serif;
-    font-size: 13pt;
     color: var(--color-maintext);
     padding: 0;
     margin: 0;
@@ -32,40 +31,57 @@ body {
 
 a {
     color: var(--color-link);
+    /*text-decoration: none;
+    border-bottom: 3px solid var(--color-tertiary);*/
 }
 
 a:visited {
     color: var(--color-link-visited);
 }
 
+/*
+h1, h2, h3, h4, h5, h6 {
+    /*background-color: rgba(var(--color-main-green-triple), 0.30);*/
+    /*text-shadow: 1px 1px 1px var(--color-dark-shadow);*//*
+    padding-right: 1em;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-left: -30px;
+    display: table;
+    /*clip-path: polygon(0 0, calc(100% - 0.5em) 0, 100% 100%, 0 100%);*//*
+    box-shadow: 0px 5px 0px var(--color-primary);
+}
+*/
+
+/*
+h1, h2, h3, h4, h5, h6 {
+    text-shadow: 3px 3px 0px rgba(var(--color-main-blue-triple), 1);
+}
+*/
+
 .page-container {
-    /*width: min(80em, 100%);*/
-    max-width: 80rem;
+    width: min(90em, 100%);
     margin-left: auto;
     margin-right: auto;
 }
 
 .main-content-container {
     background-color: var(--color-contentbg);
+    box-shadow: 0px 5px 10px var(--color-shadow);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
 }
 
 .text-container {
-    padding-left: 1em;
-    padding-right: 1em;
+    padding: 1em;
 }
 
 .navigation {
     position: relative;
     margin-top: 1em;
-    margin-bottom: calc(1em + 10px);
     width: 100%;
     padding-top: 1em;
     padding-bottom: 1em;
-}
-
-.navigation-links {
-    position: relative;
-    z-index: 1;
 }
 
 .navigation::after {
@@ -78,6 +94,7 @@ a:visited {
     height: 100%;
     left: -2em;
     top: 0;
+    z-index: -1;
 }
 
 .footer {
@@ -85,8 +102,9 @@ a:visited {
     position: relative;
     padding-top: 1em;
     padding-bottom: 1em;
-    text-align: center;
+    text-align: right;
     background-color: var(--color-primary);
+    /*box-shadow: 0px -5px 0px var(--color-secondary);*/
     border-top: 5px solid var(--color-secondary);
 }
 
@@ -94,6 +112,7 @@ a:visited {
     padding: 1em;
     margin: 0;
     color: var(--color-white-95pct);
+    /* text-decoration: none; */
     text-shadow: 1px 1px 1px var(--color-dark-shadow);
     border: none;
 }
@@ -122,6 +141,12 @@ a:visited {
     padding-bottom: 0.25em;
 }
 
+/*
+.blog-heading {
+    background-color: var(--color-primary);
+}
+*/
+
 .blog-title {
     /*width: 100%;*/
     padding-left: 0;
@@ -129,13 +154,21 @@ a:visited {
     background: none;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 0.25em;
-    margin-bottom: 0.25em;
     font-family: "title-font", serif;
     text-align: center;
     clip-path: none;
     box-shadow: none;
     /*box-shadow: 0px 8px 0px var(--color-primary);*/
+}
+
+.blog-title::after {
+    display: block;
+    content: "";
+    margin: auto;
+    position: relative;
+    width: 10em;
+    height: 8px;
+    background-color: var(--color-primary);
 }
 
 .blog-stub {
@@ -151,9 +184,18 @@ a:visited {
     background-color: rgba(255, 255, 255, 0.02);
 }
 
+/*
+.blog-metadata {
+    display: table;
+    margin: auto;
+    padding-top: 0.5em;
+    box-shadow: 0px -8px 0px var(--color-primary);
+}
+*/
+
 .blog-metadata, .blog-metadata a {
     text-align: center;
-    color: var(--color-fadedtext);
+    color: var(--color-white-70pct);
 }
 
 .blog-metadata p {
@@ -213,13 +255,23 @@ hr {
     border: 0;
     display: block;
     height: 0.2em;
-    margin: 1em;
-    background-color: var(--color-primary);
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background: radial-gradient(circle at 50% 50%, var(--color-main-yellow), rgba(0, 0, 0, 0));
 }
 
-@media only screen and (max-width: 87rem) {
+@media only screen and (max-width: 96em) {
+    /*
+    .navigation::after, .footer::after{
+        transform: skew(0deg);
+        box-shadow: 0px 10px 0px #00C17D, 0px -10px 0px #ffc300;
+        width: 100%;
+        left: 0;
+    }
+    */
+
     .navigation {
-        width: calc(100% - 1em);
+        width: calc(100% - 2em);
         margin-left: auto;
         margin-right: auto;
     }
@@ -232,176 +284,6 @@ hr {
         width: calc(100% - 2em);
         left: 1em;
     }
-}
-
-/* Color */
-
-:root {
-    --content-width: 80em;
-
-    /* https://paletton.com/#uid=33-0u0kPwDppxNnzvOxPYrIQDls */
-    --color-main-blue: #0563BD;
-    --color-main-blue-triple: 5, 99, 189;
-    --color-light-blue: #398AD9;
-    --color-dark-blue: #044B8F;
-    --color-main-yellow: #ffc300;
-    --color-main-yellow-triple: 255, 195, 0;
-    --color-light-yellow: #FFCF34;
-    --color-dark-yellow: #DDA900;
-
-    /* https://paletton.com/#uid=53-0u0kPwDppxNnzvOxPYrIQDls */
-    --color-main-green: #00C17D;
-    --color-main-green-triple: 0, 193, 125;
-    --color-light-green: #2CDB9D;
-    --color-dark-green: #009460;
-
-    --color-lighter-yellow: #facf46;
-    --color-barely-orange-dark: #fff6ea;
-    --color-barely-orange: #fdf9f4;
-    --color-offwhite: rgb(248, 248, 248);
-
-    --color-shadow: rgba(0, 0, 0, 0.18);
-    --color-dark-shadow: rgba(0, 0, 0, 0.4);
-
-    --color-white-10pct: rgba(255, 255, 255, 0.1);
-    --color-white-15pct: rgba(255, 255, 255, 0.15);
-    --color-white-25pct: rgba(255, 255, 255, 0.25);
-    --color-white-50pct: rgba(255, 255, 255, 0.5);
-    --color-white-70pct: rgba(255, 255, 255, 0.7);
-    --color-white-75pct: rgba(255, 255, 255, 0.75);
-    --color-white-85pct: rgba(255, 255, 255, 0.85);
-    --color-white-90pct: rgba(255, 255, 255, 0.9);
-    --color-white-95pct: rgba(255, 255, 255, 0.95);
-
-    --color-black-3pct: rgba(0, 0, 0, 0.03);
-    --color-black-5pct: rgba(0, 0, 0, 0.05);
-    --color-black-10pct: rgba(0, 0, 0, 0.1);
-    --color-black-15pct: rgba(0, 0, 0, 0.15);
-    --color-black-40pct: rgba(0, 0, 0, 0.4);
-    --color-black-50pct: rgba(0, 0, 0, 0.5);
-    --color-black-70pct: rgba(0, 0, 0, 0.7);
-    --color-black-75pct: rgba(0, 0, 0, 0.75);
-    --color-black-80pct: rgba(0, 0, 0, 0.8);
-    --color-black-85pct: rgba(0, 0, 0, 0.85);
-    --color-black-90pct: rgba(0, 0, 0, 0.90);
-    --color-black-95pct: rgba(0, 0, 0, 0.95);
-
-    --color-primary: var(--color-main-blue);
-    --color-secondary: var(--color-main-green);
-    --color-tertiary: var(--color-main-yellow);
-
-    /* light mode colors */
-    /*
-    --color-pagebg: var(--color-offwhite);
-    --color-contentbg: var(--color-offwhite);
-    --color-maintext: var(--color-black-90pct);
-    --color-fadedtext: var(--color-black-70pct);
-    --color-navbg: var(--color-primary);
-    --color-navhover: var(--color-white-15pct);
-    --color-link: var(--color-main-blue);
-    --color-link-visited: var(--color-main-blue);
-    */
-
-    /* dark mode colors */
-    /*
-    --color-pagebg: var(--color-black-85pct);
-    --color-contentbg: none;
-    --color-maintext: var(--color-white-90pct);
-    --color-fadedtext: var(--color-white-70pct);
-    --color-navbg: var(--color-primary);
-    --color-navhover: var(--color-white-15pct);
-    --color-link: var(--color-lighter-yellow);
-    --color-link-visited: var(--color-lighter-yellow);
-    */
-}
-
-body .theme-toggle {
-    position: absolute;
-    padding: 0.5em;
-    right: 0;
-    top: 0;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 13pt;
-    background-color: var(--color-black-50pct);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    z-index: 1;
-}
-
-body.light-theme .theme-toggle {
-    background-color: var(--color-white-50pct);
-}
-
-
-body .theme-toggle::after {
-    content: "☀️";
-}
-
-body.light-theme .theme-toggle::after {
-    content: "🌘";
-}
-
-body {
-    --color-pagebg: var(--color-black-85pct);
-    --color-contentbg: none;
-    --color-maintext: var(--color-white-90pct);
-    --color-fadedtext: var(--color-white-70pct);
-    --color-navbg: var(--color-primary);
-    --color-navhover: var(--color-white-15pct);
-    --color-link: var(--color-lighter-yellow);
-    --color-link-visited: var(--color-lighter-yellow);
-}
-
-body.light-theme {
-    --color-pagebg: var(--color-offwhite);
-    --color-contentbg: var(--color-offwhite);
-    --color-maintext: var(--color-black-90pct);
-    --color-fadedtext: var(--color-black-70pct);
-    --color-navbg: var(--color-primary);
-    --color-navhover: var(--color-white-15pct);
-    --color-link: var(--color-main-blue);
-    --color-link-visited: var(--color-main-blue);
-}
-
-.bgcolor-extralightblue {
-    background-color: var(--color-extralightblue);
-}
-
-.textcolor-extralightblue {
-    color: var(--color-extralightblue);
-}
-
-.bgcolor-lightblue {
-    background-color: var(--color-lightblue);
-}
-
-.textcolor-lightblue {
-    color: var(--color-lightblue);
-}
-
-.bgcolor-darkblue {
-    background-color: var(--color-darkblue);
-}
-
-.textcolor-darkblue {
-    color: var(--color-darkblue);
-}
-
-.bgcolor-lightgray {
-    background-color: var(--color-lightgray);
-}
-
-.textcolor-lightgray {
-    color: var(--color-lightgray);
-}
-
-.bgcolor-medgray {
-    background-color: var(--color-medgray);
-}
-
-.textcolor-medgray {
-    color: var(--color-medgray);
 }
 
 /* Font */
@@ -417,15 +299,15 @@ body.light-theme {
 /* Width */
 
 .width-sm {
-    max-width: 60em;
+    width: min(75em, 100%);
 }
 
 .width-md {
-    max-width: 80em;
+    width: min(90em, 100%);
 }
 
 .width-lg {
-    max-width: 100em;
+    width: min(150em, 100%);
 }
 
 .width-auto {
@@ -583,4 +465,102 @@ body.light-theme {
 
 .font-logo {
     font-family: "logo-font", sans-serif;
+}
+
+/* Color */
+
+:root {
+    --content-width: 90em;
+
+    /* https://paletton.com/#uid=33-0u0kPwDppxNnzvOxPYrIQDls */
+    --color-main-blue: #0563BD;
+    --color-main-blue-triple: 5, 99, 189;
+    --color-light-blue: #398AD9;
+    --color-dark-blue: #044B8F;
+    --color-main-yellow: #ffc300;
+    --color-main-yellow-triple: 255, 195, 0;
+    --color-light-yellow: #FFCF34;
+    --color-dark-yellow: #DDA900;
+
+    /* https://paletton.com/#uid=53-0u0kPwDppxNnzvOxPYrIQDls */
+    --color-main-green: #00C17D;
+    --color-main-green-triple: 0, 193, 125;
+    --color-light-green: #2CDB9D;
+    --color-dark-green: #009460;
+
+    --color-lighter-yellow: #facf46;
+
+    --color-shadow: rgba(0, 0, 0, 0.18);
+    --color-dark-shadow: rgba(0, 0, 0, 0.4);
+
+    --color-white-10pct: rgba(255, 255, 255, 0.1);
+    --color-white-15pct: rgba(255, 255, 255, 0.15);
+    --color-white-25pct: rgba(255, 255, 255, 0.25);
+    --color-white-50pct: rgba(255, 255, 255, 0.5);
+    --color-white-70pct: rgba(255, 255, 255, 0.7);
+    --color-white-75pct: rgba(255, 255, 255, 0.75);
+    --color-white-85pct: rgba(255, 255, 255, 0.85);
+    --color-white-90pct: rgba(255, 255, 255, 0.9);
+    --color-white-95pct: rgba(255, 255, 255, 0.95);
+
+    --color-black-10pct: rgba(0, 0, 0, 0.1);
+    --color-black-40pct: rgba(0, 0, 0, 0.4);
+    --color-black-50pct: rgba(0, 0, 0, 0.5);
+    --color-black-70pct: rgba(0, 0, 0, 0.7);
+    --color-black-75pct: rgba(0, 0, 0, 0.75);
+    --color-black-90pct: rgba(0, 0, 0, 0.90);
+    --color-black-95pct: rgba(0, 0, 0, 0.95);
+
+    --color-primary: var(--color-main-blue);
+    --color-secondary: var(--color-main-green);
+    --color-tertiary: var(--color-main-yellow);
+
+    --color-pagebg: var(--color-black-90pct);
+    --color-contentbg: var(--color-white-10pct);
+    --color-maintext: var(--color-white-90pct);
+    --color-lighttext: var(--color-white-95pct);
+    --color-navbg: var(--color-primary);
+    --color-navhover: var(--color-white-15pct);
+    --color-link: var(--color-lighter-yellow);
+    --color-link-visited: var(--color-lighter-yellow);
+}
+
+.bgcolor-extralightblue {
+    background-color: var(--color-extralightblue);
+}
+
+.textcolor-extralightblue {
+    color: var(--color-extralightblue);
+}
+
+.bgcolor-lightblue {
+    background-color: var(--color-lightblue);
+}
+
+.textcolor-lightblue {
+    color: var(--color-lightblue);
+}
+
+.bgcolor-darkblue {
+    background-color: var(--color-darkblue);
+}
+
+.textcolor-darkblue {
+    color: var(--color-darkblue);
+}
+
+.bgcolor-lightgray {
+    background-color: var(--color-lightgray);
+}
+
+.textcolor-lightgray {
+    color: var(--color-lightgray);
+}
+
+.bgcolor-medgray {
+    background-color: var(--color-medgray);
+}
+
+.textcolor-medgray {
+    color: var(--color-medgray);
 }
