@@ -17,12 +17,12 @@
     </head>
     <body>
         <script>
-        const currentTheme = localStorage.getItem("theme");
-        if (currentTheme == "dark") {
-            document.body.classList.toggle("dark-theme");
-        } else if (currentTheme == "light") {
-            document.body.classList.toggle("light-theme");
-        }
+            const currentTheme = localStorage.getItem("theme");
+            if (currentTheme == "dark") {
+                document.body.classList.toggle("dark-theme");
+            } else if (currentTheme == "light") {
+                document.body.classList.toggle("light-theme");
+            }
         </script>
         <a href="#" class="theme-toggle" title="Toggle light/dark mode"> </a>
         <script src="/theme_toggle.js"></script>
@@ -34,4 +34,9 @@
         </div>
         {% include "footer" %}
     </body>
+    <script>
+        window.addEventListener("load", function(){
+            document.body.style.transition = "all 0.5s ease";
+        });
+    </script>
 </html>

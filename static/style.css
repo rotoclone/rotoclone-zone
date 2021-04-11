@@ -365,7 +365,7 @@ body.light-theme .theme-toggle::after {
 
 body {
     --color-pagebg: var(--color-offblack);
-    --color-contentbg: var(--color-offblack);
+    --color-contentbg: none;
     --color-maintext: var(--color-white-90pct);
     --color-fadedtext: var(--color-white-70pct);
     --color-navbg: var(--color-primary);
@@ -376,7 +376,7 @@ body {
 
 body.light-theme {
     --color-pagebg: var(--color-offwhite);
-    --color-contentbg: var(--color-offwhite);
+    --color-contentbg: none;
     --color-maintext: var(--color-black-90pct);
     --color-fadedtext: var(--color-black-70pct);
     --color-navbg: var(--color-primary);
