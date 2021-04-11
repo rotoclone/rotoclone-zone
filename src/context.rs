@@ -61,6 +61,23 @@ impl Site {
 }
 
 #[derive(Serialize)]
+pub struct AboutContext {
+    base: BaseContext,
+}
+
+impl Site {
+    /// Builds the context for the about page.
+    pub fn build_about_context(&self) -> AboutContext {
+        AboutContext {
+            base: BaseContext {
+                title: "About The Rotoclone Zone".to_string(),
+                meta_description: "It's The Rotoclone Zone".to_string(),
+            },
+        }
+    }
+}
+
+#[derive(Serialize)]
 pub struct BlogIndexContext {
     base: BaseContext,
     entries: Vec<BlogEntryStub>,
@@ -137,6 +154,13 @@ impl Site {
             next_entry: None,     //TODO
         })
     }
+}
+
+#[derive(Serialize)]
+pub struct ErrorContext {
+    pub base: BaseContext,
+    pub header: String,
+    pub message: String,
 }
 
 /// Converts the provided `DateTime` into a nice human-readable string.

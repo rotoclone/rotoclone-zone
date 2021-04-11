@@ -107,6 +107,24 @@ a:visited {
     border: none;
 }
 
+/*
+.navigation a::after {
+    content: "";
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    position: absolute;
+    display: inline-block;
+    background-color: var(--color-white-25pct);
+    width: 2px;
+    height: calc(100% + 0.8em);
+    top: -0.4em;
+}
+*/
+
+.navigation a:last-child::after {
+    display: none;
+}
+
 .navigation a:hover {
     background-color: var(--color-navhover);
 }
@@ -557,7 +575,7 @@ body.light-theme {
 }
 
 .text-shadow-obnoxious {
-    text-shadow: 8px 8px 5px #0000ff44, 16px 16px 5px #00ff0044, 24px 24px 5px #ff000033, 32px 32px 5px #0000ff33, 40px 40px 5px #00ff0022, 48px 48px 5px #ff000022, 56px 56px 5px #0000ff11;
+    text-shadow: 3px 3px 0px var(--color-tertiary), 6px 6px 0px var(--color-secondary), 9px 9px 0px var(--color-primary);
 }
 
 /* Text size */

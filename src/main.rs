@@ -3,7 +3,6 @@ use std::num::NonZeroUsize;
 use rocket::State;
 use rocket_contrib::serve::{crate_relative, Options, StaticFiles};
 use rocket_contrib::templates::Template;
-use serde::Serialize;
 use std::path::Path;
 
 #[macro_use]
@@ -13,6 +12,7 @@ mod site;
 use site::*;
 
 mod context;
+use context::*;
 
 const ADDITIONAL_STATIC_FILES_DIR_CONFIG_KEY: &str = "static_files_dir";
 
@@ -22,17 +22,16 @@ const DEFAULT_SITE_CONTENT_BASE_DIR: &str = "./site_content";
 const RENDERED_HTML_BASE_DIR_CONFIG_KEY: &str = "rendered_html_base_dir";
 const DEFAULT_RENDERED_HTML_BASE_DIR: &str = "./rendered_html";
 
-#[derive(Serialize)]
-struct ErrorContext {
-    title: String,
-    header: String,
-    message: String,
-}
-
 #[get("/")]
 fn index(site: State<Site>) -> Template {
     let context = site.build_index_context();
     Template::render("index", &context)
+}
+
+#[get("/about")]
+fn about(site: State<Site>) -> Template {
+    let context = site.build_about_context();
+    Template::render("about", &context)
 }
 
 #[get("/blog?<page>")]
@@ -85,7 +84,10 @@ fn get_blog_search(q: Option<String>, site: State<Site>) -> Template {
 #[catch(404)]
 fn not_found() -> Template {
     let context = ErrorContext {
-        title: "404".to_string(),
+        base: BaseContext {
+            title: "404".to_string(),
+            meta_description: "Not a page".to_string(),
+        },
         header: "404".to_string(),
         message: "That's not a page".to_string(),
     };
@@ -99,6 +101,7 @@ fn rocket() -> rocket::Rocket {
             "/",
             routes![
                 index,
+                about,
                 get_blog_index,
                 get_blog_entry,
                 get_blog_tags,

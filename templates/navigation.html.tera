@@ -1,6 +1,7 @@
 <div class="navigation">
     <div class="navigation-links">
         <a href="/" class="home-link">The Rotoclone Zone</a>
+        <a href="/about">About</a>
         <a href="/blog">Blog</a>
     </div>
 </div>
