@@ -1,19 +1,19 @@
 /* Webfont */
 @font-face {
     font-family: "main-font";
-    src: url("/open-sans-regular.woff2") format('woff2');
+    src: url("/fonts/open-sans-regular.woff2") format('woff2');
     font-display: swap;
 }
 
 @font-face {
     font-family: "title-font";
-    src: url("/martel-regular.woff2") format('woff2');
+    src: url("/fonts/martel-regular.woff2") format('woff2');
     font-display: swap;
 }
 
 @font-face {
     font-family: "logo-font";
-    src: url('/raleway-bold.woff2') format('woff2');
+    src: url('/fonts/raleway-bold.woff2') format('woff2');
     font-display: swap;
 }
 
