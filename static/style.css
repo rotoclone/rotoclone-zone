@@ -157,6 +157,11 @@ a:visited {
     padding-bottom: 0.25em;
 }
 
+.vertical-spacer-md {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
 .blog-title {
     /*width: 100%;*/
     padding-left: 0;
