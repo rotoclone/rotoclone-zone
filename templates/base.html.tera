@@ -24,8 +24,6 @@
                 document.body.classList.toggle("light-theme");
             }
         </script>
-        <a href="#" class="theme-toggle" title="Toggle light/dark mode"> </a>
-        <script src="/theme_toggle.js"></script>
         <div class="page-container">
             <div class="main-content-container">
                 {% include "navigation" %}
