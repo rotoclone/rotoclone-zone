@@ -111,7 +111,7 @@ a:visited {
     margin: 0;
     color: var(--color-white-95pct);
     text-decoration: none;
-    text-shadow: 1px 1px 1px var(--color-dark-shadow);
+    text-shadow: 1px 1px 1px var(--color-shadow);
     border: none;
 }
 
@@ -330,6 +330,7 @@ hr {
     --color-barely-orange-dark: #fff6ea;
     --color-barely-orange: #fdf9f4;
     --color-offwhite: rgb(245, 245, 245);
+    --color-gray: rgb(235, 235, 235);
     --color-offblack: rgb(40, 40, 40);
 
     --color-shadow: rgba(0, 0, 0, 0.18);
@@ -338,7 +339,10 @@ hr {
     --color-white-5pct: rgba(255, 255, 255, 0.05);
     --color-white-10pct: rgba(255, 255, 255, 0.1);
     --color-white-15pct: rgba(255, 255, 255, 0.15);
+    --color-white-20pct: rgba(255, 255, 255, 0.20);
     --color-white-25pct: rgba(255, 255, 255, 0.25);
+    --color-white-30pct: rgba(255, 255, 255, 0.3);
+    --color-white-40pct: rgba(255, 255, 255, 0.4);
     --color-white-50pct: rgba(255, 255, 255, 0.5);
     --color-white-70pct: rgba(255, 255, 255, 0.7);
     --color-white-75pct: rgba(255, 255, 255, 0.75);
@@ -409,10 +413,6 @@ body .theme-toggle {
     z-index: 1;
 }
 
-body.light-theme .theme-toggle {
-    /*background-color: var(--color-white-50pct);*/
-}
-
 
 body .theme-toggle::after {
     content: "☀️";
@@ -434,8 +434,8 @@ body {
 }
 
 body.light-theme {
-    --color-pagebg: var(--color-offwhite);
-    --color-contentbg: var(--color-black-5pct);
+    --color-pagebg: var(--color-gray);
+    --color-contentbg: var(--color-offwhite);
     --color-maintext: var(--color-black-90pct);
     --color-fadedtext: var(--color-black-70pct);
     --color-navbg: var(--color-primary);
