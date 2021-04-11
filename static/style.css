@@ -258,11 +258,12 @@ hr {
     --color-lighter-yellow: #facf46;
     --color-barely-orange-dark: #fff6ea;
     --color-barely-orange: #fdf9f4;
-    --color-offwhite: rgb(248, 248, 248);
+    --color-offwhite: rgb(245, 245, 245);
 
     --color-shadow: rgba(0, 0, 0, 0.18);
     --color-dark-shadow: rgba(0, 0, 0, 0.4);
 
+    --color-white-5pct: rgba(255, 255, 255, 0.05);
     --color-white-10pct: rgba(255, 255, 255, 0.1);
     --color-white-15pct: rgba(255, 255, 255, 0.15);
     --color-white-25pct: rgba(255, 255, 255, 0.25);
@@ -277,6 +278,7 @@ hr {
     --color-black-5pct: rgba(0, 0, 0, 0.05);
     --color-black-10pct: rgba(0, 0, 0, 0.1);
     --color-black-15pct: rgba(0, 0, 0, 0.15);
+    --color-black-25pct: rgba(0, 0, 0, 0.25);
     --color-black-40pct: rgba(0, 0, 0, 0.4);
     --color-black-50pct: rgba(0, 0, 0, 0.5);
     --color-black-70pct: rgba(0, 0, 0, 0.7);
