@@ -112,20 +112,6 @@ a:visited {
     border: none;
 }
 
-/*
-.navigation a::after {
-    content: "";
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    position: absolute;
-    display: inline-block;
-    background-color: var(--color-white-25pct);
-    width: 2px;
-    height: calc(100% + 0.8em);
-    top: -0.4em;
-}
-*/
-
 .navigation a:last-child::after {
     display: none;
 }
@@ -175,26 +161,10 @@ a:visited {
 .blog-stub {
     padding: 1em;
     margin: 1em;
-    /*border-radius: 5px;*/
     border-width: 0px 0px 0px 5px;
     border-color: var(--color-boxaccent);
     border-style: solid;
     background-color: var(--color-boxbg);
-    /*box-shadow: -4px 0px 0px var(--color-primary), -0px 0px 0px var(--color-primary);*/
-
-    /*
-    background-image: linear-gradient(var(--color-primary), var(--color-primary)),
-                    linear-gradient(var(--color-primary), var(--color-primary)),
-                    linear-gradient(var(--color-primary), var(--color-primary)),
-                    linear-gradient(var(--color-primary), var(--color-primary));
-
-    background-repeat: no-repeat;
-    background-size: 8px 4px;
-    background-position: top left, bottom left;
-
-    border: solid var(--color-primary);
-    border-width: 0 0 0 4px;
-    */
 }
 
 .blog-stub h2 {
@@ -389,19 +359,10 @@ body .theme-toggle {
     position: relative;
     padding: 0.25em;
     margin: 0.5em;
-    /*padding: 0;
-    margin: 0;*/
-    /*align-self: flex-end;*/
     margin-left: auto;
     right: -2em;
-    /*top: 0;*/
     text-decoration: none;
     border-radius: 50%;
-    /*
-    background-color: var(--color-black-50pct);
-    -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(3px);
-    */
     z-index: 1;
 }
 

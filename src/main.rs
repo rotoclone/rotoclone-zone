@@ -123,6 +123,7 @@ fn rocket() -> rocket::Rocket {
         .extract_inner::<String>(RENDERED_HTML_BASE_DIR_CONFIG_KEY)
         .unwrap_or_else(|_| DEFAULT_RENDERED_HTML_BASE_DIR.to_string());
 
+    println!("Building site...");
     let site = Site::from_dir(Path::new(&site_base_dir), Path::new(&html_base_dir))
         .expect("error building site");
     println!("Built site: {:#?}", site); //TODO remove?
