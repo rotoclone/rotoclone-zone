@@ -30,6 +30,11 @@ body {
     background-color: var(--color-pagebg);
 }
 
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
 a {
     color: var(--color-link);
 }
@@ -182,14 +187,36 @@ a:visited {
     padding: 1em;
     margin: 1em;
     border-radius: 5px;
-    border-width: 2px;
+    /*border-width: 2px;
     border-color: rgba(255, 255, 255, 0.1);
-    border-style: solid;
+    border-style: solid;*/
+    background-color: var(--color-boxbg);
+    box-shadow: 4px 0px 0px var(--color-primary), -4px 0px 0px var(--color-primary);
+
+    /*
+    background-image: linear-gradient(var(--color-primary), var(--color-primary)),
+                    linear-gradient(var(--color-primary), var(--color-primary)),
+                    linear-gradient(var(--color-primary), var(--color-primary)),
+                    linear-gradient(var(--color-primary), var(--color-primary));
+
+    background-repeat: no-repeat;
+    background-size: 8px 4px;
+    background-position: top left, top right, bottom left, bottom right;
+
+    border: solid var(--color-primary);
+    border-width: 0 8px;
+    */
 }
 
+.blog-stub h2 {
+    margin: 0;
+}
+
+/*
 .blog-stub:hover {
     background-color: rgba(255, 255, 255, 0.02);
 }
+*/
 
 .blog-metadata, .blog-metadata a {
     text-align: center;
@@ -372,30 +399,6 @@ hr {
     --color-primary: var(--color-main-blue);
     --color-secondary: var(--color-main-green);
     --color-tertiary: var(--color-main-yellow);
-
-    /* light mode colors */
-    /*
-    --color-pagebg: var(--color-offwhite);
-    --color-contentbg: var(--color-offwhite);
-    --color-maintext: var(--color-black-90pct);
-    --color-fadedtext: var(--color-black-70pct);
-    --color-navbg: var(--color-primary);
-    --color-navhover: var(--color-white-15pct);
-    --color-link: var(--color-main-blue);
-    --color-link-visited: var(--color-main-blue);
-    */
-
-    /* dark mode colors */
-    /*
-    --color-pagebg: var(--color-black-85pct);
-    --color-contentbg: none;
-    --color-maintext: var(--color-white-90pct);
-    --color-fadedtext: var(--color-white-70pct);
-    --color-navbg: var(--color-primary);
-    --color-navhover: var(--color-white-15pct);
-    --color-link: var(--color-lighter-yellow);
-    --color-link-visited: var(--color-lighter-yellow);
-    */
 }
 
 body .theme-toggle {
@@ -432,6 +435,7 @@ body {
     --color-contentbg: var(--color-white-5pct);
     --color-maintext: var(--color-white-90pct);
     --color-fadedtext: var(--color-white-70pct);
+    --color-boxbg: var(--color-white-5pct);
     --color-navbg: var(--color-primary);
     --color-navhover: var(--color-white-15pct);
     --color-link: var(--color-lighter-yellow);
@@ -443,6 +447,7 @@ body.light-theme {
     --color-contentbg: var(--color-offwhite);
     --color-maintext: var(--color-black-90pct);
     --color-fadedtext: var(--color-black-70pct);
+    --color-boxbg: var(--color-black-3pct);
     --color-navbg: var(--color-primary);
     --color-navhover: var(--color-white-15pct);
     --color-link: var(--color-main-blue);
