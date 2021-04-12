@@ -19,6 +19,6 @@
                 {% endif %}
             </div>
         {% endfor %}
-        <p class="padding-bottom-md"><a href="/blog">More blog posts</a></p>
+        <p><a href="/blog">More blog posts</a><p>
     </div>
 {% endblock content %}

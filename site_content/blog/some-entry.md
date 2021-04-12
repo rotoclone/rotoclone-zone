@@ -5,6 +5,8 @@ slug = "florp"
 updated_at = "2020-01-01T00:00:00Z"
 +++
 
+Most blog entries probably won't start with a header so here's some text.
+
 # It's a header
 It's some stuff under a header
 
@@ -25,7 +27,7 @@ Let's try a ~~tlable~~ ~~talbal~~ ~~trambampoline~~ table
 |value 1|value 2|
 |value 3|value 4|
 
-This text has to be long enough to test out the footnotes. Also I want a line long enough that it has to wrap around. I'll have to type some more stuff to get that to happen. Ok I think that should be long enough.
+This text has to be long enough to test out the footnotes. Also I want a line long enough that it has to wrap around. I'll have to type some more stuff to get that to happen. Ok I think that should be long enough. But it should be even longer so it's more than just a couple of lines. I'm not sure this is long enough yet, so I'm going to keep adding words. I'm not sure what to put, so I'll just put that I don't know what to say. There, that might be enough. One more sentence for good measure.
 
 Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaah

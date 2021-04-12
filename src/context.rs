@@ -61,6 +61,23 @@ impl Site {
 }
 
 #[derive(Serialize)]
+pub struct AboutContext {
+    base: BaseContext,
+}
+
+impl Site {
+    /// Builds the context for the about page.
+    pub fn build_about_context(&self) -> AboutContext {
+        AboutContext {
+            base: BaseContext {
+                title: "About The Rotoclone Zone".to_string(),
+                meta_description: "It's The Rotoclone Zone".to_string(),
+            },
+        }
+    }
+}
+
+#[derive(Serialize)]
 pub struct BlogIndexContext {
     base: BaseContext,
     entries: Vec<BlogEntryStub>,
@@ -126,7 +143,7 @@ impl Site {
     ) -> Result<BlogEntryContext, std::io::Error> {
         Ok(BlogEntryContext {
             base: BaseContext {
-                title: format!("The Rotoclone Zone Blog - {}", entry.title),
+                title: entry.title.clone(),
                 meta_description: entry.title.clone(),
             },
             tags: entry.tags.clone(),
@@ -139,11 +156,18 @@ impl Site {
     }
 }
 
+#[derive(Serialize)]
+pub struct ErrorContext {
+    pub base: BaseContext,
+    pub header: String,
+    pub message: String,
+}
+
 /// Converts the provided `DateTime` into a nice human-readable string.
 fn format_datetime(datetime: DateTime<Utc>) -> String {
     let month = datetime.format("%B");
     let day = Ordinal(datetime.day()).to_string();
     let year = datetime.format("%Y");
 
-    format!("{} {} {}", month, day, year)
+    format!("{} {}, {}", month, day, year)
 }

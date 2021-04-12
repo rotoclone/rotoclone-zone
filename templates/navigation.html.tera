@@ -1,4 +1,9 @@
 <div class="navigation">
-    <a href="/" class="home-link">The Rotoclone Zone</a>
+    <a href="/" class="home-link home-link-long">The Rotoclone Zone</a>
+    <a href="/" class="home-link home-link-short">Rotoclone Zone</a>
+    <a href="/" class="home-link home-link-shorter">Home</a>
+    <a href="/about">About</a>
     <a href="/blog">Blog</a>
+    <a href="#" class="theme-toggle" title="Toggle light/dark mode"> </a>
+    <script src="/theme_toggle.js"></script>
 </div>
