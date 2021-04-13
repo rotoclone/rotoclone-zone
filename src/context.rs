@@ -6,7 +6,7 @@ use std::{fs::read_to_string, num::NonZeroUsize};
 use crate::site::{BlogEntry, Site};
 
 const RECENT_BLOG_ENTRIES_LIMIT: usize = 5;
-const BLOG_INDEX_PAGE_SIZE: usize = 10;
+const PAGE_SIZE: usize = 10;
 
 #[derive(Serialize)]
 pub struct BlogEntryStub {
@@ -52,7 +52,7 @@ impl Site {
 
         IndexContext {
             base: BaseContext {
-                title: "Sup".to_string(),
+                title: "The Rotoclone Zone".to_string(),
                 meta_description: "It's The Rotoclone Zone".to_string(),
             },
             recent_blog_entries,
@@ -88,26 +88,17 @@ pub struct BlogIndexContext {
 impl Site {
     /// Builds the context for the blog index page.
     pub fn build_blog_index_context(&self, page: NonZeroUsize) -> BlogIndexContext {
-        let page = page.get();
-        let start_index = (page - 1) * BLOG_INDEX_PAGE_SIZE;
+        let start_index = (page.get() - 1) * PAGE_SIZE;
         let entries = self
             .blog_entries
             .iter()
             .skip(start_index)
-            .take(BLOG_INDEX_PAGE_SIZE)
+            .take(PAGE_SIZE)
             .map(BlogEntry::to_stub)
             .collect();
 
-        let previous_page = match page {
-            1 => None,
-            _ => Some(page - 1),
-        };
-
-        let next_page = if self.blog_entries.len() > (start_index + BLOG_INDEX_PAGE_SIZE) {
-            Some(page + 1)
-        } else {
-            None
-        };
+        let (previous_page, next_page) =
+            calculate_pages(page, start_index, self.blog_entries.len(), PAGE_SIZE);
 
         BlogIndexContext {
             base: BaseContext {
@@ -157,6 +148,75 @@ impl Site {
 }
 
 #[derive(Serialize)]
+pub struct BlogTagsContext {
+    base: BaseContext,
+    tags: Vec<String>,
+}
+
+impl Site {
+    /// Builds the context for the page of all the blog tags.
+    pub fn build_blog_tags_context(&self) -> BlogTagsContext {
+        let mut tags = self
+            .blog_entries
+            .iter()
+            .flat_map(|entry| entry.tags.clone())
+            .collect::<Vec<String>>();
+        tags.sort_unstable();
+        tags.dedup();
+
+        BlogTagsContext {
+            base: BaseContext {
+                title: "The Rotoclone Zone Blog - All Tags".to_string(),
+                meta_description: "All the tags".to_string(),
+            },
+            tags,
+        }
+    }
+}
+
+#[derive(Serialize)]
+pub struct BlogTagContext {
+    base: BaseContext,
+    tag: String,
+    entries: Vec<BlogEntryStub>,
+    previous_page: Option<usize>,
+    next_page: Option<usize>,
+}
+
+impl Site {
+    /// Builds the context for a blog tag page.
+    pub fn build_blog_tag_context(&self, tag: String, page: NonZeroUsize) -> BlogTagContext {
+        let start_index = (page.get() - 1) * PAGE_SIZE;
+        let all_matching_entries = self
+            .blog_entries
+            .iter()
+            .filter(|entry| entry.tags.contains(&tag))
+            .collect::<Vec<&BlogEntry>>();
+        let total_matching_entries = all_matching_entries.len();
+        let entries = all_matching_entries
+            .into_iter()
+            .skip(start_index)
+            .take(PAGE_SIZE)
+            .map(BlogEntry::to_stub)
+            .collect::<Vec<BlogEntryStub>>();
+
+        let (previous_page, next_page) =
+            calculate_pages(page, start_index, total_matching_entries, PAGE_SIZE);
+
+        BlogTagContext {
+            base: BaseContext {
+                title: format!("The Rotoclone Zone Blog - Posts Tagged {}", tag),
+                meta_description: format!("All the posts tagged {}", tag),
+            },
+            tag,
+            entries,
+            previous_page,
+            next_page,
+        }
+    }
+}
+
+#[derive(Serialize)]
 pub struct ErrorContext {
     pub base: BaseContext,
     pub header: String,
@@ -170,4 +230,24 @@ fn format_datetime(datetime: DateTime<Utc>) -> String {
     let year = datetime.format("%Y");
 
     format!("{} {}, {}", month, day, year)
+}
+
+fn calculate_pages(
+    current_page: NonZeroUsize,
+    start_index: usize,
+    total_size: usize,
+    page_size: usize,
+) -> (Option<usize>, Option<usize>) {
+    let previous_page = match current_page.get() {
+        1 => None,
+        _ => Some(current_page.get() - 1),
+    };
+
+    let next_page = if total_size > (start_index + page_size) {
+        Some(current_page.get() + 1)
+    } else {
+        None
+    };
+
+    (previous_page, next_page)
 }

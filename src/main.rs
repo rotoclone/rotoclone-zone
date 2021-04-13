@@ -58,19 +58,16 @@ fn get_blog_entry(entry_name: String, site: State<Site>) -> Option<Template> {
 }
 
 #[get("/blog/tags")]
-#[allow(unused_variables)]
 fn get_blog_tags(site: State<Site>) -> Template {
-    //let context = site.build_blog_tags_context(q);
-    //Template::render("blog_tags", &context)
-    unimplemented!() //TODO
+    let context = site.build_blog_tags_context();
+    Template::render("blog_tags", &context)
 }
 
-#[get("/blog/tags/<tag>")]
-#[allow(unused_variables)]
-fn get_blog_tag(tag: String, site: State<Site>) -> Template {
-    //let context = site.build_blog_tag_context(q);
-    //Template::render("blog_tag", &context)
-    unimplemented!() //TODO
+#[get("/blog/tags/<tag>?<page>")]
+fn get_blog_tag(tag: String, page: Option<NonZeroUsize>, site: State<Site>) -> Template {
+    let context =
+        site.build_blog_tag_context(tag, page.unwrap_or_else(|| NonZeroUsize::new(1).unwrap()));
+    Template::render("blog_tag", &context)
 }
 
 #[get("/blog/search?<q>")]

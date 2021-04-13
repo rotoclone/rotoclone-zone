@@ -1,0 +1,14 @@
+<div class="blog-stub">
+    <h2 class="font-title"><a href={{ entry.url }}>{{ entry.title }}</a></h2>
+    <span>{{ entry.created_at }}</span>
+    {% if entry.tags|length > 0 %}
+        <span> • </span>
+        <div class="blog-tags inline">
+            <ul>
+                {% for tag in entry.tags %}
+                    <li><a href="/blog/tags/{{ tag }}">{{ tag }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>

@@ -4,20 +4,7 @@
         <h1 class="textsize-extralg text-center-hz">You Have Entered <span class="font-logo text-shadow-obnoxious">The Rotoclone Zone</span></h1>
         <h1>Recent blog posts</h1>
         {% for entry in recent_blog_entries %}
-            <div class="blog-stub">
-                <h2 class="font-title"><a href={{ entry.url }}>{{ entry.title }}</a></h2>
-                <span>{{ entry.created_at }}</span>
-                {% if entry.tags|length > 0 %}
-                    <span> • </span>
-                    <div class="blog-tags inline">
-                        <ul>
-                            {% for tag in entry.tags %}
-                                <li><a href="/tags/{{ tag }}">{{ tag }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
-            </div>
+            {% include "blog_entry_stub" %}
         {% endfor %}
         <p><a href="/blog">More blog posts</a><p>
     </div>
