@@ -1,0 +1,11 @@
+{% extends "base" %}
+{% block content %}
+    <div class="text-container">
+        <h1>All the tags</h1>
+        <ul>
+            {% for tag in tags %}
+                <li><a href="/blog/tags/{{ tag }}">{{ tag }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}

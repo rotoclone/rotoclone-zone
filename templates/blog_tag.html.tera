@@ -1,19 +1,20 @@
 {% extends "base" %}
 {% block content %}
     <div class="text-container">
-        <h1>The Rotoclone Zone Blog</h1>
+        <a href="/blog/tags">See all the tags</a>
+        <h1>Posts tagged "{{ tag }}"</h1>
         {% for entry in entries %}
             {% include "blog_entry_stub" %}
         {% endfor %}
         <div class="blog-footer">
             {% if previous_page %}
-                <div class="blog-footer-left"><span class="blog-footer-arrow">← </span><a href="/blog?page={{ previous_page }}">Newer posts</a></div>
+                <div class="blog-footer-left"><span class="blog-footer-arrow">← </span><a href="/blog/tags/{{ tag }}?page={{ previous_page }}">Newer posts</a></div>
             {% else %}
                 <div></div>
             {% endif %}
             <div class="blog-footer-center"><a href="/">Home</a></div>
             {% if next_page %}
-                <div class="blog-footer-right"><a href="/blog?page={{ next_page }}">Older posts</a><span class="blog-footer-arrow"> →</span></div>
+                <div class="blog-footer-right"><a href="/blog/tags/{{ tag }}?page={{ next_page }}">Older posts</a><span class="blog-footer-arrow"> →</span></div>
             {% else %}
                 <div></div>
             {% endif %}
