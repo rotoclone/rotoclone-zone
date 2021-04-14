@@ -1,20 +1,147 @@
 /* Webfont */
 @font-face {
-    font-family: "main-font";
+    font-family: "Open Sans";
     src: url("/fonts/open-sans-regular.woff2") format('woff2');
     font-display: swap;
 }
 
 @font-face {
-    font-family: "title-font";
+    font-family: "Martel";
     src: url("/fonts/martel-regular.woff2") format('woff2');
     font-display: swap;
 }
 
+/*
 @font-face {
-    font-family: "logo-font";
+    font-family: "Raleway";
     src: url('/fonts/raleway-bold.woff2') format('woff2');
     font-display: swap;
+}
+*/
+
+@font-face {
+    font-family: "Nunito Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/nunitosans/v6/pe0qMImSLYBIv1o4X1M8cce9I9s.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/nunitosans/v6/pe03MImSLYBIv1o4X1M8cc9iB85tU1E.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/nunitosans/v6/pe03MImSLYBIv1o4X1M8cc8GBs5tU1E.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/worksans/v9/QGY_z_wNahGAdqQ43RhVcIgYT2Xz5u32K0nXBi8Jpg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/rubik/v12/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-B4iFV0U1.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/raleway/v19/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCIPrE.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/raleway/v19/1Ptug8zYS_SKggPNyC0ITw.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/inter/v3/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/inter/v3/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYAZ9hiA.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/spacegrotesk/v5/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj4PVnskPMA.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/lato/v17/S6uyw4BMUTPHjx4wXg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/lato/v17/S6u9w4BMUTPHh6UVSwiPGQ.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Bitter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/bitter/v17/raxhHiqOu8IVPmnRc6SY1KXhnF_Y8fbfOLjOXQ.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+    --font-main: "Open Sans", sans-serif;
+    --font-navbar: "Raleway", sans-serif;
+    --font-title: "Raleway", sans-serif;
+    --font-header: "Raleway", sans-serif;
+    --font-logo: "Raleway", sans-serif;
 }
 
 /* Composite classes */
@@ -22,7 +149,7 @@
 /* * {border:1px solid red;} */
 
 body {
-    font-family: "main-font", sans-serif;
+    font-family: var(--font-main);
     font-size: 13pt;
     color: var(--color-maintext);
     padding: 0;
@@ -33,6 +160,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+    font-family: var(--font-header);
 }
 
 a {
@@ -69,6 +197,8 @@ a:visited {
     margin-top: 1em;
     margin-bottom: calc(1em + 10px);
     width: 100%;
+    font-family: var(--font-navbar);
+    line-height: 1.4;
 }
 
 .navigation::after {
@@ -91,12 +221,13 @@ a:visited {
     text-align: center;
     background-color: var(--color-primary);
     border-top: 5px solid var(--color-secondary);
+    font-family: var(--font-navbar);
 }
 
 .footer a {
     padding: 1em;
     margin: 0;
-    color: var(--color-white-95pct);
+    color: var(--color-footertext);
     text-shadow: 1px 1px 1px var(--color-dark-shadow);
     border: none;
 }
@@ -106,7 +237,7 @@ a:visited {
     z-index: 1;
     padding: 0.75em;
     margin: 0;
-    color: var(--color-white-95pct);
+    color: var(--color-navtext);
     text-decoration: none;
     text-shadow: 1px 1px 1px var(--color-shadow);
     border: none;
@@ -121,7 +252,7 @@ a:visited {
 }
 
 .navigation .home-link {
-    font-family: "logo-font", sans-serif;
+    font-family: var(--font-logo);
     font-weight: bold;
     padding-left: 1em;
     line-height: 1.4;
@@ -154,7 +285,7 @@ a:visited {
     margin-right: auto;
     margin-top: 0.25em;
     margin-bottom: 0.25em;
-    font-family: "title-font", serif;
+    font-family: var(--font-title);
     text-align: center;
 }
 
@@ -330,6 +461,7 @@ hr {
     --color-white-30pct: rgba(255, 255, 255, 0.3);
     --color-white-40pct: rgba(255, 255, 255, 0.4);
     --color-white-50pct: rgba(255, 255, 255, 0.5);
+    --color-white-60pct: rgba(255, 255, 255, 0.6);
     --color-white-70pct: rgba(255, 255, 255, 0.7);
     --color-white-75pct: rgba(255, 255, 255, 0.75);
     --color-white-85pct: rgba(255, 255, 255, 0.85);
@@ -343,6 +475,7 @@ hr {
     --color-black-25pct: rgba(0, 0, 0, 0.25);
     --color-black-40pct: rgba(0, 0, 0, 0.4);
     --color-black-50pct: rgba(0, 0, 0, 0.5);
+    --color-black-60pct: rgba(0, 0, 0, 0.6);
     --color-black-70pct: rgba(0, 0, 0, 0.7);
     --color-black-75pct: rgba(0, 0, 0, 0.75);
     --color-black-80pct: rgba(0, 0, 0, 0.8);
@@ -378,29 +511,33 @@ body.light-theme .theme-toggle::after {
 body {
     --color-pagebg: var(--color-offblack);
     --color-contentbg: var(--color-white-5pct);
-    --color-maintext: var(--color-white-90pct);
-    --color-fadedtext: var(--color-white-70pct);
+    --color-maintext: var(--color-white-75pct);
+    --color-fadedtext: var(--color-white-60pct);
+    --color-navtext: var(--color-gray);
+    --color-footertext: var(--color-gray);
     --color-boxbg: var(--color-white-5pct);
     --color-boxborder: var(--color-white-10pct);
     --color-boxaccent: var(--color-primary);
     --color-navbg: var(--color-primary);
     --color-navhover: var(--color-white-15pct);
-    --color-link: var(--color-lighter-yellow);
-    --color-link-visited: var(--color-lighter-yellow);
+    --color-link: rgba(var(--color-main-yellow-triple), 0.8);
+    --color-link-visited: rgba(var(--color-main-yellow-triple), 0.8);
 }
 
 body.light-theme {
     --color-pagebg: var(--color-gray);
     --color-contentbg: var(--color-offwhite);
-    --color-maintext: var(--color-black-90pct);
-    --color-fadedtext: var(--color-black-70pct);
+    --color-maintext: var(--color-black-75pct);
+    --color-fadedtext: var(--color-black-60pct);
+    --color-navtext: var(--color-gray);
+    --color-footertext: var(--color-gray);
     --color-boxbg: var(--color-black-3pct);
     --color-boxborder: var(--color-black-5pct);
     --color-boxaccent: var(--color-secondary);
     --color-navbg: var(--color-primary);
     --color-navhover: var(--color-white-15pct);
-    --color-link: var(--color-main-blue);
-    --color-link-visited: var(--color-main-blue);
+    --color-link: rgba(var(--color-main-blue-triple), 0.8);
+    --color-link-visited: rgba(var(--color-main-blue-triple), 0.8);
 }
 
 .bgcolor-extralightblue {
@@ -450,7 +587,7 @@ body.light-theme {
 }
 
 .font-title {
-    font-family: "title-font", sans-serif;
+    font-family: var(--font-title);
 }
 
 /* Width */
@@ -621,5 +758,5 @@ body.light-theme {
 }
 
 .font-logo {
-    font-family: "logo-font", sans-serif;
+    font-family: var(--font-logo);
 }
