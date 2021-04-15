@@ -138,6 +138,7 @@
 
 :root {
     --font-main: "Open Sans", sans-serif;
+    --font-code: "TODO", monospace; /*TODO*/
     --font-navbar: "Raleway", sans-serif;
     --font-title: "Raleway", sans-serif;
     --font-header: "Raleway", sans-serif;
@@ -420,6 +421,52 @@ hr {
     .navigation .home-link-shorter {
         display: inline;
     }
+}
+
+/* Commento */
+#commento .commento-root * {
+    color: var(--color-maintext);
+    font-weight: normal;
+}
+
+#commento .commento-login-text {
+    color: var(--color-link);
+    font-weight: normal;
+    line-height: inherit;
+    height: 2em;
+}
+
+#commento textarea {
+    background: var(--color-boxbg);
+    border: 1px solid var(--color-boxborder);
+    color: var(--color-maintext);
+}
+
+#commento .commento-markdown-button {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-markdown-button b {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-anonymous-checkbox-container input[type=checkbox]+label {
+    color: var(--color-fadedtext);
+    font-weight: normal;
+}
+
+#commento .commento-anonymous-checkbox-container input[type=checkbox] {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-submit-button {
+    background: var(--color-main-blue);
+    font-weight: normal;
+    color: var(--color-navtext);
+}
+
+#commento .commento-logo-text {
+    color: var(--color-fadedtext);
 }
 
 /* Color */
