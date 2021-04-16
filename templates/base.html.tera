@@ -23,6 +23,10 @@
             } else if (currentTheme == "light") {
                 document.body.classList.toggle("light-theme");
             }
+
+            window.addEventListener("load", function(){
+                document.body.style.transition = "all 0.5s ease";
+            });
         </script>
         <div class="page-container">
             <div class="main-content-container">
@@ -32,9 +36,4 @@
         </div>
         {% include "footer" %}
     </body>
-    <script>
-        window.addEventListener("load", function(){
-            document.body.style.transition = "all 0.5s ease";
-        });
-    </script>
 </html>
