@@ -511,6 +511,11 @@ hr {
     height: 2em;
 }
 
+#commento .commento-textarea-container {
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
 #commento textarea {
     background: var(--color-boxbg);
     border: 1px solid var(--color-boxborder);
@@ -518,11 +523,32 @@ hr {
     border-radius: 0;
 }
 
+#commento textarea:focus {
+    outline: 1px solid var(--color-inputfocus);
+}
+
+#commento textarea:focus:not(:focus-visible) {
+    outline: none;
+}
+
+#commento .commento-guest-details-container {
+    margin-top: 10px;
+    margin-left: 1px;
+}
+
 #commento .commento-guest-details {
     background: var(--color-boxbg);
     border: 1px solid var(--color-boxborder);
     color: var(--color-maintext);
     border-radius: 0;
+}
+
+#commento .commento-guest-details:focus {
+    outline: 1px solid var(--color-inputfocus);
+}
+
+#commento .commento-guest-details:focus:not(:focus-visible) {
+    outline: none;
 }
 
 #commento .commento-markdown-button {
@@ -536,17 +562,6 @@ hr {
 #commento .commento-anonymous-checkbox-container {
     display: none;
 }
-
-/*
-#commento .commento-anonymous-checkbox-container input[type=checkbox]+label {
-    color: var(--color-fadedtext);
-    font-weight: normal;
-}
-
-#commento .commento-anonymous-checkbox-container input[type=checkbox] {
-    color: var(--color-fadedtext);
-}
-*/
 
 #commento .commento-submit-button {
     background: var(--color-primary);
@@ -636,7 +651,7 @@ hr {
 }
 
 #commento .commento-card .commento-anonymous::after {
-    color: var(--color-maintext);
+    color: var(--color-white-75pct);
 }
 
 #commento .commento-card .commento-moderator::after {
@@ -798,13 +813,15 @@ body {
     --color-link-visited: rgba(var(--color-main-yellow-triple), 0.8);
     --color-upvote: var(--color-main-green);
     --color-downvote: var(--color-red);
+    /*--color-inputfocus: rgba(var(--color-main-green-triple), 0.5);*/
+    --color-inputfocus: var(--color-white-40pct);
 }
 
 body.light-theme {
     --color-pagebg: var(--color-gray);
     --color-contentbg: var(--color-offwhite);
     --color-maintext: var(--color-black-75pct);
-    --color-fadedtext: var(--color-black-50pct);
+    --color-fadedtext: var(--color-black-40pct);
     --color-navtext: var(--color-gray);
     --color-footertext: var(--color-gray);
     --color-boxbg: var(--color-black-3pct);
@@ -816,6 +833,8 @@ body.light-theme {
     --color-link-visited: rgba(var(--color-main-blue-triple), 0.8);
     --color-upvote: var(--color-main-green);
     --color-downvote: var(--color-red);
+    /*--color-inputfocus: rgba(var(--color-main-green-triple), 0.5);*/
+    --color-inputfocus: var(--color-black-50pct);
 }
 
 .bgcolor-extralightblue {
