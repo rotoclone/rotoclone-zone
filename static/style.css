@@ -533,6 +533,11 @@ hr {
     color: var(--color-fadedtext);
 }
 
+#commento .commento-anonymous-checkbox-container {
+    display: none;
+}
+
+/*
 #commento .commento-anonymous-checkbox-container input[type=checkbox]+label {
     color: var(--color-fadedtext);
     font-weight: normal;
@@ -541,6 +546,7 @@ hr {
 #commento .commento-anonymous-checkbox-container input[type=checkbox] {
     color: var(--color-fadedtext);
 }
+*/
 
 #commento .commento-submit-button {
     background: var(--color-primary);
