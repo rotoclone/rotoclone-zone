@@ -253,6 +253,7 @@ a:visited {
     text-decoration: none;
     text-shadow: 1px 1px 1px var(--color-shadow);
     border: none;
+    transition: all 0.2s ease;
 }
 
 .navigation a:last-child::after {
@@ -380,6 +381,32 @@ hr {
     background-color: var(--color-primary);
 }
 
+.show-comments-button-container {
+    margin: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.show-comments-button-container .show-comments-button {
+    cursor: pointer;
+    color: var(--color-navtext);
+    text-decoration: none;
+    padding: 0.5em;
+    font-size: 11pt;
+    font-weight: bold;
+    background: var(--color-primary);
+    border-radius: 0;
+    border: none;
+    box-shadow:inset 0px -2px 0px 0px var(--color-tertiary);
+    transition: all 0.2s ease;
+    color: var(--color-navtext);
+}
+
+.show-comments-button-container .show-comments-button:hover {
+    box-shadow:inset 0px -6px 0px 0px var(--color-tertiary);
+}
+
 @media only screen and (max-width: 87rem) {
     .navigation {
         width: calc(100% - 1em);
@@ -458,9 +485,16 @@ hr {
 }
 
 #commento .commento-logged-container .commento-profile-button {
-    color: var(--color-link);
+    color: var(--color-fadedtext);
+    fill: var(--color-fadedtext);
     text-decoration: underline;
     font-size: 11pt;
+    transition: all 0.2s ease;
+}
+
+#commento .commento-logged-container .commento-profile-button:hover {
+    color: var(--color-link);
+    fill: var(--color-link);
 }
 
 #commento .commento-mod-tools::before {
@@ -481,6 +515,14 @@ hr {
     background: var(--color-boxbg);
     border: 1px solid var(--color-boxborder);
     color: var(--color-maintext);
+    border-radius: 0;
+}
+
+#commento .commento-guest-details {
+    background: var(--color-boxbg);
+    border: 1px solid var(--color-boxborder);
+    color: var(--color-maintext);
+    border-radius: 0;
 }
 
 #commento .commento-markdown-button {
@@ -587,6 +629,10 @@ hr {
     color: var(--color-maintext);
 }
 
+#commento .commento-card .commento-anonymous::after {
+    color: var(--color-maintext);
+}
+
 #commento .commento-card .commento-moderator::after {
     color: var(--color-pagebg);
     background: var(--color-secondary);
@@ -600,14 +646,13 @@ hr {
     color: var(--color-maintext);
 }
 
-#commento .commento-card .commento-body p a {
+#commento .commento-card .commento-body p a, #commento .commento-markdown-help a {
     color: var(--color-link);
     text-decoration: underline;
 }
 
-#commento .commento-markdown-help a {
-    color: var(--color-link);
-    text-decoration: underline;
+#commento .commento-card .commento-body blockquote p, #commento .commento-markdown-help blockquote {
+    color: var(--color-fadedtext);
 }
 
 #commento .commento-card .commento-option-button {
@@ -632,6 +677,10 @@ hr {
 
 #commento .commento-card .commento-downvoted {
     background: var(--color-downvote);
+}
+
+#commento .commento-card .commento-permalink {
+    color: var(--color-fadedtext);
 }
 
 #commento .commento-input {
@@ -731,7 +780,7 @@ body {
     --color-pagebg: var(--color-offblack);
     --color-contentbg: var(--color-white-5pct);
     --color-maintext: var(--color-white-75pct);
-    --color-fadedtext: var(--color-white-60pct);
+    --color-fadedtext: var(--color-white-50pct);
     --color-navtext: var(--color-gray);
     --color-footertext: var(--color-gray);
     --color-boxbg: var(--color-white-5pct);
@@ -749,7 +798,7 @@ body.light-theme {
     --color-pagebg: var(--color-gray);
     --color-contentbg: var(--color-offwhite);
     --color-maintext: var(--color-black-75pct);
-    --color-fadedtext: var(--color-black-60pct);
+    --color-fadedtext: var(--color-black-50pct);
     --color-navtext: var(--color-gray);
     --color-footertext: var(--color-gray);
     --color-boxbg: var(--color-black-3pct);

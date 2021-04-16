@@ -8,4 +8,5 @@
         {% endfor %}
         <p><a href="/blog">More blog posts</a><p>
     </div>
+    <script src="https://comments.rotoclone.zone/js/count.js"></script>
 {% endblock content %}

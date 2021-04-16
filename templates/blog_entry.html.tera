@@ -25,9 +25,5 @@
         <p>{{ entry_content | safe }}</p>
     </div>
     {% include "blog_footer" %}
-    <div class="commento-super-container">
-        <script defer src="https://comments.rotoclone.zone/js/commento.js" data-no-fonts="true"></script>
-        <div id="commento"></div>
-        <noscript><p>Please enable JavaScript to load the comments.<p></noscript>
-    </div>
+    {% include "comments" %}
 {% endblock content %}

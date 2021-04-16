@@ -1,0 +1,37 @@
+<div class="commento-super-container">
+    <div class="show-comments-button-container"><a href="#commento" class="show-comments-button">Make a comment</a></div>
+    <script>
+        window.showComments = function() {
+            window.commento.main();
+            showCommentsButton.style.display = "none";
+        }
+
+        window.loadedCommento = function() {
+            if (window.location.href.endsWith("#commento")) {
+                window.showComments();
+            }
+        }
+    </script>
+    <script defer onload="window.loadedCommento();" src="https://comments.rotoclone.zone/js/commento.js" data-no-fonts="true" data-no-livereload="true" data-auto-init="false"></script>
+    <div id="commento"></div>
+    <script>
+        const showCommentsButton = document.querySelector(".show-comments-button");
+
+        showCommentsButton.addEventListener("click", function () {
+            window.showComments();
+        });
+    </script>
+    <script>
+        window.showCommentsButtonText = function(count) {
+            if(count === 0) {
+                return "Make a comment";
+            } else if (count === 1) {
+                return "Show 1 comment";
+            } else {
+                return "Show " + count + " comments";
+            }
+        }
+    </script>
+    <script src="https://comments.rotoclone.zone/js/count.js" data-custom-text="window.showCommentsButtonText"></script>
+    <noscript><p>Please enable JavaScript to load the comments.<p></noscript>
+</div>
