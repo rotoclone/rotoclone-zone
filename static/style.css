@@ -1,6 +1,8 @@
 /* Webfont */
 @font-face {
     font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
     src: url("/fonts/open-sans-regular.woff2") format('woff2');
     font-display: swap;
 }
@@ -18,6 +20,15 @@
     font-display: swap;
 }
 */
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/opensans/v18/mem5YaGs126MiZpBA-UN7rgOUuhp.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 @font-face {
     font-family: "Nunito Sans";
@@ -424,14 +435,44 @@ hr {
 }
 
 /* Commento */
-#commento .commento-root * {
+
+.commento-super-container {
+    padding: 0.5em;
+}
+
+#commento * {
     color: var(--color-maintext);
-    font-weight: normal;
+}
+
+#commento .commento-avatar {
+    color: var(--color-white-75pct);
+}
+
+#commento .commento-name {
+    cursor: inherit;
+}
+
+#commento .commento-logged-container .commento-name {
+    color: var(--color-maintext);
+    font-size: 12pt;
+}
+
+#commento .commento-logged-container .commento-profile-button {
+    color: var(--color-link);
+    text-decoration: underline;
+    font-size: 11pt;
+}
+
+#commento .commento-mod-tools::before {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-mod-tools button {
+    color: var(--color-link);
 }
 
 #commento .commento-login-text {
     color: var(--color-link);
-    font-weight: normal;
     line-height: inherit;
     height: 2em;
 }
@@ -460,13 +501,143 @@ hr {
 }
 
 #commento .commento-submit-button {
-    background: var(--color-main-blue);
-    font-weight: normal;
+    background: var(--color-primary);
+    border-radius: 0;
+    border: none;
+    box-shadow:inset 0px -2px 0px 0px var(--color-tertiary);
+    transition: all 0.2s ease;
     color: var(--color-navtext);
+}
+
+#commento .commento-submit-button:hover {
+    box-shadow:inset 0px -6px 0px 0px var(--color-tertiary);
 }
 
 #commento .commento-logo-text {
     color: var(--color-fadedtext);
+}
+
+#commento .commento-login-box {
+    background: var(--color-boxbg);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+#commento .commento-login-box .commento-email {
+    background: var(--color-boxbg);
+}
+
+#commento .commento-login-box .commento-login-box-subtitle {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-login-box .commento-forgot-link {
+    color: var(--color-fadedtext);
+    text-decoration: underline;
+}
+
+#commento .commento-login-box .commento-login-link {
+    color: var(--color-link);
+}
+
+#commento .commento-login-box .commento-login-box-close::before {
+    background-color: var(--color-fadedtext);
+}
+
+#commento .commento-login-box .commento-login-box-close::after {
+    background-color: var(--color-fadedtext);
+}
+
+#commento .commento-login-box .commento-email {
+    background: none;
+    box-shadow: none;
+}
+
+#commento .commento-login-box .commento-email-button {
+    background: var(--color-primary);
+    color: var(--color-navtext);
+    border: none;
+    box-shadow:inset 0px -2px 0px 0px var(--color-tertiary);
+    transition: all 0.2s ease;
+    height: 100%;
+    font-size: 11pt;
+}
+
+#commento .commento-login-box .commento-email-button:hover {
+    box-shadow:inset 0px -6px 0px 0px var(--color-tertiary);
+}
+
+#commento .commento-sort-policy-button {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-sort-policy-button-selected {
+    color: var(--color-secondary);
+}
+
+#commento .commento-card {
+    border-top: 1px solid var(--color-boxborder);
+}
+
+#commento .commento-dark-card {
+    background: var(--color-boxbg);
+}
+
+#commento .commento-card .commento-name {
+    color: var(--color-maintext);
+}
+
+#commento .commento-card .commento-moderator::after {
+    color: var(--color-pagebg);
+    background: var(--color-secondary);
+}
+
+#commento .commento-card .commento-subtitle {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-card .commento-body {
+    color: var(--color-maintext);
+}
+
+#commento .commento-card .commento-body p a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+#commento .commento-markdown-help a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+#commento .commento-card .commento-option-button {
+    background: var(--color-fadedtext);
+}
+
+#commento .commento-card .commento-option-approve {
+    background: var(--color-secondary);
+}
+
+#commento .commento-card .commento-option-remove {
+    background: var(--color-red);
+}
+
+#commento .commento-card .commento-option-unsticky {
+    background: var(--color-tertiary);
+}
+
+#commento .commento-card .commento-upvoted {
+    background: var(--color-upvote);
+}
+
+#commento .commento-card .commento-downvoted {
+    background: var(--color-downvote);
+}
+
+#commento .commento-input {
+    background: var(--color-boxbg);
+    color: var(--color-maintext);
+    border-radius: 0;
 }
 
 /* Color */
@@ -496,6 +667,7 @@ hr {
     --color-offwhite: rgb(245, 245, 245);
     --color-gray: rgb(235, 235, 235);
     --color-offblack: rgb(40, 40, 40);
+    --color-red: rgb(221, 51, 51);
 
     --color-shadow: rgba(0, 0, 0, 0.18);
     --color-dark-shadow: rgba(0, 0, 0, 0.4);
@@ -569,6 +741,8 @@ body {
     --color-navhover: var(--color-white-15pct);
     --color-link: rgba(var(--color-main-yellow-triple), 0.8);
     --color-link-visited: rgba(var(--color-main-yellow-triple), 0.8);
+    --color-upvote: var(--color-main-green);
+    --color-downvote: var(--color-red);
 }
 
 body.light-theme {
@@ -585,6 +759,8 @@ body.light-theme {
     --color-navhover: var(--color-white-15pct);
     --color-link: rgba(var(--color-main-blue-triple), 0.8);
     --color-link-visited: rgba(var(--color-main-blue-triple), 0.8);
+    --color-upvote: var(--color-main-green);
+    --color-downvote: var(--color-red);
 }
 
 .bgcolor-extralightblue {
