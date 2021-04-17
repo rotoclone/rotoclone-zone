@@ -1,0 +1,250 @@
+.commento-super-container {
+    padding: 0.5em;
+}
+
+#commento * {
+    color: var(--color-maintext);
+}
+
+#commento .commento-avatar {
+    color: var(--color-white-75pct);
+}
+
+#commento .commento-name {
+    cursor: inherit;
+}
+
+#commento .commento-logged-container .commento-name {
+    color: var(--color-maintext);
+    font-size: 12pt;
+}
+
+#commento .commento-logged-container .commento-profile-button {
+    color: var(--color-fadedtext);
+    fill: var(--color-fadedtext);
+    text-decoration: underline;
+    font-size: 11pt;
+    transition: all 0.2s ease;
+}
+
+#commento .commento-logged-container .commento-profile-button:hover {
+    color: var(--color-link);
+    fill: var(--color-link);
+}
+
+#commento .commento-mod-tools::before {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-mod-tools button {
+    color: var(--color-link);
+}
+
+#commento .commento-login-text {
+    color: var(--color-link);
+    line-height: inherit;
+    height: 2em;
+}
+
+#commento .commento-textarea-container {
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+#commento textarea {
+    background: var(--color-boxbg);
+    border: 1px solid var(--color-boxborder);
+    color: var(--color-maintext);
+    border-radius: 0;
+}
+
+#commento textarea:focus {
+    outline: 1px solid var(--color-inputfocus);
+}
+
+#commento textarea:focus:not(:focus-visible) {
+    outline: none;
+}
+
+#commento .commento-guest-details-container {
+    margin-top: 10px;
+    margin-left: 1px;
+}
+
+#commento .commento-guest-details {
+    background: var(--color-boxbg);
+    border: 1px solid var(--color-boxborder);
+    color: var(--color-maintext);
+    border-radius: 0;
+}
+
+#commento .commento-guest-details::placeholder {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-guest-details:focus {
+    outline: 1px solid var(--color-inputfocus);
+}
+
+#commento .commento-guest-details:focus:not(:focus-visible) {
+    outline: none;
+}
+
+#commento .commento-markdown-button {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-markdown-button b {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-anonymous-checkbox-container {
+    display: none;
+}
+
+#commento .commento-submit-button {
+    background: var(--color-primary);
+    border-radius: 0;
+    border: none;
+    box-shadow:inset 0px -2px 0px 0px var(--color-tertiary);
+    transition: all 0.2s ease;
+    color: var(--color-navtext);
+}
+
+#commento .commento-submit-button:hover {
+    box-shadow:inset 0px -6px 0px 0px var(--color-tertiary);
+}
+
+#commento .commento-logo-text {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-login-box {
+    background: var(--color-boxbg);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+#commento .commento-login-box .commento-email {
+    background: var(--color-boxbg);
+}
+
+#commento .commento-login-box .commento-login-box-subtitle {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-login-box .commento-forgot-link {
+    color: var(--color-fadedtext);
+    text-decoration: underline;
+}
+
+#commento .commento-login-box .commento-login-link {
+    color: var(--color-link);
+}
+
+#commento .commento-login-box .commento-login-box-close::before {
+    background-color: var(--color-fadedtext);
+}
+
+#commento .commento-login-box .commento-login-box-close::after {
+    background-color: var(--color-fadedtext);
+}
+
+#commento .commento-login-box .commento-email {
+    background: none;
+    box-shadow: none;
+}
+
+#commento .commento-login-box .commento-email-button {
+    background: var(--color-primary);
+    color: var(--color-navtext);
+    border: none;
+    box-shadow:inset 0px -2px 0px 0px var(--color-tertiary);
+    transition: all 0.2s ease;
+    height: 100%;
+    font-size: 11pt;
+}
+
+#commento .commento-login-box .commento-email-button:hover {
+    box-shadow:inset 0px -6px 0px 0px var(--color-tertiary);
+}
+
+#commento .commento-sort-policy-button {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-sort-policy-button-selected {
+    color: var(--color-secondary);
+}
+
+#commento .commento-card {
+    border-top: 1px solid var(--color-boxborder);
+}
+
+#commento .commento-dark-card {
+    background: var(--color-boxbg);
+}
+
+#commento .commento-card .commento-name {
+    color: var(--color-maintext);
+}
+
+#commento .commento-card .commento-anonymous::after {
+    color: var(--color-white-75pct);
+}
+
+#commento .commento-card .commento-moderator::after {
+    color: var(--color-pagebg);
+    background: var(--color-secondary);
+}
+
+#commento .commento-card .commento-subtitle {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-card .commento-body {
+    color: var(--color-maintext);
+}
+
+#commento .commento-card .commento-body p a, #commento .commento-markdown-help a {
+    color: var(--color-link);
+    text-decoration: underline;
+}
+
+#commento .commento-card .commento-body blockquote p, #commento .commento-markdown-help blockquote {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-card .commento-option-button {
+    background: var(--color-fadedtext);
+}
+
+#commento .commento-card .commento-option-approve {
+    background: var(--color-secondary);
+}
+
+#commento .commento-card .commento-option-remove {
+    background: var(--color-red);
+}
+
+#commento .commento-card .commento-option-unsticky {
+    background: var(--color-tertiary);
+}
+
+#commento .commento-card .commento-upvoted {
+    background: var(--color-upvote);
+}
+
+#commento .commento-card .commento-downvoted {
+    background: var(--color-downvote);
+}
+
+#commento .commento-card .commento-permalink {
+    color: var(--color-fadedtext);
+}
+
+#commento .commento-input {
+    background: var(--color-boxbg);
+    color: var(--color-maintext);
+    border-radius: 0;
+}

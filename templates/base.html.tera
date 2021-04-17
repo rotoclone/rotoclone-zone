@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8"/>
         <link rel="preload" href="/fonts/raleway-bold.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="/fonts/martel-regular.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="/fonts/open-sans-regular.woff2" as="font" type="font/woff2" crossorigin>
         <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
         <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
