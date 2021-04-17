@@ -12,7 +12,7 @@
             {% else %}
                 <div></div>
             {% endif %}
-            <div class="blog-footer-center"><a href="#top">▲ To the top ▲</a></div>
+            <div class="blog-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top {% include "icons/arrow-up" %}</a></div>
             {% if next_page %}
                 <div class="blog-footer-right"><a href="/blog?page={{ next_page }}">Older posts</a><span class="blog-footer-arrow"> →</span></div>
             {% else %}
