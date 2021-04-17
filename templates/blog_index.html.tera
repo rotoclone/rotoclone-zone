@@ -5,13 +5,14 @@
         {% for entry in entries %}
             {% include "blog_entry_stub" %}
         {% endfor %}
+        <script defer src="https://comments.rotoclone.zone/js/count.js"></script>
         <div class="blog-footer">
             {% if previous_page %}
                 <div class="blog-footer-left"><span class="blog-footer-arrow">← </span><a href="/blog?page={{ previous_page }}">Newer posts</a></div>
             {% else %}
                 <div></div>
             {% endif %}
-            <div class="blog-footer-center"><a href="/">Home</a></div>
+            <div class="blog-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top {% include "icons/arrow-up" %}</a></div>
             {% if next_page %}
                 <div class="blog-footer-right"><a href="/blog?page={{ next_page }}">Older posts</a><span class="blog-footer-arrow"> →</span></div>
             {% else %}

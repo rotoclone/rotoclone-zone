@@ -6,6 +6,7 @@
         {% for entry in recent_blog_entries %}
             {% include "blog_entry_stub" %}
         {% endfor %}
+        <script defer src="https://comments.rotoclone.zone/js/count.js"></script>
         <p><a href="/blog">More blog posts</a><p>
     </div>
 {% endblock content %}

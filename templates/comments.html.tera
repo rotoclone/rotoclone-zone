@@ -1,0 +1,8 @@
+<div class="commento-super-container">
+    <div class="show-comments-button-container"><a href="#commento" class="show-comments-button">Make a comment</a></div>
+    <script defer src="/comments.js"></script>
+    <script defer onload="window.loadedCommento();" src="https://comments.rotoclone.zone/js/commento.js" data-no-fonts="true" data-no-livereload="true" data-auto-init="false"></script>
+    <div id="commento"></div>
+    <script defer src="https://comments.rotoclone.zone/js/count.js" data-custom-text="window.showCommentsButtonText"></script>
+    <noscript><p>Please enable JavaScript to load the comments.<p></noscript>
+</div>

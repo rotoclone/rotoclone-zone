@@ -25,4 +25,5 @@
         <p>{{ entry_content | safe }}</p>
     </div>
     {% include "blog_footer" %}
+    {% include "comments" %}
 {% endblock content %}
