@@ -32,7 +32,7 @@ pub struct FrontMatter {
     updated_at: Option<DateTime<Utc>>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct PageMetadata {
     source_file: PathBuf,
     pub html_content_file: PathBuf,
@@ -40,7 +40,7 @@ pub struct PageMetadata {
     pub template_name: String,
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct BlogEntry {
     pub title: String,
     pub metadata: PageMetadata,

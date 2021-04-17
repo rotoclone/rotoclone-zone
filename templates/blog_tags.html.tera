@@ -9,7 +9,7 @@
         </ul>
         <div class="blog-footer">
             <div></div>
-            <div class="blog-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top {% include "icons/arrow-up" %}</a></div>
+            <div class="blog-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top</a></div>
             <div></div>
         </div>
     </div>

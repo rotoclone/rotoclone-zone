@@ -132,6 +132,10 @@ impl Site {
         &self,
         entry: &BlogEntry,
     ) -> Result<BlogEntryContext, std::io::Error> {
+        //TODO this looks up the entry again, refactor this method to take in a slug so the entries list only has to be searched once
+        // the list of blog entries is sorted by creation date descending, so the previous entry in the list is the next entry chronologically
+        let (next_entry, previous_entry) = stubs_for_surrounding_entries(&self.blog_entries, entry);
+
         Ok(BlogEntryContext {
             base: BaseContext {
                 title: entry.title.clone(),
@@ -141,10 +145,34 @@ impl Site {
             created_at: format_datetime(entry.created_at),
             updated_at: entry.updated_at.map(format_datetime),
             entry_content: read_to_string(&entry.metadata.html_content_file)?,
-            previous_entry: None, //TODO
-            next_entry: None,     //TODO
+            previous_entry,
+            next_entry,
         })
     }
+}
+
+/// Builds `BlogEntryStub`s for the blog entries from the provided list positioned immediately before and after the provided entry, if they exist.
+fn stubs_for_surrounding_entries(
+    entries: &[BlogEntry],
+    entry: &BlogEntry,
+) -> (Option<BlogEntryStub>, Option<BlogEntryStub>) {
+    let entry_index = entries.iter().position(|x| x == entry);
+
+    entry_index.map_or((None, None), |index| {
+        let previous = if index == 0 {
+            None
+        } else {
+            Some(entries[index - 1].to_stub())
+        };
+
+        let next = if index == entries.len() - 1 {
+            None
+        } else {
+            Some(entries[index + 1].to_stub())
+        };
+
+        (previous, next)
+    })
 }
 
 #[derive(Serialize)]

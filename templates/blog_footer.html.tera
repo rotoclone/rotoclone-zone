@@ -1,13 +1,13 @@
 <hr class="blog-footer-hr" />
 <div class="blog-footer">
     {% if previous_entry %}
-        <div class="blog-footer-left"><span class="blog-footer-arrow">← </span><a href="{{ previous_entry.url }}">Previous: {{ previous_entry.title }}</a></div>
+        <div class="blog-footer-left"><a href="{{ previous_entry.url }}">{% include "icons/arrow-left" %} Previous: {{ previous_entry.title }}</a></div>
     {% else %}
         <div></div>
     {% endif %}
-    <div class="blog-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top {% include "icons/arrow-up" %}</a></div>
+    <div class="blog-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top</a></div>
     {% if next_entry %}
-        <div class="blog-footer-right"><a href="{{ next_entry.url }}">Next: {{ next_entry.title }}</a><span class="blog-footer-arrow"> →</span></div>
+        <div class="blog-footer-right"><a href="{{ next_entry.url }}">Next: {{ next_entry.title }} {% include "icons/arrow-right" %}</a></div>
     {% else %}
         <div></div>
     {% endif %}

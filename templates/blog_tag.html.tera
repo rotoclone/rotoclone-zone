@@ -8,13 +8,13 @@
         {% endfor %}
         <div class="blog-footer">
             {% if previous_page %}
-                <div class="blog-footer-left"><span class="blog-footer-arrow">← </span><a href="/blog/tags/{{ tag }}?page={{ previous_page }}">Newer posts</a></div>
+                <div class="blog-footer-left"><a href="/blog/tags/{{ tag }}?page={{ previous_page }}">{% include "icons/arrow-left" %} Newer posts</a></div>
             {% else %}
                 <div></div>
             {% endif %}
-            <div class="blog-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top {% include "icons/arrow-up" %}</a></div>
+            <div class="blog-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top</a></div>
             {% if next_page %}
-                <div class="blog-footer-right"><a href="/blog/tags/{{ tag }}?page={{ next_page }}">Older posts</a><span class="blog-footer-arrow"> →</span></div>
+                <div class="blog-footer-right"><a href="/blog/tags/{{ tag }}?page={{ next_page }}">Older posts {% include "icons/arrow-right" %}</a></div>
             {% else %}
                 <div></div>
             {% endif %}
