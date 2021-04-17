@@ -28,6 +28,7 @@
                 document.body.style.transition = "all 0.5s ease";
             });
         </script>
+        <div id="top"></div>
         <div class="page-container">
             <div class="main-content-container">
                 {% include "navigation" %}

@@ -6,8 +6,9 @@ window.showComments = function () {
 }
 
 window.loadedCommento = function () {
-    if (window.location.href.endsWith("#commento")) {
+    if (window.location.href.includes("#commento")) {
         window.showComments();
+        document.querySelector(window.location.href.split("#")[1]).scrollIntoView();
     } else {
         showCommentsButton.addEventListener("click", function () {
             window.showComments();

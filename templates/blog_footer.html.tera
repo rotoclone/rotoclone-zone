@@ -5,7 +5,7 @@
     {% else %}
         <div></div>
     {% endif %}
-    <div class="blog-footer-center"><a href="/">Home</a></div>
+    <div class="blog-footer-center"><a href="#top"><span class="icon">{% include "icons/arrow-up" %}</span> To the top <span class="icon">{% include "icons/arrow-up" %}</span></a></div>
     {% if next_entry %}
         <div class="blog-footer-right"><a href="{{ next_entry.url }}">Next: {{ next_entry.title }}</a><span class="blog-footer-arrow"> →</span></div>
     {% else %}

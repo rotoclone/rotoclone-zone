@@ -177,6 +177,7 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
     color: var(--color-link);
+    fill: var(--color-link);
 }
 
 a:visited {
@@ -240,8 +241,13 @@ a:visited {
     padding: 1em;
     margin: 0;
     color: var(--color-footertext);
+    fill: var(--color-footericon);
     text-shadow: 1px 1px 1px var(--color-dark-shadow);
     border: none;
+}
+
+.footer .icon svg {
+    width: 1.5em;
 }
 
 .navigation a {
@@ -407,6 +413,10 @@ hr {
     box-shadow:inset 0px -6px 0px 0px var(--color-tertiary);
 }
 
+.icon svg {
+    height: 1em;
+}
+
 @media only screen and (max-width: 87rem) {
     .navigation {
         width: calc(100% - 1em);
@@ -541,6 +551,10 @@ hr {
     border: 1px solid var(--color-boxborder);
     color: var(--color-maintext);
     border-radius: 0;
+}
+
+#commento .commento-guest-details::placeholder {
+    color: var(--color-fadedtext);
 }
 
 #commento .commento-guest-details:focus {
@@ -804,6 +818,7 @@ body {
     --color-fadedtext: var(--color-white-50pct);
     --color-navtext: var(--color-gray);
     --color-footertext: var(--color-gray);
+    --color-footericon: var(--color-gray);
     --color-boxbg: var(--color-white-5pct);
     --color-boxborder: var(--color-white-10pct);
     --color-boxaccent: var(--color-primary);
@@ -824,6 +839,7 @@ body.light-theme {
     --color-fadedtext: var(--color-black-40pct);
     --color-navtext: var(--color-gray);
     --color-footertext: var(--color-gray);
+    --color-footericon: var(--color-gray);
     --color-boxbg: var(--color-black-3pct);
     --color-boxborder: var(--color-black-5pct);
     --color-boxaccent: var(--color-secondary);
