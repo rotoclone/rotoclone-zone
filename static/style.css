@@ -247,7 +247,7 @@ a:visited {
 }
 
 .footer .icon svg {
-    width: 1.5em;
+    height: 1.5em;
 }
 
 .navigation a {
@@ -414,7 +414,7 @@ hr {
 }
 
 .icon svg {
-    height: 1em;
+    height: 0.75em;
 }
 
 @media only screen and (max-width: 87rem) {
