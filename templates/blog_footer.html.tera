@@ -1,4 +1,4 @@
-<hr class="margin-bottom-none" />
+<hr class="blog-footer-hr" />
 <div class="blog-footer">
     {% if previous_entry %}
         <div class="blog-footer-left"><span class="blog-footer-arrow">← </span><a href="{{ previous_entry.url }}">Previous: {{ previous_entry.title }}</a></div>

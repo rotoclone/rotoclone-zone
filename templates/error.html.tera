@@ -1,6 +1,6 @@
 {% extends "base" %}
 {% block content %}
-    <div class="text-container center-hz text-center-hz width-fit-content margin-top-md">
+    <div class="text-container error-container">
         <h1>{{ header }}</h1>
         <p>{{ message }}</p>
     </div>
