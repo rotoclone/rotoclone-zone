@@ -4,6 +4,7 @@
 
 #commento * {
     color: var(--color-maintext);
+    font-family: inherit;
 }
 
 #commento .commento-avatar {
@@ -131,7 +132,7 @@
 }
 
 #commento .commento-login-box .commento-login-box-subtitle {
-    color: var(--color-fadedtext);
+    color: var(--color-maintext);
 }
 
 #commento .commento-login-box .commento-forgot-link {
@@ -163,11 +164,28 @@
     box-shadow:inset 0px -2px 0px 0px var(--color-tertiary);
     transition: all 0.2s ease;
     height: 100%;
-    font-size: 11pt;
+    font-size: 10pt;
 }
 
 #commento .commento-login-box .commento-email-button:hover {
     box-shadow:inset 0px -6px 0px 0px var(--color-tertiary);
+}
+
+#commento .commento-button {
+    box-shadow: none;
+    border-radius: 0;
+}
+
+#commento .commento-google-button {
+    color: var(--color-245);
+}
+
+#commento .commento-twitter-button {
+    color: var(--color-245);
+}
+
+#commento .commento-github-button {
+    color: var(--color-245);
 }
 
 #commento .commento-sort-policy-button {
