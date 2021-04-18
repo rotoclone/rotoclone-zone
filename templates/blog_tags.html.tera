@@ -7,9 +7,9 @@
                 <li><a href="/blog/tags/{{ tag }}">{{ tag }}</a></li>
             {% endfor %}
         </ul>
-        <div class="blog-footer">
+        <div class="content-footer">
             <div></div>
-            <div class="blog-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top</a></div>
+            <div class="content-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top</a></div>
             <div></div>
         </div>
     </div>

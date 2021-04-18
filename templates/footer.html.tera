@@ -1,3 +1,6 @@
 <div class="footer">
-    <a href="https://github.com/rotoclone" title="GitHub">{% include "icons/github" %}</a>
+    <p>steven<span style="display: none">florp</span>@<span style="display: none">glorp</span>rotoclone.zone</p>
+    <div class="icons">
+        <a href="https://github.com/rotoclone" title="GitHub">{% include "icons/github" %}</a>
+    </div>
 </div>
