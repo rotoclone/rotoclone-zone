@@ -23,10 +23,11 @@ Wow, that sure is some code. Better copy and paste that directly into your edito
 ## A smaller header
 This header isn't the biggest. It's still bigger than this text though. How about a table?
 
-|column 1|column 2|
-|--------|--------|
-|value 1|value 2|
-|value 3|value 4|
+|column 1|column 2|a long column 3|
+|--------|--------|---------------|
+|a value|another value|value|
+|hello|i'm table|sup|
+|a long value|value yay|something|
 
 Fantastic. And there should also be *some text in italics* and **some bold text** too. And don't forget to ~~cross out~~ stuff. Oh I almost forget, gotta put a footnote[^1] near the top to test that out too. And [a regular link](/) is probably good to have.
 

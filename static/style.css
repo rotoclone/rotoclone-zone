@@ -91,10 +91,64 @@ h1, h2, h3, h4, h5, h6 {
 a {
     color: var(--color-link);
     fill: var(--color-link);
+    transition: all 0.2s ease;
 }
 
 a:visited {
-    color: var(--color-link-visited);
+    color: var(--color-link);
+}
+
+a:hover {
+    color: var(--color-link-hover);
+    fill: var(--color-link-hover);
+}
+
+pre {
+    padding: 1em;
+    margin: .5em 0;
+}
+
+pre:focus {
+    outline: none;
+}
+
+
+p code {
+    color: var(--color-inlinecodetext);
+    background: var(--color-inlinecodebg);
+    padding-left: 0.15em;
+    padding-right: 0.15em;
+    border: 2px solid var(--color-inlinecodebg);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 2px solid var(--color-tablerowborder);
+    border-bottom: 2px solid var(--color-tablerowborderbottom);
+    padding: 0.5em;
+    text-align: left;
+}
+
+th {
+    border-bottom: 3px solid var(--color-tableheaderborderbottom);
+}
+
+blockquote {
+    color: var(--color-blockquotetext);
+    background: var(--color-blockquotebg);
+    border-left: 3px solid var(--color-blockquoteaccent);
+    padding: 0.5em;
+}
+
+blockquote p {
+    margin: 0;
+}
+
+blockquote blockquote {
+    margin: 0;
 }
 
 .page-container {
@@ -156,17 +210,18 @@ a:visited {
     font-family: var(--font-navbar);
 }
 
-.footer a {
-    padding: 1em;
+.footer a, .footer p {
+    padding: 0.5em;
     margin: 0;
     color: var(--color-footertext);
     fill: var(--color-footericon);
-    text-shadow: 1px 1px 1px var(--color-dark-shadow);
+    text-shadow: 1px 1px 1px var(--color-shadow);
     border: none;
 }
 
 .footer .icon svg {
     height: 1.5em;
+    filter: drop-shadow( 1px 1px 1px var(--color-shadow));
 }
 
 .navigation a {
@@ -234,6 +289,10 @@ a:visited {
 .blog-stub .blog-stub-title {
     margin: 0;
     font-family: var(--font-title);
+}
+
+.blog-stub .blog-stub-title a {
+    text-decoration: none;
 }
 
 .blog-stub .blog-stub-tags {
@@ -413,9 +472,18 @@ hr.blog-footer-hr {
     --color-lighter-yellow: #facf46;
     --color-barely-orange-dark: #fff6ea;
     --color-barely-orange: #fdf9f4;
-    --color-offwhite: rgb(245, 245, 245);
-    --color-gray: rgb(235, 235, 235);
-    --color-offblack: rgb(40, 40, 40);
+    --color-245: rgb(245, 245, 245);
+    --color-240: rgb(240, 240, 240);
+    --color-235: rgb(235, 235, 235);
+    --color-225: rgb(225, 225, 225);
+    --color-215: rgb(215, 215, 215);
+    --color-205: rgb(205, 205, 205);
+    --color-75: rgb(75, 75, 75);
+    --color-65: rgb(65, 65, 65);
+    --color-55: rgb(55, 55, 55);
+    --color-50: rgb(50, 50, 50);
+    --color-45: rgb(45, 45, 45);
+    --color-40: rgb(40, 40, 40);
     --color-red: rgb(221, 51, 51);
 
     --color-shadow: rgba(0, 0, 0, 0.18);
@@ -432,6 +500,7 @@ hr.blog-footer-hr {
     --color-white-60pct: rgba(255, 255, 255, 0.6);
     --color-white-70pct: rgba(255, 255, 255, 0.7);
     --color-white-75pct: rgba(255, 255, 255, 0.75);
+    --color-white-80pct: rgba(255, 255, 255, 0.8);
     --color-white-85pct: rgba(255, 255, 255, 0.85);
     --color-white-90pct: rgba(255, 255, 255, 0.9);
     --color-white-95pct: rgba(255, 255, 255, 0.95);
@@ -440,6 +509,7 @@ hr.blog-footer-hr {
     --color-black-5pct: rgba(0, 0, 0, 0.05);
     --color-black-10pct: rgba(0, 0, 0, 0.1);
     --color-black-15pct: rgba(0, 0, 0, 0.15);
+    --color-black-20pct: rgba(0, 0, 0, 0.2);
     --color-black-25pct: rgba(0, 0, 0, 0.25);
     --color-black-40pct: rgba(0, 0, 0, 0.4);
     --color-black-50pct: rgba(0, 0, 0, 0.5);
@@ -477,43 +547,59 @@ body.light-theme .theme-toggle::after {
 }
 
 body {
-    --color-pagebg: var(--color-offblack);
-    --color-contentbg: var(--color-white-5pct);
+    --color-pagebg: var(--color-40);
+    --color-contentbg: /*var(--color-50);*/ none;
     --color-maintext: var(--color-white-75pct);
     --color-fadedtext: var(--color-white-50pct);
-    --color-navtext: var(--color-gray);
-    --color-footertext: var(--color-gray);
-    --color-footericon: var(--color-gray);
+    --color-navtext: var(--color-235);
+    --color-footertext: var(--color-235);
+    --color-footericon: var(--color-235);
     --color-boxbg: var(--color-white-5pct);
     --color-boxborder: var(--color-white-10pct);
     --color-boxaccent: var(--color-primary);
     --color-navbg: var(--color-primary);
     --color-navhover: var(--color-white-15pct);
     --color-link: rgba(var(--color-main-yellow-triple), 0.8);
-    --color-link-visited: rgba(var(--color-main-yellow-triple), 0.8);
+    --color-link-hover: var(--color-main-yellow);
     --color-upvote: var(--color-main-green);
     --color-downvote: var(--color-red);
     --color-inputfocus: var(--color-white-40pct);
+    --color-inlinecodetext: var(--color-white-80pct);
+    --color-inlinecodebg: var(--color-55);
+    --color-blockquotetext: var(--color-white-60pct);
+    --color-blockquotebg: var(--color-50);
+    --color-blockquoteaccent: var(--color-primary);
+    --color-tablerowborder: var(--color-55);
+    --color-tableheaderborderbottom: var(--color-65);
+    --color-tablerowborderbottom: var(--color-55);
 }
 
 body.light-theme {
-    --color-pagebg: var(--color-gray);
-    --color-contentbg: var(--color-offwhite);
+    --color-pagebg: var(--color-245);
+    --color-contentbg: /*var(--color-245);*/ none;
     --color-maintext: var(--color-black-75pct);
     --color-fadedtext: var(--color-black-40pct);
-    --color-navtext: var(--color-gray);
-    --color-footertext: var(--color-gray);
-    --color-footericon: var(--color-gray);
+    --color-navtext: var(--color-235);
+    --color-footertext: var(--color-235);
+    --color-footericon: var(--color-235);
     --color-boxbg: var(--color-black-3pct);
     --color-boxborder: var(--color-black-5pct);
     --color-boxaccent: var(--color-secondary);
     --color-navbg: var(--color-primary);
     --color-navhover: var(--color-white-15pct);
     --color-link: rgba(var(--color-main-blue-triple), 0.8);
-    --color-link-visited: rgba(var(--color-main-blue-triple), 0.8);
+    --color-link-hover: var(--color-main-blue);
     --color-upvote: var(--color-main-green);
     --color-downvote: var(--color-red);
     --color-inputfocus: var(--color-black-50pct);
+    --color-inlinecodetext: var(--color-black-80pct);
+    --color-inlinecodebg: var(--color-225);
+    --color-blockquotetext: var(--color-black-60pct);
+    --color-blockquotebg: var(--color-235);
+    --color-blockquoteaccent: var(--color-primary);
+    --color-tablerowborder: var(--color-225);
+    --color-tableheaderborderbottom: var(--color-215);
+    --color-tablerowborderbottom: var(--color-225);
 }
 
 /* Shadow */

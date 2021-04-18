@@ -92,6 +92,7 @@
 
 #commento .commento-markdown-button {
     color: var(--color-fadedtext);
+    margin-top: 0!important;
 }
 
 #commento .commento-markdown-button b {

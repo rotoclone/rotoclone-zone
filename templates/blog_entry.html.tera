@@ -1,5 +1,7 @@
 {% extends "base" %}
 {% block content %}
+    <link href="/prism/prism.css" rel="stylesheet">
+    <script async defer src="/prism/prism.js"></script>
     <div class="text-container">
         <div class="blog-heading">
             <h1 class="blog-title">{{ base.title }}</h1>
