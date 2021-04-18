@@ -2,5 +2,6 @@
     <p>steven<span style="display: none">florp</span>@<span style="display: none">glorp</span>rotoclone.zone</p>
     <div class="icons">
         <a href="https://github.com/rotoclone" title="GitHub">{% include "icons/github" %}</a>
+        <a href="https://www.youtube.com/user/microx" title="YouTube">{%include "icons/youtube" %}</a>
     </div>
 </div>
