@@ -6,15 +6,15 @@
         {% for entry in entries %}
             {% include "blog_entry_stub" %}
         {% endfor %}
-        <div class="blog-footer">
+        <div class="content-footer">
             {% if previous_page %}
-                <div class="blog-footer-left"><a href="/blog/tags/{{ tag }}?page={{ previous_page }}">{% include "icons/arrow-left" %} Newer posts</a></div>
+                <div class="content-footer-left"><a href="/blog/tags/{{ tag }}?page={{ previous_page }}">{% include "icons/arrow-left" %} Newer posts</a></div>
             {% else %}
                 <div></div>
             {% endif %}
-            <div class="blog-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top</a></div>
+            <div class="content-footer-center"><a href="#top">{% include "icons/arrow-up" %} To the top</a></div>
             {% if next_page %}
-                <div class="blog-footer-right"><a href="/blog/tags/{{ tag }}?page={{ next_page }}">Older posts {% include "icons/arrow-right" %}</a></div>
+                <div class="content-footer-right"><a href="/blog/tags/{{ tag }}?page={{ next_page }}">Older posts {% include "icons/arrow-right" %}</a></div>
             {% else %}
                 <div></div>
             {% endif %}

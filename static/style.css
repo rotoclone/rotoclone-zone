@@ -330,7 +330,7 @@ blockquote blockquote {
     content: " • ";
 }
 
-.blog-footer {
+.content-footer {
     padding-left: 0.5em;
     padding-right: 0.5em;
     padding-top: 1em;
@@ -340,15 +340,15 @@ blockquote blockquote {
     column-gap: 1em;
 }
 
-.blog-footer-left {
+.content-footer-left {
     text-align: left;
 }
 
-.blog-footer-right {
+.content-footer-right {
     text-align: right;
 }
 
-.blog-footer-center {
+.content-footer-center {
     text-align: center;
 }
 
@@ -360,7 +360,7 @@ hr {
     background-color: var(--color-primary);
 }
 
-hr.blog-footer-hr {
+hr.content-footer-hr {
     margin-bottom: 0;
 }
 
