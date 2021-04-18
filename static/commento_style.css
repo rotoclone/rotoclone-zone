@@ -274,6 +274,12 @@
 
 #commento .commento-card .commento-permalink {
     color: var(--color-fadedtext);
+    border-bottom: none;
+}
+
+#commento .commento-card .commento-permalink:hover {
+    color: var(--color-link-hover);
+    border-bottom: none;
 }
 
 #commento .commento-input {
