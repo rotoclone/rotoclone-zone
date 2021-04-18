@@ -202,8 +202,8 @@ blockquote blockquote {
 .footer {
     width: 100%;
     position: relative;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
     text-align: center;
     background-color: var(--color-primary);
     border-top: 5px solid var(--color-secondary);
