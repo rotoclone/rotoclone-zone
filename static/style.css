@@ -478,8 +478,14 @@ hr.content-footer-hr {
     --color-225: rgb(225, 225, 225);
     --color-215: rgb(215, 215, 215);
     --color-205: rgb(205, 205, 205);
+    --color-195: rgb(195, 195, 195);
+    --color-170: rgb(170, 170, 170);
+    --color-150: rgb(150, 150, 150);
+    --color-140: rgb(140, 140, 140);
+    --color-100: rgb(100, 100, 100);
     --color-75: rgb(75, 75, 75);
     --color-65: rgb(65, 65, 65);
+    --color-60: rgb(60, 60, 60);
     --color-55: rgb(55, 55, 55);
     --color-50: rgb(50, 50, 50);
     --color-45: rgb(45, 45, 45);
@@ -526,6 +532,62 @@ hr.content-footer-hr {
     --color-tertiary: var(--color-main-yellow);
 }
 
+body {
+    --color-pagebg: var(--color-40);
+    --color-contentbg: /*var(--color-50);*/ none;
+    --color-maintext: var(--color-195);
+    --color-fadedtext: var(--color-150);
+    --color-navtext: var(--color-235);
+    --color-footertext: var(--color-235);
+    --color-footericon: var(--color-235);
+    --color-boxbg: var(--color-white-5pct);
+    --color-boxborder: var(--color-white-10pct);
+    --color-boxaccent: var(--color-primary);
+    --color-navbg: var(--color-primary);
+    --color-navhover: var(--color-white-15pct);
+    --color-link: rgba(var(--color-main-yellow-triple), 0.8);
+    --color-link-hover: var(--color-main-yellow);
+    --color-upvote: var(--color-main-green);
+    --color-downvote: var(--color-red);
+    --color-inputfocus: var(--color-white-40pct);
+    --color-inlinecodetext: var(--color-205);
+    --color-inlinecodebg: var(--color-55);
+    --color-blockquotetext: var(--color-170);
+    --color-blockquotebg: var(--color-50);
+    --color-blockquoteaccent: var(--color-primary);
+    --color-tablerowborder: var(--color-55);
+    --color-tableheaderborderbottom: var(--color-65);
+    --color-tablerowborderbottom: var(--color-55);
+}
+
+body.light-theme {
+    --color-pagebg: var(--color-245);
+    --color-contentbg: /*var(--color-245);*/ none;
+    --color-maintext: var(--color-60);
+    --color-fadedtext: var(--color-140);
+    --color-navtext: var(--color-235);
+    --color-footertext: var(--color-235);
+    --color-footericon: var(--color-235);
+    --color-boxbg: var(--color-black-3pct);
+    --color-boxborder: var(--color-black-5pct);
+    --color-boxaccent: var(--color-secondary);
+    --color-navbg: var(--color-primary);
+    --color-navhover: var(--color-white-15pct);
+    --color-link: rgba(var(--color-main-blue-triple), 0.8);
+    --color-link-hover: var(--color-main-blue);
+    --color-upvote: var(--color-main-green);
+    --color-downvote: var(--color-red);
+    --color-inputfocus: var(--color-black-50pct);
+    --color-inlinecodetext: var(--color-40);
+    --color-inlinecodebg: var(--color-225);
+    --color-blockquotetext: var(--color-100);
+    --color-blockquotebg: var(--color-235);
+    --color-blockquoteaccent: var(--color-primary);
+    --color-tablerowborder: var(--color-225);
+    --color-tableheaderborderbottom: var(--color-215);
+    --color-tablerowborderbottom: var(--color-225);
+}
+
 body .theme-toggle {
     position: relative;
     padding: 0.25em;
@@ -544,62 +606,6 @@ body .theme-toggle::after {
 
 body.light-theme .theme-toggle::after {
     content: "🌘";
-}
-
-body {
-    --color-pagebg: var(--color-40);
-    --color-contentbg: /*var(--color-50);*/ none;
-    --color-maintext: var(--color-white-75pct);
-    --color-fadedtext: var(--color-white-50pct);
-    --color-navtext: var(--color-235);
-    --color-footertext: var(--color-235);
-    --color-footericon: var(--color-235);
-    --color-boxbg: var(--color-white-5pct);
-    --color-boxborder: var(--color-white-10pct);
-    --color-boxaccent: var(--color-primary);
-    --color-navbg: var(--color-primary);
-    --color-navhover: var(--color-white-15pct);
-    --color-link: rgba(var(--color-main-yellow-triple), 0.8);
-    --color-link-hover: var(--color-main-yellow);
-    --color-upvote: var(--color-main-green);
-    --color-downvote: var(--color-red);
-    --color-inputfocus: var(--color-white-40pct);
-    --color-inlinecodetext: var(--color-white-80pct);
-    --color-inlinecodebg: var(--color-55);
-    --color-blockquotetext: var(--color-white-60pct);
-    --color-blockquotebg: var(--color-50);
-    --color-blockquoteaccent: var(--color-primary);
-    --color-tablerowborder: var(--color-55);
-    --color-tableheaderborderbottom: var(--color-65);
-    --color-tablerowborderbottom: var(--color-55);
-}
-
-body.light-theme {
-    --color-pagebg: var(--color-245);
-    --color-contentbg: /*var(--color-245);*/ none;
-    --color-maintext: var(--color-black-75pct);
-    --color-fadedtext: var(--color-black-40pct);
-    --color-navtext: var(--color-235);
-    --color-footertext: var(--color-235);
-    --color-footericon: var(--color-235);
-    --color-boxbg: var(--color-black-3pct);
-    --color-boxborder: var(--color-black-5pct);
-    --color-boxaccent: var(--color-secondary);
-    --color-navbg: var(--color-primary);
-    --color-navhover: var(--color-white-15pct);
-    --color-link: rgba(var(--color-main-blue-triple), 0.8);
-    --color-link-hover: var(--color-main-blue);
-    --color-upvote: var(--color-main-green);
-    --color-downvote: var(--color-red);
-    --color-inputfocus: var(--color-black-50pct);
-    --color-inlinecodetext: var(--color-black-80pct);
-    --color-inlinecodebg: var(--color-225);
-    --color-blockquotetext: var(--color-black-60pct);
-    --color-blockquotebg: var(--color-235);
-    --color-blockquoteaccent: var(--color-primary);
-    --color-tablerowborder: var(--color-225);
-    --color-tableheaderborderbottom: var(--color-215);
-    --color-tablerowborderbottom: var(--color-225);
 }
 
 /* Shadow */
