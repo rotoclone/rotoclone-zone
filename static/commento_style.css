@@ -45,6 +45,11 @@
     color: var(--color-link);
     line-height: inherit;
     height: 2em;
+    transition: all 0.2s ease;
+}
+
+#commento .commento-login-text:hover {
+    color: var(--color-link-hover);
 }
 
 #commento .commento-textarea-container {
@@ -127,6 +132,11 @@
     backdrop-filter: blur(10px);
 }
 
+#commento .commento-login-box hr {
+    background: var(--color-fadedtext);
+    height: 2px;
+}
+
 #commento .commento-login-box .commento-email {
     background: var(--color-boxbg);
 }
@@ -142,6 +152,11 @@
 
 #commento .commento-login-box .commento-login-link {
     color: var(--color-link);
+    transition: all 0.2s ease;
+}
+
+#commento .commento-login-box .commento-login-link:hover {
+    color: var(--color-link-hover);
 }
 
 #commento .commento-login-box .commento-login-box-close::before {
@@ -227,7 +242,6 @@
 
 #commento .commento-card .commento-body p a, #commento .commento-markdown-help a {
     color: var(--color-link);
-    text-decoration: underline;
 }
 
 #commento .commento-card .commento-body blockquote p, #commento .commento-markdown-help blockquote {
