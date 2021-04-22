@@ -1,5 +1,5 @@
 use cached::proc_macro::cached;
-use rocket::State;
+use rocket::{Build, Rocket, State};
 use rocket_contrib::serve::{crate_relative, Options, StaticFiles};
 use rocket_contrib::templates::Template;
 use std::num::NonZeroUsize;
@@ -23,15 +23,13 @@ const RENDERED_HTML_BASE_DIR_CONFIG_KEY: &str = "rendered_html_base_dir";
 const DEFAULT_RENDERED_HTML_BASE_DIR: &str = "./rendered_html";
 
 #[get("/")]
-fn index(site: State<Site>) -> Template {
-    let context = site.build_index_context();
-    Template::render("index", &context)
+fn index(template: State<RenderedIndexTemplate>) -> Template {
+    template.0.clone()
 }
 
 #[get("/about")]
-fn about(site: State<Site>) -> Template {
-    let context = site.build_about_context();
-    Template::render("about", &context)
+fn about(template: State<RenderedAboutTemplate>) -> Template {
+    template.0.clone()
 }
 
 #[get("/blog?<page>")]
@@ -63,9 +61,8 @@ fn render_blog_entry(entry_name: String, site: &Site) -> Option<Template> {
 }
 
 #[get("/blog/tags")]
-fn get_blog_tags(site: State<Site>) -> Template {
-    let context = site.build_blog_tags_context();
-    Template::render("blog_tags", &context)
+fn get_blog_tags(template: State<RenderedBlogTagsTemplate>) -> Template {
+    template.0.clone()
 }
 
 #[get("/blog/tags/<tag>?<page>")]
@@ -97,7 +94,7 @@ fn not_found() -> Template {
 }
 
 #[launch]
-fn rocket() -> _ {
+fn rocket() -> Rocket<Build> {
     let mut rocket = rocket::build()
         .mount(
             "/",
@@ -129,7 +126,7 @@ fn rocket() -> _ {
     let site = Site::from_dir(Path::new(&site_base_dir), Path::new(&html_base_dir))
         .expect("error building site");
     println!("Built site: {:#?}", site); //TODO remove?
-    rocket = rocket.manage(site);
+    rocket = manage_site(rocket, site);
 
     if let Ok(dir) = additional_static_files_dir {
         println!("Serving static files from {}", dir);
@@ -140,4 +137,24 @@ fn rocket() -> _ {
     }
 
     rocket
+}
+
+struct RenderedIndexTemplate(Template);
+struct RenderedAboutTemplate(Template);
+struct RenderedBlogTagsTemplate(Template);
+
+/// Adds the site and some static pages to the provided `Rocket` instance as managed state.
+fn manage_site(rocket: Rocket<Build>, site: Site) -> Rocket<Build> {
+    let index = RenderedIndexTemplate(Template::render("index", &site.build_index_context()));
+    let about = RenderedAboutTemplate(Template::render("about", &site.build_about_context()));
+    let blog_tags = RenderedBlogTagsTemplate(Template::render(
+        "blog_tags",
+        &site.build_blog_tags_context(),
+    ));
+
+    rocket
+        .manage(site)
+        .manage(index)
+        .manage(about)
+        .manage(blog_tags)
 }
