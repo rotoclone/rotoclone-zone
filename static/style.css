@@ -109,6 +109,7 @@ a:hover {
 pre {
     padding: 1em;
     margin: .5em 0;
+    border: 1px solid var(--color-boxbg);
 }
 
 pre:focus {
@@ -283,9 +284,9 @@ blockquote blockquote {
 .blog-stub {
     padding: 1em;
     margin: 1em;
-    border-width: 0px 0px 0px 5px;
-    border-color: var(--color-boxaccent);
-    border-style: solid;
+    border: 1px solid var(--color-boxborder);
+    border-left: none;
+    box-shadow: -5px 0px 0px var(--color-boxaccent);
     background-color: var(--color-boxbg);
 }
 

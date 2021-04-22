@@ -1,3 +1,4 @@
+use cached::proc_macro::cached;
 use chrono::{DateTime, Datelike, Utc};
 use ordinal::Ordinal;
 use serde::Serialize;
@@ -144,7 +145,7 @@ impl Site {
             tags: entry.tags.clone(),
             created_at: format_datetime(entry.created_at),
             updated_at: entry.updated_at.map(format_datetime),
-            entry_content: read_to_string(&entry.metadata.html_content_file)?,
+            entry_content: read_to_string_cached(entry.metadata.html_content_file.clone())?,
             previous_entry,
             next_entry,
         })
@@ -278,4 +279,11 @@ fn calculate_pages(
     };
 
     (previous_page, next_page)
+}
+
+/// Same as `std::fs::read_to_string`, but caches the result to reduce filesystem reads.
+//TODO remove
+#[cached(size = 20, result = true)]
+fn read_to_string_cached(path: std::path::PathBuf) -> std::io::Result<String> {
+    read_to_string(path)
 }

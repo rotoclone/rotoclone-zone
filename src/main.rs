@@ -1,8 +1,8 @@
-use std::num::NonZeroUsize;
-
+use cached::proc_macro::cached;
 use rocket::State;
 use rocket_contrib::serve::{crate_relative, Options, StaticFiles};
 use rocket_contrib::templates::Template;
+use std::num::NonZeroUsize;
 use std::path::Path;
 
 #[macro_use]
@@ -43,6 +43,11 @@ fn get_blog_index(page: Option<NonZeroUsize>, site: State<Site>) -> Template {
 
 #[get("/blog/<entry_name>")]
 fn get_blog_entry(entry_name: String, site: State<Site>) -> Option<Template> {
+    render_blog_entry(entry_name, &site)
+}
+
+#[cached(size = 20, key = "String", convert = "{entry_name.clone()}")]
+fn render_blog_entry(entry_name: String, site: &Site) -> Option<Template> {
     let entry = site
         .blog_entries
         .iter()
@@ -92,8 +97,8 @@ fn not_found() -> Template {
 }
 
 #[launch]
-fn rocket() -> rocket::Rocket {
-    let mut rocket = rocket::ignite()
+fn rocket() -> _ {
+    let mut rocket = rocket::build()
         .mount(
             "/",
             routes![
@@ -107,7 +112,7 @@ fn rocket() -> rocket::Rocket {
             ],
         )
         .mount("/", StaticFiles::from(crate_relative!("static")).rank(10))
-        .register(catchers![not_found])
+        .register("/", catchers![not_found])
         .attach(Template::fairing());
 
     let config = rocket.figment();

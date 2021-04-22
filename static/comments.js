@@ -8,6 +8,7 @@ window.showComments = function () {
 window.loadedCommento = function () {
     if (window.location.href.includes("#commento")) {
         window.showComments();
+        // TODO delay doing this until the element exists (but don't do it if it's too long after the page was loaded)
         document.querySelector("#" + window.location.href.split("#")[1]).scrollIntoView();
     } else {
         showCommentsButton.addEventListener("click", function () {
