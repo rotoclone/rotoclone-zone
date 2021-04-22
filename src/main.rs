@@ -1,5 +1,5 @@
 use cached::proc_macro::cached;
-use rocket::{Build, Rocket, State};
+use rocket::{figment::Figment, Build, Rocket, State};
 use rocket_contrib::serve::{crate_relative, Options, StaticFiles};
 use rocket_contrib::templates::Template;
 use std::num::NonZeroUsize;
@@ -112,22 +112,11 @@ fn rocket() -> Rocket<Build> {
         .register("/", catchers![not_found])
         .attach(Template::fairing());
 
+    rocket = manage_site(rocket);
+
     let config = rocket.figment();
     let additional_static_files_dir =
         config.extract_inner::<String>(ADDITIONAL_STATIC_FILES_DIR_CONFIG_KEY);
-    let site_base_dir = config
-        .extract_inner::<String>(SITE_CONTENT_BASE_DIR_CONFIG_KEY)
-        .unwrap_or_else(|_| DEFAULT_SITE_CONTENT_BASE_DIR.to_string());
-    let html_base_dir = config
-        .extract_inner::<String>(RENDERED_HTML_BASE_DIR_CONFIG_KEY)
-        .unwrap_or_else(|_| DEFAULT_RENDERED_HTML_BASE_DIR.to_string());
-
-    println!("Building site...");
-    let site = Site::from_dir(Path::new(&site_base_dir), Path::new(&html_base_dir))
-        .expect("error building site");
-    println!("Built site: {:#?}", site); //TODO remove?
-    rocket = manage_site(rocket, site);
-
     if let Ok(dir) = additional_static_files_dir {
         println!("Serving static files from {}", dir);
         rocket = rocket.mount(
@@ -144,7 +133,20 @@ struct RenderedAboutTemplate(Template);
 struct RenderedBlogTagsTemplate(Template);
 
 /// Adds the site and some static pages to the provided `Rocket` instance as managed state.
-fn manage_site(rocket: Rocket<Build>, site: Site) -> Rocket<Build> {
+fn manage_site(rocket: Rocket<Build>) -> Rocket<Build> {
+    let config = rocket.figment();
+    let site_base_dir = config
+        .extract_inner::<String>(SITE_CONTENT_BASE_DIR_CONFIG_KEY)
+        .unwrap_or_else(|_| DEFAULT_SITE_CONTENT_BASE_DIR.to_string());
+    let html_base_dir = config
+        .extract_inner::<String>(RENDERED_HTML_BASE_DIR_CONFIG_KEY)
+        .unwrap_or_else(|_| DEFAULT_RENDERED_HTML_BASE_DIR.to_string());
+
+    println!("Building site...");
+    let site = Site::from_dir(Path::new(&site_base_dir), Path::new(&html_base_dir))
+        .expect("error building site");
+    println!("Built site: {:#?}", site); //TODO remove?
+
     let index = RenderedIndexTemplate(Template::render("index", &site.build_index_context()));
     let about = RenderedAboutTemplate(Template::render("about", &site.build_about_context()));
     let blog_tags = RenderedBlogTagsTemplate(Template::render(
