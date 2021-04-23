@@ -70,14 +70,6 @@ fn get_blog_tag(tag: String, page: Option<NonZeroUsize>, site: State<Site>) -> T
     Template::render("blog_tag", &context)
 }
 
-#[get("/blog/search?<q>")]
-#[allow(unused_variables)]
-fn get_blog_search(q: Option<String>, site: State<Site>) -> Template {
-    //let context = site.build_blog_search_context(q);
-    //Template::render("blog_search", &context)
-    unimplemented!() //TODO
-}
-
 #[catch(404)]
 fn not_found() -> Template {
     let context = ErrorContext {
@@ -102,8 +94,7 @@ fn rocket() -> rocket::Rocket {
                 get_blog_index,
                 get_blog_entry,
                 get_blog_tags,
-                get_blog_tag,
-                get_blog_search
+                get_blog_tag
             ],
         )
         .mount("/", StaticFiles::from(crate_relative!("static")).rank(10))
