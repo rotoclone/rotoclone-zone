@@ -109,7 +109,7 @@
     display: none;
 }
 
-#commento .commento-submit-button {
+#commento .commento-button.commento-submit-button {
     background: var(--color-primary);
     border-radius: 0;
     border: none;
