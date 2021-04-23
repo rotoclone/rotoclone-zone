@@ -84,8 +84,8 @@ fn not_found() -> Template {
 }
 
 #[launch]
-fn rocket() -> rocket::Rocket {
-    let mut rocket = rocket::ignite()
+fn rocket() -> rocket::Rocket<rocket::Build> {
+    let mut rocket = rocket::build()
         .mount(
             "/",
             routes![
@@ -98,7 +98,7 @@ fn rocket() -> rocket::Rocket {
             ],
         )
         .mount("/", StaticFiles::from(crate_relative!("static")).rank(10))
-        .register(catchers![not_found])
+        .register("/", catchers![not_found])
         .attach(Template::fairing());
 
     let config = rocket.figment();
