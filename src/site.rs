@@ -3,7 +3,7 @@ use pulldown_cmark::{html, Options, Parser};
 use serde::Deserialize;
 use std::{
     ffi::OsString,
-    fs::{create_dir_all, DirEntry, File, OpenOptions},
+    fs::{create_dir_all, remove_dir_all, DirEntry, File, OpenOptions},
     io::{BufRead, BufReader, ErrorKind, Write},
     path::{Path, PathBuf},
 };
@@ -58,7 +58,7 @@ impl Site {
         let blog_entries_source_dir = source_dir.join(BLOG_ENTRIES_DIR_NAME);
         let blog_entries_html_dir = html_dir.join(BLOG_ENTRIES_DIR_NAME);
 
-        //TODO recursively delete html_dir
+        remove_dir_all(&blog_entries_html_dir)?;
 
         let mut blog_entries = Vec::new();
         for blog_file in blog_entries_source_dir.read_dir()? {
