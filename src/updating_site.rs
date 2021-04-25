@@ -11,9 +11,9 @@ use crate::site::Site;
 /// Site that updates itself when changes to its source directory are detected.
 pub struct UpdatingSite {
     /// The `Hotwatch` instance that handles updating the site.
-    hotwatch: Option<Hotwatch>,
+    _hotwatch: Hotwatch,
     /// The site.
-    pub site: Site,
+    pub site: Arc<RwLock<Site>>,
 }
 
 impl UpdatingSite {
@@ -24,14 +24,11 @@ impl UpdatingSite {
     pub fn from_dir(
         source_dir: PathBuf,
         html_dir: PathBuf,
-    ) -> Result<Arc<RwLock<UpdatingSite>>, Box<dyn Error>> {
+    ) -> Result<UpdatingSite, Box<dyn Error>> {
         let site = Site::from_dir(&source_dir, &html_dir)?;
 
-        let shared_updating_site = Arc::new(RwLock::new(UpdatingSite {
-            hotwatch: None,
-            site,
-        }));
-        let hotwatch_updating_site = Arc::clone(&shared_updating_site);
+        let shared_site = Arc::new(RwLock::new(site));
+        let hotwatch_site = Arc::clone(&shared_site);
 
         let mut hotwatch = Hotwatch::new()?;
         hotwatch.watch(source_dir.clone(), move |event: Event| {
@@ -44,13 +41,15 @@ impl UpdatingSite {
             match Site::from_dir(&source_dir, &html_dir) {
                 Ok(site) => {
                     println!("Site rebuilt successfully.");
-                    hotwatch_updating_site.write().unwrap().site = site;
+                    *hotwatch_site.write().unwrap() = site;
                 }
-                Err(e) => println!("Error rebuilding site: {}", e),
+                Err(e) => println!("Error rebuilding site: {:?}", e),
             };
         })?;
 
-        shared_updating_site.write().unwrap().hotwatch = Some(hotwatch);
-        Ok(shared_updating_site)
+        Ok(UpdatingSite {
+            _hotwatch: hotwatch,
+            site: shared_site,
+        })
     }
 }

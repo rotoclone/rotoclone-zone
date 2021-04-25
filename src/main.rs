@@ -1,7 +1,4 @@
-use std::{
-    num::NonZeroUsize,
-    sync::{Arc, RwLock},
-};
+use std::num::NonZeroUsize;
 
 use rocket::State;
 use rocket_contrib::serve::{crate_relative, Options, StaticFiles};
@@ -28,30 +25,30 @@ const RENDERED_HTML_BASE_DIR_CONFIG_KEY: &str = "rendered_html_base_dir";
 const DEFAULT_RENDERED_HTML_BASE_DIR: &str = "./rendered_html";
 
 #[get("/")]
-fn index(site: State<Arc<RwLock<UpdatingSite>>>) -> Template {
-    let context = site.read().unwrap().site.build_index_context();
+fn index(updating_site: State<UpdatingSite>) -> Template {
+    let context = updating_site.site.read().unwrap().build_index_context();
     Template::render("index", &context)
 }
 
 #[get("/about")]
-fn about(site: State<Arc<RwLock<UpdatingSite>>>) -> Template {
-    let context = site.read().unwrap().site.build_about_context();
+fn about(updating_site: State<UpdatingSite>) -> Template {
+    let context = updating_site.site.read().unwrap().build_about_context();
     Template::render("about", &context)
 }
 
 #[get("/blog?<page>")]
-fn get_blog_index(page: Option<NonZeroUsize>, site: State<Arc<RwLock<UpdatingSite>>>) -> Template {
-    let context = site
+fn get_blog_index(page: Option<NonZeroUsize>, updating_site: State<UpdatingSite>) -> Template {
+    let context = updating_site
+        .site
         .read()
         .unwrap()
-        .site
         .build_blog_index_context(page.unwrap_or_else(|| NonZeroUsize::new(1).unwrap()));
     Template::render("blog_index", &context)
 }
 
 #[get("/blog/<entry_name>")]
-fn get_blog_entry(entry_name: String, site: State<Arc<RwLock<UpdatingSite>>>) -> Option<Template> {
-    let site = &site.read().unwrap().site;
+fn get_blog_entry(entry_name: String, updating_site: State<UpdatingSite>) -> Option<Template> {
+    let site = &updating_site.site.read().unwrap();
     let entry = site
         .blog_entries
         .iter()
@@ -67,8 +64,8 @@ fn get_blog_entry(entry_name: String, site: State<Arc<RwLock<UpdatingSite>>>) ->
 }
 
 #[get("/blog/tags")]
-fn get_blog_tags(site: State<Arc<RwLock<UpdatingSite>>>) -> Template {
-    let context = site.read().unwrap().site.build_blog_tags_context();
+fn get_blog_tags(updating_site: State<UpdatingSite>) -> Template {
+    let context = updating_site.site.read().unwrap().build_blog_tags_context();
     Template::render("blog_tags", &context)
 }
 
@@ -76,12 +73,12 @@ fn get_blog_tags(site: State<Arc<RwLock<UpdatingSite>>>) -> Template {
 fn get_blog_tag(
     tag: String,
     page: Option<NonZeroUsize>,
-    site: State<Arc<RwLock<UpdatingSite>>>,
+    updating_site: State<UpdatingSite>,
 ) -> Option<Template> {
-    let context = site
+    let context = updating_site
+        .site
         .read()
         .unwrap()
-        .site
         .build_blog_tag_context(tag, page.unwrap_or_else(|| NonZeroUsize::new(1).unwrap()));
 
     context.map(|x| Template::render("blog_tag", &x))
@@ -138,7 +135,7 @@ fn rocket() -> rocket::Rocket<rocket::Build> {
     };
     let updating_site =
         UpdatingSite::from_dir(PathBuf::from(site_base_dir), PathBuf::from(html_base_dir))
-            .unwrap_or_else(|e| panic!("error building site: {}", e));
+            .unwrap_or_else(|e| panic!("error building site: {:?}", e));
     println!("Site built successfully.");
     rocket = rocket.manage(updating_site);
 
