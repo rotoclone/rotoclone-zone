@@ -27,7 +27,4 @@
         <p>{{ entry_content | safe }}</p>
     </div>
     {% include "blog_footer" %}
-    {% if comments_enabled %}
-        {% include "comments" %}
-    {% endif %}
 {% endblock content %}

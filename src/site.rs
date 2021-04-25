@@ -35,6 +35,7 @@ pub struct FrontMatter {
     created_at: Option<DateTime<Utc>>,
     updated_at: Option<DateTime<Utc>>,
     comments_enabled: Option<bool>,
+    external_discussions: Option<Vec<ExternalDiscussion>>,
 }
 
 #[derive(Debug, PartialEq)]
@@ -53,6 +54,13 @@ pub struct BlogEntry {
     pub created_at: DateTime<Utc>,
     pub updated_at: Option<DateTime<Utc>>,
     pub comments_enabled: bool,
+    pub external_discussions: Vec<ExternalDiscussion>,
+}
+
+#[derive(Debug, PartialEq, Deserialize)]
+pub struct ExternalDiscussion {
+    pub name: String,
+    pub url: String,
 }
 
 impl Site {
@@ -133,6 +141,7 @@ impl Site {
                 comments_enabled: front_matter
                     .comments_enabled
                     .unwrap_or(DEFAULT_COMMENTS_ENABLED),
+                external_discussions: front_matter.external_discussions.unwrap_or_else(Vec::new),
             };
 
             blog_entries.push(entry);

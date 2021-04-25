@@ -121,9 +121,16 @@ pub struct BlogEntryContext {
     created_at: String,
     updated_at: Option<String>,
     comments_enabled: bool,
+    external_discussions: Vec<ExternalDiscussionContext>,
     entry_content: String,
     previous_entry: Option<BlogEntryStub>,
     next_entry: Option<BlogEntryStub>,
+}
+
+#[derive(Serialize)]
+pub struct ExternalDiscussionContext {
+    name: String,
+    url: String,
 }
 
 impl Site {
@@ -148,6 +155,14 @@ impl Site {
             created_at: format_datetime(entry.created_at),
             updated_at: entry.updated_at.map(format_datetime),
             comments_enabled: entry.comments_enabled,
+            external_discussions: entry
+                .external_discussions
+                .iter()
+                .map(|d| ExternalDiscussionContext {
+                    name: d.name.clone(),
+                    url: d.url.clone(),
+                })
+                .collect(),
             entry_content: read_to_string(&entry.metadata.html_content_file)?,
             previous_entry,
             next_entry,

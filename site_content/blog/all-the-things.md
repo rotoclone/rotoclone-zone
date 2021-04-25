@@ -3,6 +3,7 @@ title = "A Post With All The Things"
 tags = ["some tag", "wow a tag"]
 slug = "custom-slug"
 updated_at = "2020-01-02T00:00:00Z"
+external_discussions = [{ name = "Some Website", url = "https://www.example.com" }, { name = "Some Other Website", url = "https://www.example.org" }]
 +++
 
 This post starts with a long section of text, since I expect that's what most posts will start with. That sentence isn't long enough so I'll add another one. A short sentence too. Almost there, this text just needs to be at least...let's say 3 lines. I don't think that's long enough yet. I guess I could have used the "lorem ipsum" text for this, but typing this all out is more fun I guess. Maybe. Ok that might be long enough.
