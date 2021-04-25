@@ -14,6 +14,7 @@ pub struct BlogEntryStub {
     pub tags: Vec<String>,
     pub url: String,
     pub created_at: String,
+    pub comments_enabled: bool,
 }
 
 impl BlogEntry {
@@ -24,6 +25,7 @@ impl BlogEntry {
             tags: self.tags.clone(),
             url: format!("/blog/{}", self.metadata.slug),
             created_at: format_datetime(self.created_at),
+            comments_enabled: self.comments_enabled,
         }
     }
 }
@@ -118,6 +120,7 @@ pub struct BlogEntryContext {
     tags: Vec<String>,
     created_at: String,
     updated_at: Option<String>,
+    comments_enabled: bool,
     entry_content: String,
     previous_entry: Option<BlogEntryStub>,
     next_entry: Option<BlogEntryStub>,
@@ -144,6 +147,7 @@ impl Site {
             tags: entry.tags.clone(),
             created_at: format_datetime(entry.created_at),
             updated_at: entry.updated_at.map(format_datetime),
+            comments_enabled: entry.comments_enabled,
             entry_content: read_to_string(&entry.metadata.html_content_file)?,
             previous_entry,
             next_entry,

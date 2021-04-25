@@ -11,7 +11,9 @@
             </ul>
         </div>
     {% endif %}
-    <div>
-        <a href={{ entry.url }}#commento data-page-id="{{ entry.url }}">0 comments</a>
-    </div>
+    {% if entry.comments_enabled %}
+        <div>
+            <a href={{ entry.url }}#commento data-page-id="{{ entry.url }}">0 comments</a>
+        </div>
+    {% endif %}
 </div>

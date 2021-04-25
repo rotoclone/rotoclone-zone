@@ -15,6 +15,9 @@ const BLOG_ENTRIES_DIR_NAME: &str = "blog";
 /// The template to use to render blog entries that have no template defined in their front matter.
 const DEFAULT_BLOG_ENTRY_TEMPLATE_NAME: &str = "blog_entry";
 
+/// Whether comments should be enabled on blog entries by default.
+const DEFAULT_COMMENTS_ENABLED: bool = true;
+
 /// The string used to delimit the beginning and end of the front matter
 const FRONT_MATTER_DELIMITER: &str = "+++";
 
@@ -31,6 +34,7 @@ pub struct FrontMatter {
     tags: Option<Vec<String>>,
     created_at: Option<DateTime<Utc>>,
     updated_at: Option<DateTime<Utc>>,
+    comments_enabled: Option<bool>,
 }
 
 #[derive(Debug, PartialEq)]
@@ -48,6 +52,7 @@ pub struct BlogEntry {
     pub tags: Vec<String>,
     pub created_at: DateTime<Utc>,
     pub updated_at: Option<DateTime<Utc>>,
+    pub comments_enabled: bool,
 }
 
 impl Site {
@@ -125,6 +130,9 @@ impl Site {
                         .into(),
                 ),
                 updated_at: front_matter.updated_at,
+                comments_enabled: front_matter
+                    .comments_enabled
+                    .unwrap_or(DEFAULT_COMMENTS_ENABLED),
             };
 
             blog_entries.push(entry);
