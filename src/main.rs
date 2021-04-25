@@ -1,15 +1,20 @@
-use std::num::NonZeroUsize;
+use std::{
+    num::NonZeroUsize,
+    sync::{Arc, RwLock},
+};
 
 use rocket::State;
 use rocket_contrib::serve::{crate_relative, Options, StaticFiles};
 use rocket_contrib::templates::Template;
-use std::path::Path;
+use std::path::PathBuf;
 
 #[macro_use]
 extern crate rocket;
 
 mod site;
-use site::*;
+
+mod updating_site;
+use updating_site::*;
 
 mod context;
 use context::*;
@@ -23,26 +28,30 @@ const RENDERED_HTML_BASE_DIR_CONFIG_KEY: &str = "rendered_html_base_dir";
 const DEFAULT_RENDERED_HTML_BASE_DIR: &str = "./rendered_html";
 
 #[get("/")]
-fn index(site: State<Site>) -> Template {
-    let context = site.build_index_context();
+fn index(site: State<Arc<RwLock<UpdatingSite>>>) -> Template {
+    let context = site.read().unwrap().site.build_index_context();
     Template::render("index", &context)
 }
 
 #[get("/about")]
-fn about(site: State<Site>) -> Template {
-    let context = site.build_about_context();
+fn about(site: State<Arc<RwLock<UpdatingSite>>>) -> Template {
+    let context = site.read().unwrap().site.build_about_context();
     Template::render("about", &context)
 }
 
 #[get("/blog?<page>")]
-fn get_blog_index(page: Option<NonZeroUsize>, site: State<Site>) -> Template {
-    let context =
-        site.build_blog_index_context(page.unwrap_or_else(|| NonZeroUsize::new(1).unwrap()));
+fn get_blog_index(page: Option<NonZeroUsize>, site: State<Arc<RwLock<UpdatingSite>>>) -> Template {
+    let context = site
+        .read()
+        .unwrap()
+        .site
+        .build_blog_index_context(page.unwrap_or_else(|| NonZeroUsize::new(1).unwrap()));
     Template::render("blog_index", &context)
 }
 
 #[get("/blog/<entry_name>")]
-fn get_blog_entry(entry_name: String, site: State<Site>) -> Option<Template> {
+fn get_blog_entry(entry_name: String, site: State<Arc<RwLock<UpdatingSite>>>) -> Option<Template> {
+    let site = &site.read().unwrap().site;
     let entry = site
         .blog_entries
         .iter()
@@ -58,16 +67,24 @@ fn get_blog_entry(entry_name: String, site: State<Site>) -> Option<Template> {
 }
 
 #[get("/blog/tags")]
-fn get_blog_tags(site: State<Site>) -> Template {
-    let context = site.build_blog_tags_context();
+fn get_blog_tags(site: State<Arc<RwLock<UpdatingSite>>>) -> Template {
+    let context = site.read().unwrap().site.build_blog_tags_context();
     Template::render("blog_tags", &context)
 }
 
 #[get("/blog/tags/<tag>?<page>")]
-fn get_blog_tag(tag: String, page: Option<NonZeroUsize>, site: State<Site>) -> Template {
-    let context =
-        site.build_blog_tag_context(tag, page.unwrap_or_else(|| NonZeroUsize::new(1).unwrap()));
-    Template::render("blog_tag", &context)
+fn get_blog_tag(
+    tag: String,
+    page: Option<NonZeroUsize>,
+    site: State<Arc<RwLock<UpdatingSite>>>,
+) -> Option<Template> {
+    let context = site
+        .read()
+        .unwrap()
+        .site
+        .build_blog_tag_context(tag, page.unwrap_or_else(|| NonZeroUsize::new(1).unwrap()));
+
+    context.map(|x| Template::render("blog_tag", &x))
 }
 
 #[catch(404)]
@@ -112,10 +129,18 @@ fn rocket() -> rocket::Rocket<rocket::Build> {
         .unwrap_or_else(|_| DEFAULT_RENDERED_HTML_BASE_DIR.to_string());
 
     println!("Building site...");
-    let site = Site::from_dir(Path::new(&site_base_dir), Path::new(&html_base_dir))
-        .expect("error building site");
-    println!("Built site: {:#?}", site); //TODO remove?
-    rocket = rocket.manage(site);
+    match std::fs::remove_dir_all(&html_base_dir) {
+        Ok(()) => (),
+        Err(e) => match e.kind() {
+            std::io::ErrorKind::NotFound => (),
+            _ => panic!("error deleting {}: {}", html_base_dir, e),
+        },
+    };
+    let updating_site =
+        UpdatingSite::from_dir(PathBuf::from(site_base_dir), PathBuf::from(html_base_dir))
+            .unwrap_or_else(|e| panic!("error building site: {}", e));
+    println!("Site built successfully.");
+    rocket = rocket.manage(updating_site);
 
     if let Ok(dir) = additional_static_files_dir {
         println!("Serving static files from {}", dir);

@@ -7,11 +7,11 @@ edition = "2018"
 [dependencies]
 rocket = { git = "https://github.com/SergioBenitez/Rocket", branch = "master", features = ["tls"] }
 serde = "1.0"
-#TODO remove or use hotwatch = "0.4.5"
 chrono = { version = "0.4.19", features = ["serde"] }
 toml = "0.5.8"
 ordinal = "0.2.3"
 pulldown-cmark = "0.8.0"
+hotwatch = "0.4.5"
 
 [dependencies.rocket_contrib]
 git = "https://github.com/SergioBenitez/Rocket"
