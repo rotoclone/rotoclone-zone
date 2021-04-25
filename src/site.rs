@@ -58,8 +58,6 @@ impl Site {
         let blog_entries_source_dir = source_dir.join(BLOG_ENTRIES_DIR_NAME);
         let blog_entries_html_dir = html_dir.join(BLOG_ENTRIES_DIR_NAME);
 
-        // TODO if building the site fails, the existing site should be maintained remove_dir_all(&blog_entries_html_dir)?;
-
         let mut blog_entries = Vec::new();
         for blog_file in blog_entries_source_dir.read_dir()? {
             let blog_file = blog_file?;
