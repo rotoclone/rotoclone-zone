@@ -213,13 +213,23 @@ pub struct BlogTagContext {
 
 impl Site {
     /// Builds the context for a blog tag page.
-    pub fn build_blog_tag_context(&self, tag: String, page: NonZeroUsize) -> BlogTagContext {
+    /// Returns `None` if there are no entries with the provided tag.
+    pub fn build_blog_tag_context(
+        &self,
+        tag: String,
+        page: NonZeroUsize,
+    ) -> Option<BlogTagContext> {
         let start_index = (page.get() - 1) * PAGE_SIZE;
         let all_matching_entries = self
             .blog_entries
             .iter()
             .filter(|entry| entry.tags.contains(&tag))
             .collect::<Vec<&BlogEntry>>();
+
+        if all_matching_entries.is_empty() {
+            return None;
+        }
+
         let total_matching_entries = all_matching_entries.len();
         let entries = all_matching_entries
             .into_iter()
@@ -231,7 +241,7 @@ impl Site {
         let (previous_page, next_page) =
             calculate_pages(page, start_index, total_matching_entries, PAGE_SIZE);
 
-        BlogTagContext {
+        Some(BlogTagContext {
             base: BaseContext {
                 title: format!("The Rotoclone Zone Blog - Posts Tagged {}", tag),
                 meta_description: format!("All the posts tagged {}", tag),
@@ -240,7 +250,7 @@ impl Site {
             entries,
             previous_page,
             next_page,
-        }
+        })
     }
 }
 

@@ -1,9 +1,10 @@
+use anyhow::Context;
 use chrono::{DateTime, Utc};
 use pulldown_cmark::{html, Options, Parser};
 use serde::Deserialize;
 use std::{
     ffi::OsString,
-    fs::{create_dir_all, remove_dir_all, DirEntry, File, OpenOptions},
+    fs::{create_dir_all, DirEntry, File, OpenOptions},
     io::{BufRead, BufReader, ErrorKind, Write},
     path::{Path, PathBuf},
 };
@@ -54,23 +55,42 @@ impl Site {
     ///
     /// # Errors
     /// Returns any errors that occur while reading from the file system or parsing file contents.
-    pub fn from_dir(source_dir: &Path, html_dir: &Path) -> Result<Site, std::io::Error> {
+    pub fn from_dir(source_dir: &Path, html_dir: &Path) -> anyhow::Result<Site> {
         let blog_entries_source_dir = source_dir.join(BLOG_ENTRIES_DIR_NAME);
         let blog_entries_html_dir = html_dir.join(BLOG_ENTRIES_DIR_NAME);
 
-        remove_dir_all(&blog_entries_html_dir)?;
-
         let mut blog_entries = Vec::new();
-        for blog_file in blog_entries_source_dir.read_dir()? {
-            let blog_file = blog_file?;
+        for blog_file in blog_entries_source_dir.read_dir().with_context(|| {
+            format!(
+                "error reading from {}",
+                blog_entries_source_dir.to_string_lossy()
+            )
+        })? {
+            let blog_file = blog_file.with_context(|| {
+                format!(
+                    "error reading from {}",
+                    blog_entries_source_dir.to_string_lossy()
+                )
+            })?;
 
             let (front_matter, content_markdown) =
-                extract_front_matter_and_content(&blog_file.path())?;
+                extract_front_matter_and_content(&blog_file.path()).with_context(|| {
+                    format!(
+                        "error extracting front matter from {}",
+                        blog_file.path().to_string_lossy()
+                    )
+                })?;
             let html_content_file = write_content_as_html(
                 &blog_entries_html_dir,
                 blog_file.file_name(),
                 &content_markdown,
-            )?;
+            )
+            .with_context(|| {
+                format!(
+                    "error writing content of {} as HTML",
+                    blog_file.path().to_string_lossy()
+                )
+            })?;
 
             let metadata = PageMetadata {
                 source_file: blog_file.path(),
@@ -86,9 +106,24 @@ impl Site {
                 metadata,
                 title: front_matter.title.unwrap_or_else(|| "".to_string()),
                 tags: front_matter.tags.unwrap_or_default(),
-                created_at: front_matter
-                    .created_at
-                    .unwrap_or(blog_file.metadata()?.created()?.into()),
+                created_at: front_matter.created_at.unwrap_or(
+                    blog_file
+                        .metadata()
+                        .with_context(|| {
+                            format!(
+                                "error getting metadata for {}",
+                                blog_file.path().to_string_lossy()
+                            )
+                        })?
+                        .created()
+                        .with_context(|| {
+                            format!(
+                                "error getting created at for {}",
+                                blog_file.path().to_string_lossy()
+                            )
+                        })?
+                        .into(),
+                ),
                 updated_at: front_matter.updated_at,
             };
 
