@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ title }}</title>
+    <description>{{ description }}</description>
+    <link>{{ base_url }}</link>
+    <atom:link href="{{ base_url ~ feed_url }}" rel="self" type="application/rss+xml" />
+    {% for item in items %}
+      <item>
+        <title>{{ item.title }}</title>
+        <pubDate>{{ item.published_date }}</pubDate>
+        <link>{{ base_url ~ item.url }}</link>
+        <guid isPermaLink="true">{{ base_url ~ item.url }}</guid>
+      </item>
+    {% endfor %}
+  </channel>
+</rss>

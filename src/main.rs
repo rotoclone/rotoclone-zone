@@ -46,7 +46,7 @@ fn get_blog_index(page: Option<NonZeroUsize>, updating_site: State<UpdatingSite>
     Template::render("blog_index", &context)
 }
 
-#[get("/blog/<entry_name>")]
+#[get("/blog/posts/<entry_name>")]
 fn get_blog_entry(entry_name: String, updating_site: State<UpdatingSite>) -> Option<Template> {
     let site = &updating_site.site.read().unwrap();
     let entry = site
@@ -84,6 +84,12 @@ fn get_blog_tag(
     context.map(|x| Template::render("blog_tag", &x))
 }
 
+#[get("/blog/feed")]
+fn get_blog_feed(updating_site: State<UpdatingSite>) -> Template {
+    let context = updating_site.site.read().unwrap().build_blog_feed_context();
+    Template::render("feed", &context)
+}
+
 #[catch(404)]
 fn not_found() -> Template {
     let context = ErrorContext {
@@ -108,7 +114,8 @@ fn rocket() -> rocket::Rocket<rocket::Build> {
                 get_blog_index,
                 get_blog_entry,
                 get_blog_tags,
-                get_blog_tag
+                get_blog_tag,
+                get_blog_feed,
             ],
         )
         .mount("/", StaticFiles::from(crate_relative!("static")).rank(10))
