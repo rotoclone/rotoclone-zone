@@ -1,7 +1,5 @@
 {% extends "base" %}
 {% block content %}
-    <link href="/prism/prism.css" rel="stylesheet">
-    <script defer src="/prism/prism.js"></script>
     <div class="text-container">
         <div class="blog-heading">
             <h1 class="blog-title">{{ base.title }}</h1>
@@ -27,4 +25,6 @@
         <p>{{ entry_content | safe }}</p>
     </div>
     {% include "blog_footer" %}
+    <link href="/prism/prism.css" rel="stylesheet">
+    <script defer src="/prism/prism.js"></script>
 {% endblock content %}

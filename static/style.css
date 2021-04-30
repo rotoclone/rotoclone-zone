@@ -223,8 +223,13 @@ blockquote blockquote {
 }
 
 .footer .icon svg {
-    height: 1.5em;
     filter: drop-shadow( 1px 1px 1px var(--color-shadow));
+}
+
+.blog-index-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }
 
 .navigation a {
@@ -343,6 +348,10 @@ blockquote blockquote {
     column-gap: 1em;
 }
 
+.content-footer .icon svg {
+    height: 0.75em;
+}
+
 .content-footer-left {
     text-align: left;
 }
@@ -366,6 +375,11 @@ hr {
 hr.content-footer-hr {
     margin-bottom: 0;
 }
+
+.entry-end-rss-link {
+    text-align: center;
+}
+
 .external-discussion-links {
     text-align: center;
 }
@@ -411,7 +425,7 @@ hr.content-footer-hr {
 }
 
 .icon svg {
-    height: 0.75em;
+    height: 1.5em;
 }
 
 @media only screen and (max-width: 87rem) {

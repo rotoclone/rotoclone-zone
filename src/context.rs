@@ -5,8 +5,14 @@ use std::{fs::read_to_string, num::NonZeroUsize};
 
 use crate::site::{BlogEntry, Site};
 
+/// The number of blog entries to display on the index page.
 const RECENT_BLOG_ENTRIES_LIMIT: usize = 5;
+
+/// The number of items to display on a single page.
 const PAGE_SIZE: usize = 10;
+
+/// The number of blog entries to include in the RSS feed.
+const BLOG_FEED_SIZE: usize = 20;
 
 #[derive(Serialize)]
 pub struct BlogEntryStub {
@@ -23,7 +29,7 @@ impl BlogEntry {
         BlogEntryStub {
             title: self.title.clone(),
             tags: self.tags.clone(),
-            url: format!("/blog/{}", self.metadata.slug),
+            url: format!("/blog/posts/{}", self.metadata.slug),
             created_at: format_datetime(self.created_at),
             comments_enabled: self.comments_enabled,
         }
@@ -274,6 +280,51 @@ impl Site {
 }
 
 #[derive(Serialize)]
+pub struct FeedContext {
+    title: String,
+    description: String,
+    base_url: String,
+    feed_url: String,
+    items: Vec<FeedItemContext>,
+}
+
+#[derive(Serialize)]
+pub struct FeedItemContext {
+    title: String,
+    published_date: String,
+    url: String,
+}
+
+impl BlogEntry {
+    fn to_feed_item(&self) -> FeedItemContext {
+        FeedItemContext {
+            title: self.title.clone(),
+            published_date: format_datetime_feed(self.created_at),
+            url: format!("/posts/{}", self.metadata.slug),
+        }
+    }
+}
+
+impl Site {
+    pub fn build_blog_feed_context(&self) -> FeedContext {
+        let items = self
+            .blog_entries
+            .iter()
+            .take(BLOG_FEED_SIZE)
+            .map(BlogEntry::to_feed_item)
+            .collect();
+
+        FeedContext {
+            title: "The Rotoclone Zone Blog".to_string(),
+            description: "Some guy's blog I dunno".to_string(),
+            base_url: "https://www.rotoclone.zone/blog".to_string(),
+            feed_url: "/feed".to_string(),
+            items,
+        }
+    }
+}
+
+#[derive(Serialize)]
 pub struct ErrorContext {
     pub base: BaseContext,
     pub header: String,
@@ -287,6 +338,11 @@ fn format_datetime(datetime: DateTime<Utc>) -> String {
     let year = datetime.format("%Y");
 
     format!("{} {}, {}", month, day, year)
+}
+
+/// Converts the provided `DateTime` into a format suitable for an RSS feed.
+fn format_datetime_feed(datetime: DateTime<Utc>) -> String {
+    datetime.to_rfc2822()
 }
 
 fn calculate_pages(
