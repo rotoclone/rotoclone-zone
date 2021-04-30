@@ -1,7 +1,10 @@
 {% extends "base" %}
 {% block content %}
     <div class="text-container">
-        <h1>The Rotoclone Zone Blog</h1>
+        <div class="blog-index-header">
+            <h1>The Rotoclone Zone Blog</h1>
+            <a href="/blog/feed" title="RSS feed" class="rss-link">{% include "icons/rss" %}</a>
+        </div>
         {% for entry in entries %}
             {% include "blog_entry_stub" %}
         {% endfor %}

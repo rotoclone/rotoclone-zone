@@ -12,6 +12,9 @@
         <div></div>
     {% endif %}
 </div>
+<div class="entry-end-rss-link">
+    <a href="/blog/feed" title="RSS feed" class="rss-link">{% include "icons/rss" %}</a>
+</div>
 <div class="external-discussion-links">
     {% for external_discussion in external_discussions %}
         <span class="external-discussion-link"><a href="{{ external_discussion.url }}">Discuss this post on {{ external_discussion.name }}</a></span>
