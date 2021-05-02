@@ -46,7 +46,7 @@
 
 /* Composite classes */
 
-/* * {border:1px solid red;} */
+/* * {outline:1px solid red;} */
 
 body {
     font-family: var(--font-main);
@@ -190,12 +190,16 @@ blockquote blockquote {
 }
 
 .footer a, .footer p {
-    padding: 0.5em;
-    margin: 0;
+    padding: 0;
+    margin: 0.5em;
     color: var(--color-footertext);
     fill: var(--color-footericon);
     text-shadow: 1px 1px 1px var(--color-shadow);
     border: none;
+}
+
+.footer a:hover {
+    fill: var(--color-footerlink-hover);
 }
 
 .footer .icon svg {
@@ -300,6 +304,14 @@ blockquote blockquote {
 
 .blog-metadata p {
     display: inline;
+}
+
+.blog-metadata a {
+    color: var(--color-fadedlink);
+}
+
+.blog-metadata a:hover {
+    color: var(--color-link-hover);
 }
 
 .blog-tags ul {
@@ -561,6 +573,7 @@ body {
     --color-navtext: var(--color-235);
     --color-footertext: var(--color-235);
     --color-footericon: var(--color-235);
+    --color-footerlink-hover: #fff;
     --color-boxbg: var(--color-white-5pct);
     --color-boxborder: var(--color-white-10pct);
     --color-boxaccent: var(--color-primary);
@@ -590,6 +603,7 @@ body.light-theme {
     --color-navtext: var(--color-235);
     --color-footertext: var(--color-235);
     --color-footericon: var(--color-235);
+    --color-footerlink-hover: #fff;
     --color-boxbg: var(--color-black-3pct);
     --color-boxborder: var(--color-black-5pct);
     --color-boxaccent: var(--color-secondary);
