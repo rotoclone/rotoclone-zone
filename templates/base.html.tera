@@ -17,7 +17,7 @@
     </head>
     <body>
         <script>
-            if (window.location.host !== 'rotoclone.zone') {
+            if (window.location.host !== 'rotoclone.zone' && window.location.host !== 'www.rotoclone.zone') {
                 window.goatcounter = {no_onload: true}
             }
         </script>
