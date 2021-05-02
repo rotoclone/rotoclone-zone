@@ -1,44 +1,20 @@
 /* Webfonts */
+
 @font-face {
     font-family: "Open Sans";
     font-style: normal;
     font-weight: 400;
-    src: url("/fonts/open-sans-regular.woff2") format('woff2');
     font-display: swap;
+    src: url("/fonts/open-sans-400.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
-/*
-@font-face {
-    font-family: "Raleway";
-    src: url('/fonts/raleway-bold.woff2') format('woff2');
-    font-display: swap;
-}
-*/
 
 @font-face {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(https://fonts.gstatic.com/s/opensans/v18/mem5YaGs126MiZpBA-UN7rgOUuhp.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: "Nunito Sans";
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/nunitosans/v6/pe0qMImSLYBIv1o4X1M8cce9I9s.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-    font-family: 'Nunito Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/nunitosans/v6/pe03MImSLYBIv1o4X1M8cc8GBs5tU1E.woff2) format('woff2');
+    src: url("/fonts/open-sans-700.woff2") format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -47,7 +23,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(https://fonts.gstatic.com/s/raleway/v19/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCIPrE.woff2) format('woff2');
+    src: url("/fonts/raleway-400.woff2") format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -56,7 +32,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(https://fonts.gstatic.com/s/raleway/v19/1Ptug8zYS_SKggPNyC0ITw.woff2) format('woff2');
+    src: url("/fonts/raleway-700.woff2") format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -228,8 +204,18 @@ blockquote blockquote {
 
 .blog-index-header {
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: baseline;
+}
+
+.blog-index-header .rss-link {
+    margin: 1em;
+    fill: var(--color-fadedlink);
+}
+
+.blog-index-header .rss-link:hover {
+    margin: 1em;
+    fill: var(--color-link-hover);
 }
 
 .navigation a {
@@ -581,6 +567,7 @@ body {
     --color-navbg: var(--color-primary);
     --color-navhover: var(--color-white-15pct);
     --color-link: rgba(var(--color-main-yellow-triple), 0.8);
+    --color-fadedlink: rgba(var(--color-main-yellow-triple), 0.6);
     --color-link-hover: var(--color-main-yellow);
     --color-upvote: var(--color-main-green);
     --color-downvote: var(--color-red);
@@ -609,6 +596,7 @@ body.light-theme {
     --color-navbg: var(--color-primary);
     --color-navhover: var(--color-white-15pct);
     --color-link: rgba(var(--color-main-blue-triple), 0.8);
+    --color-fadedlink: rgba(var(--color-main-blue-triple), 0.6);
     --color-link-hover: var(--color-main-blue);
     --color-upvote: var(--color-main-green);
     --color-downvote: var(--color-red);

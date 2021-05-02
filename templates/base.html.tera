@@ -2,19 +2,27 @@
 <html lang="en">
     <head>
         <meta charset="utf-8"/>
-        <link rel="preload" href="/fonts/raleway-bold.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="/fonts/open-sans-regular.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/fonts/raleway-400.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/fonts/raleway-700.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/fonts/open-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/fonts/open-sans-700.woff2" as="font" type="font/woff2" crossorigin>
         <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
         <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
         <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
         <link href="/site.webmanifest" rel="manifest"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="/style.css" rel="stylesheet">
-        <script async defer data-website-id="0fb9897a-2078-4060-ab2e-5e8244f8e3cc" data-domains="rotoclone.zone,www.rotoclone.zone" src="https://www.rotoclone.zone/umami/rotoclone_umami.js"></script>
         <title>{{ base.title }}</title>
         <meta name="description" content="{{ base.meta_description }}">
     </head>
     <body>
+        <script>
+            if (window.location.host !== 'rotoclone.zone') {
+                window.goatcounter = {no_onload: true}
+            }
+        </script>
+        <script async defer data-goatcounter="https://analytics.rotoclone.zone/count" src="https://analytics.rotoclone.zone/count.js"></script>
+        <noscript><img src="https://analytics.rotoclone.zone/count?p=/test-noscript"></noscript>
         <script>
             const currentTheme = localStorage.getItem("theme");
             if (currentTheme == "dark") {
