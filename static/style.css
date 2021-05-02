@@ -206,19 +206,36 @@ blockquote blockquote {
     filter: drop-shadow( 1px 1px 1px var(--color-shadow));
 }
 
-.blog-index-header {
-    display: flex;
-    /*justify-content: space-between;*/
-    align-items: baseline;
+.about-image {
+    float: left;
+    min-width: 100px;
+    max-width: 150px;
+    width: 15%;
+    margin-right: 1em;
+}
+
+.about-image img {
+    width: 100%;
+}
+
+.caption {
+    font-style: oblique;
+    font-size: 11pt;
+    color: var(--color-fadedtext);
+    margin-top: 0;
+}
+
+.blog-index-header h1 {
+    display: inline;
 }
 
 .blog-index-header .rss-link {
-    margin: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
     fill: var(--color-fadedlink);
 }
 
 .blog-index-header .rss-link:hover {
-    margin: 1em;
     fill: var(--color-link-hover);
 }
 
@@ -261,7 +278,7 @@ blockquote blockquote {
 
 .home-header {
     font-size: 40pt;
-    text-align: center;
+    margin-bottom: 0;
 }
 
 .blog-title {
@@ -344,6 +361,7 @@ blockquote blockquote {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 1em;
+    clear: both;
 }
 
 .content-footer .icon svg {
@@ -372,6 +390,7 @@ hr {
 
 hr.content-footer-hr {
     margin-bottom: 0;
+    clear: both;
 }
 
 .entry-end-rss-link {
