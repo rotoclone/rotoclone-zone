@@ -12,6 +12,9 @@ use std::{
 /// The name of the directory blog entry files are stored under.
 const BLOG_ENTRIES_DIR_NAME: &str = "blog";
 
+/// The name of the file a blog entry's content is in.
+const BLOG_CONTENT_FILE_NAME: &str = "content.md";
+
 /// The template to use to render blog entries that have no template defined in their front matter.
 const DEFAULT_BLOG_ENTRY_TEMPLATE_NAME: &str = "blog_entry";
 
@@ -41,9 +44,16 @@ pub struct FrontMatter {
 #[derive(Debug, PartialEq)]
 pub struct PageMetadata {
     source_file: PathBuf,
+    pub associated_files: Vec<AssociatedFile>,
     pub html_content_file: PathBuf,
     pub slug: String,
     pub template_name: String,
+}
+
+#[derive(Debug, PartialEq)]
+pub struct AssociatedFile {
+    pub relative_path: PathBuf,
+    pub full_path: PathBuf,
 }
 
 #[derive(Debug, PartialEq)]
@@ -73,83 +83,128 @@ impl Site {
         let blog_entries_html_dir = html_dir.join(BLOG_ENTRIES_DIR_NAME);
 
         let mut blog_entries = Vec::new();
-        for blog_file in blog_entries_source_dir.read_dir().with_context(|| {
+        for file in blog_entries_source_dir.read_dir().with_context(|| {
             format!(
                 "error reading from {}",
                 blog_entries_source_dir.to_string_lossy()
             )
         })? {
-            let blog_file = blog_file.with_context(|| {
+            let file = file.with_context(|| {
                 format!(
                     "error reading from {}",
                     blog_entries_source_dir.to_string_lossy()
                 )
             })?;
 
-            let (front_matter, content_markdown) =
-                extract_front_matter_and_content(&blog_file.path()).with_context(|| {
-                    format!(
-                        "error extracting front matter from {}",
-                        blog_file.path().to_string_lossy()
-                    )
-                })?;
-            let html_content_file = write_content_as_html(
-                &blog_entries_html_dir,
-                blog_file.file_name(),
-                &content_markdown,
-            )
-            .with_context(|| {
-                format!(
-                    "error writing content of {} as HTML",
-                    blog_file.path().to_string_lossy()
-                )
-            })?;
-
-            let metadata = PageMetadata {
-                source_file: blog_file.path(),
-                html_content_file,
-                slug: front_matter
-                    .slug
-                    .unwrap_or_else(|| default_slug_for_file(&blog_file)),
-                template_name: front_matter
-                    .template
-                    .unwrap_or_else(|| DEFAULT_BLOG_ENTRY_TEMPLATE_NAME.to_string()),
-            };
-            let entry = BlogEntry {
-                metadata,
-                title: front_matter.title.unwrap_or_else(|| "".to_string()),
-                tags: front_matter.tags.unwrap_or_default(),
-                created_at: front_matter.created_at.unwrap_or(
-                    blog_file
-                        .metadata()
-                        .with_context(|| {
-                            format!(
-                                "error getting metadata for {}",
-                                blog_file.path().to_string_lossy()
-                            )
-                        })?
-                        .created()
-                        .with_context(|| {
-                            format!(
-                                "error getting created at for {}",
-                                blog_file.path().to_string_lossy()
-                            )
-                        })?
-                        .into(),
-                ),
-                updated_at: front_matter.updated_at,
-                comments_enabled: front_matter
-                    .comments_enabled
-                    .unwrap_or(DEFAULT_COMMENTS_ENABLED),
-                external_discussions: front_matter.external_discussions.unwrap_or_else(Vec::new),
-            };
-
-            blog_entries.push(entry);
+            if is_dir(&file)? {
+                let entry = parse_entry_dir(&file, &blog_entries_html_dir)?;
+                blog_entries.push(entry);
+            }
         }
+
+        //TODO error out if multiple blog entries have the same slug
 
         blog_entries.sort_by(|a, b| a.created_at.cmp(&b.created_at).reverse());
         Ok(Site { blog_entries })
     }
+}
+
+/// Determines whether the provided `DirEntry` is a directory.
+fn is_dir(file: &DirEntry) -> anyhow::Result<bool> {
+    Ok(file
+        .file_type()
+        .with_context(|| {
+            format!(
+                "error determining file type of {}",
+                file.path().to_string_lossy()
+            )
+        })?
+        .is_dir())
+}
+
+/// Parses a directory into a `BlogEntry`.
+///
+/// # Arguments
+/// * `dir` - The directory to parse.
+/// * `html_dir` - The directory to store the rendered HTML in.
+fn parse_entry_dir(dir: &DirEntry, html_dir: &Path) -> anyhow::Result<BlogEntry> {
+    let content_file_path = dir.path().join(BLOG_CONTENT_FILE_NAME);
+
+    let (front_matter, content_markdown) = extract_front_matter_and_content(&content_file_path)
+        .with_context(|| {
+            format!(
+                "error extracting front matter from {}",
+                content_file_path.to_string_lossy()
+            )
+        })?;
+
+    let html_content_file = write_content_as_html(&html_dir, dir.file_name(), &content_markdown)
+        .with_context(|| {
+            format!(
+                "error writing content of {} as HTML",
+                content_file_path.to_string_lossy()
+            )
+        })?;
+
+    let mut associated_files = Vec::new();
+    for file in dir
+        .path()
+        .read_dir()
+        .with_context(|| format!("error reading from {}", dir.path().to_string_lossy()))?
+    {
+        let path = file
+            .with_context(|| format!("error reading from {}", dir.path().to_string_lossy()))?
+            .path();
+
+        if path != content_file_path {
+            associated_files.push(AssociatedFile {
+                relative_path: path.strip_prefix(dir.path())?.to_path_buf(),
+                full_path: path,
+            });
+        }
+    }
+
+    let created_at = front_matter.created_at.unwrap_or(
+        content_file_path
+            .metadata()
+            .with_context(|| {
+                format!(
+                    "error getting metadata for {}",
+                    content_file_path.to_string_lossy()
+                )
+            })?
+            .created()
+            .with_context(|| {
+                format!(
+                    "error getting created at for {}",
+                    content_file_path.to_string_lossy()
+                )
+            })?
+            .into(),
+    );
+
+    let metadata = PageMetadata {
+        source_file: content_file_path,
+        associated_files,
+        html_content_file,
+        slug: front_matter
+            .slug
+            .unwrap_or_else(|| default_slug_for_file(&dir)),
+        template_name: front_matter
+            .template
+            .unwrap_or_else(|| DEFAULT_BLOG_ENTRY_TEMPLATE_NAME.to_string()),
+    };
+    Ok(BlogEntry {
+        metadata,
+        title: front_matter.title.unwrap_or_else(|| "".to_string()),
+        tags: front_matter.tags.unwrap_or_default(),
+        created_at,
+        updated_at: front_matter.updated_at,
+        comments_enabled: front_matter
+            .comments_enabled
+            .unwrap_or(DEFAULT_COMMENTS_ENABLED),
+        external_discussions: front_matter.external_discussions.unwrap_or_else(Vec::new),
+    })
 }
 
 /// Determines the default slug for the provided file.
