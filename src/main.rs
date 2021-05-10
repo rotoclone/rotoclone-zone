@@ -46,6 +46,8 @@ fn get_blog_index(page: Option<NonZeroUsize>, updating_site: State<UpdatingSite>
     Template::render("blog_index", &context)
 }
 
+//TODO redirect /blog/posts to /blog
+
 #[get("/blog/posts/<entry_name>")]
 fn get_blog_entry(entry_name: String, updating_site: State<UpdatingSite>) -> Option<Template> {
     let site = &updating_site.site.read().unwrap();
@@ -63,7 +65,7 @@ fn get_blog_entry(entry_name: String, updating_site: State<UpdatingSite>) -> Opt
     })
 }
 
-#[get("/blog/posts/<entry_name>/<path..>")]
+#[get("/blog/posts/<entry_name>/<path..>", rank = 0)]
 fn get_blog_entry_file(
     entry_name: String,
     path: PathBuf,
@@ -81,8 +83,7 @@ fn get_blog_entry_file(
         .find(|file| file.relative_path == path)
         .map(|file| &file.full_path)?;
 
-    //TODO NamedFile::open(full_path).await.ok()
-    None
+    futures::executor::block_on(NamedFile::open(full_path)).ok()
 }
 
 #[get("/blog/tags")]
@@ -135,6 +136,7 @@ fn rocket() -> rocket::Rocket<rocket::Build> {
                 about,
                 get_blog_index,
                 get_blog_entry,
+                get_blog_entry_file,
                 get_blog_tags,
                 get_blog_tag,
                 get_blog_feed,

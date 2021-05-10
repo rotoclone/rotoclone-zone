@@ -123,6 +123,7 @@ impl Site {
 #[derive(Serialize)]
 pub struct BlogEntryContext {
     base: BaseContext,
+    slug: String,
     tags: Vec<String>,
     created_at: String,
     updated_at: Option<String>,
@@ -157,6 +158,7 @@ impl Site {
                 title: entry.title.clone(),
                 meta_description: entry.title.clone(),
             },
+            slug: entry.metadata.slug.clone(),
             tags: entry.tags.clone(),
             created_at: format_datetime(entry.created_at),
             updated_at: entry.updated_at.map(format_datetime),

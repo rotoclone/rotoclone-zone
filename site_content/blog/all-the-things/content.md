@@ -21,6 +21,14 @@ fn a_function(stuff: &[i32]) -> bool {
 ```
 Wow, that sure is some code. Better copy and paste that directly into your editor to make your code better. Note how `a_function` returns a `bool`. Neat.
 
+Here's an image:
+
+![oh boy](someimage.jpg)
+
+And here's another image:
+
+![wow](somedir/someimage.jpg)
+
 ## A smaller header
 This header isn't the biggest. It's still bigger than this text though. How about a table?
 

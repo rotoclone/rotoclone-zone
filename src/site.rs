@@ -146,23 +146,7 @@ fn parse_entry_dir(dir: &DirEntry, html_dir: &Path) -> anyhow::Result<BlogEntry>
             )
         })?;
 
-    let mut associated_files = Vec::new();
-    for file in dir
-        .path()
-        .read_dir()
-        .with_context(|| format!("error reading from {}", dir.path().to_string_lossy()))?
-    {
-        let path = file
-            .with_context(|| format!("error reading from {}", dir.path().to_string_lossy()))?
-            .path();
-
-        if path != content_file_path {
-            associated_files.push(AssociatedFile {
-                relative_path: path.strip_prefix(dir.path())?.to_path_buf(),
-                full_path: path,
-            });
-        }
-    }
+    let associated_files = find_associated_files(dir, &dir.path(), &content_file_path)?;
 
     let created_at = front_matter.created_at.unwrap_or(
         content_file_path
@@ -205,6 +189,43 @@ fn parse_entry_dir(dir: &DirEntry, html_dir: &Path) -> anyhow::Result<BlogEntry>
             .unwrap_or(DEFAULT_COMMENTS_ENABLED),
         external_discussions: front_matter.external_discussions.unwrap_or_else(Vec::new),
     })
+}
+
+/// Recursively finds all the files associated with a blog entry, starting in `dir`.
+/// Relative paths in the returned `AssociatedFile`s will be relative to `base_path`.
+/// Any file with a path matching `content_file_path` will be ignored.
+fn find_associated_files(
+    dir: &DirEntry,
+    base_path: &Path,
+    content_file_path: &Path,
+) -> anyhow::Result<Vec<AssociatedFile>> {
+    let mut associated_files = Vec::new();
+    for file in dir
+        .path()
+        .read_dir()
+        .with_context(|| format!("error reading from {}", dir.path().to_string_lossy()))?
+    {
+        let file =
+            file.with_context(|| format!("error reading from {}", dir.path().to_string_lossy()))?;
+
+        if file
+            .file_type()
+            .with_context(|| format!("error getting type of {}", file.path().to_string_lossy()))?
+            .is_dir()
+        {
+            associated_files.extend(find_associated_files(&file, base_path, content_file_path)?);
+        } else {
+            let path = file.path();
+            if path != *content_file_path {
+                associated_files.push(AssociatedFile {
+                    relative_path: path.strip_prefix(base_path)?.to_path_buf(),
+                    full_path: path,
+                });
+            }
+        }
+    }
+
+    Ok(associated_files)
 }
 
 /// Determines the default slug for the provided file.

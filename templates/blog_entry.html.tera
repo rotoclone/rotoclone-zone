@@ -1,5 +1,6 @@
 {% extends "base" %}
 {% block content %}
+    <base href="{{ slug }}/">
     <div class="text-container">
         <div class="blog-heading">
             <h1 class="blog-title">{{ base.title }}</h1>
