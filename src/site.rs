@@ -1,4 +1,4 @@
-use anyhow::Context;
+use anyhow::{bail, Context};
 use chrono::{DateTime, Utc};
 use pulldown_cmark::{html, Options, Parser};
 use serde::Deserialize;
@@ -82,6 +82,7 @@ impl Site {
         let blog_entries_source_dir = source_dir.join(BLOG_ENTRIES_DIR_NAME);
         let blog_entries_html_dir = html_dir.join(BLOG_ENTRIES_DIR_NAME);
 
+        let mut slugs: Vec<String> = Vec::new();
         let mut blog_entries = Vec::new();
         for file in blog_entries_source_dir.read_dir().with_context(|| {
             format!(
@@ -98,11 +99,17 @@ impl Site {
 
             if is_dir(&file)? {
                 let entry = parse_entry_dir(&file, &blog_entries_html_dir)?;
+                if slugs.contains(&entry.metadata.slug) {
+                    bail!(
+                        "Blog entry in {} has non-unique slug: {}",
+                        file.path().to_string_lossy(),
+                        entry.metadata.slug
+                    );
+                }
+                slugs.push(entry.metadata.slug.clone());
                 blog_entries.push(entry);
             }
         }
-
-        //TODO error out if multiple blog entries have the same slug
 
         blog_entries.sort_by(|a, b| a.created_at.cmp(&b.created_at).reverse());
         Ok(Site { blog_entries })
