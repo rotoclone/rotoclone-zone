@@ -130,6 +130,13 @@ blockquote blockquote {
     margin: 0;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
 .page-container {
     max-width: 80rem;
     margin-left: auto;

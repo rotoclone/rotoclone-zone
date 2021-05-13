@@ -1,6 +1,9 @@
 use std::num::NonZeroUsize;
 
-use rocket::State;
+use rocket::{
+    response::{NamedFile, Redirect},
+    State,
+};
 use rocket_contrib::serve::{crate_relative, Options, StaticFiles};
 use rocket_contrib::templates::Template;
 use std::path::PathBuf;
@@ -46,6 +49,11 @@ fn get_blog_index(page: Option<NonZeroUsize>, updating_site: State<UpdatingSite>
     Template::render("blog_index", &context)
 }
 
+#[get("/blog/posts")]
+fn get_blog_posts() -> Redirect {
+    Redirect::permanent("/blog")
+}
+
 #[get("/blog/posts/<entry_name>")]
 fn get_blog_entry(entry_name: String, updating_site: State<UpdatingSite>) -> Option<Template> {
     let site = &updating_site.site.read().unwrap();
@@ -61,6 +69,27 @@ fn get_blog_entry(entry_name: String, updating_site: State<UpdatingSite>) -> Opt
                 .unwrap_or_else(|e| panic!("error rendering blog entry {}: {}", entry_name, e)),
         )
     })
+}
+
+#[get("/blog/posts/<entry_name>/<path..>", rank = 0)]
+fn get_blog_entry_file(
+    entry_name: String,
+    path: PathBuf,
+    updating_site: State<UpdatingSite>,
+) -> Option<NamedFile> {
+    let site = &updating_site.site.read().unwrap();
+    let entry = site
+        .blog_entries
+        .iter()
+        .find(|entry| entry.metadata.slug == entry_name)?;
+    let full_path = entry
+        .metadata
+        .associated_files
+        .iter()
+        .find(|file| file.relative_path == path)
+        .map(|file| &file.full_path)?;
+
+    futures::executor::block_on(NamedFile::open(full_path)).ok()
 }
 
 #[get("/blog/tags")]
@@ -112,7 +141,9 @@ fn rocket() -> rocket::Rocket<rocket::Build> {
                 index,
                 about,
                 get_blog_index,
+                get_blog_posts,
                 get_blog_entry,
+                get_blog_entry_file,
                 get_blog_tags,
                 get_blog_tag,
                 get_blog_feed,
