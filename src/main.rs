@@ -51,9 +51,7 @@ fn get_blog_index(page: Option<NonZeroUsize>, updating_site: State<UpdatingSite>
 
 #[get("/blog/posts")]
 fn get_blog_posts() -> Redirect {
-    // TODO figure out why this doesn't work: let uri = uri!(get_blog_index: page = None);
-    let uri = "/blog";
-    Redirect::permanent(uri)
+    Redirect::permanent("/blog")
 }
 
 #[get("/blog/posts/<entry_name>")]
