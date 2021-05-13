@@ -1,6 +1,9 @@
 use std::num::NonZeroUsize;
 
-use rocket::{response::NamedFile, State};
+use rocket::{
+    response::{NamedFile, Redirect},
+    State,
+};
 use rocket_contrib::serve::{crate_relative, Options, StaticFiles};
 use rocket_contrib::templates::Template;
 use std::path::PathBuf;
@@ -46,7 +49,12 @@ fn get_blog_index(page: Option<NonZeroUsize>, updating_site: State<UpdatingSite>
     Template::render("blog_index", &context)
 }
 
-//TODO redirect /blog/posts to /blog
+#[get("/blog/posts")]
+fn get_blog_posts() -> Redirect {
+    // TODO figure out why this doesn't work: let uri = uri!(get_blog_index: page = None);
+    let uri = "/blog";
+    Redirect::permanent(uri)
+}
 
 #[get("/blog/posts/<entry_name>")]
 fn get_blog_entry(entry_name: String, updating_site: State<UpdatingSite>) -> Option<Template> {
@@ -135,6 +143,7 @@ fn rocket() -> rocket::Rocket<rocket::Build> {
                 index,
                 about,
                 get_blog_index,
+                get_blog_posts,
                 get_blog_entry,
                 get_blog_entry_file,
                 get_blog_tags,

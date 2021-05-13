@@ -316,6 +316,7 @@ fn markdown_to_html(markdown: &str) -> String {
     options.insert(Options::ENABLE_FOOTNOTES);
     options.insert(Options::ENABLE_TABLES);
     let parser = Parser::new_ext(markdown, options);
+    //TODO add width and height attributes to img tags to reduce reflow
 
     let mut html: String = String::with_capacity(markdown.len() * 3 / 2);
     html::push_html(&mut html, parser);
