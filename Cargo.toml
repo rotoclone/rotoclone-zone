@@ -19,4 +19,4 @@ futures = "0.3"
 git = "https://github.com/SergioBenitez/Rocket"
 branch = "master"
 default-features = false
-features = ["tera_templates", "serve"]
+features = ["tera_templates"]
