@@ -2,7 +2,7 @@ use std::num::NonZeroUsize;
 
 use rocket::fs::{relative, FileServer, NamedFile, Options};
 use rocket::{response::Redirect, State};
-use rocket_contrib::templates::Template;
+use rocket_dyn_templates::Template;
 use std::path::PathBuf;
 
 #[macro_use]

@@ -15,8 +15,8 @@ hotwatch = "0.4.5"
 anyhow = "1.0"
 futures = "0.3"
 
-[dependencies.rocket_contrib]
+[dependencies.rocket_dyn_templates]
 git = "https://github.com/SergioBenitez/Rocket"
 branch = "master"
 default-features = false
-features = ["tera_templates"]
+features = ["tera"]
