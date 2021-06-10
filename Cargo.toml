@@ -5,7 +5,8 @@ authors = ["Steven Goldberg"]
 edition = "2018"
 
 [dependencies]
-rocket = { git = "https://github.com/SergioBenitez/Rocket", branch = "master", features = ["tls"] }
+rocket = { version = "0.5.0-rc.1", features = ["tls"] }
+rocket_dyn_templates = { version = "0.1.0-rc.1", features = ["tera"] }
 serde = "1.0"
 chrono = { version = "0.4.19", features = ["serde"] }
 toml = "0.5.8"
@@ -14,9 +15,3 @@ pulldown-cmark = "0.8.0"
 hotwatch = "0.4.5"
 anyhow = "1.0"
 futures = "0.3"
-
-[dependencies.rocket_dyn_templates]
-git = "https://github.com/SergioBenitez/Rocket"
-branch = "master"
-default-features = false
-features = ["tera"]
