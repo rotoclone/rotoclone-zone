@@ -1,6 +1,7 @@
 <div class="blog-stub">
     <h2 class="blog-stub-title"><a href={{ entry.url }}>{{ entry.title }}</a></h2>
-    <span>{{ entry.created_at }}</span>
+    <p class="blog-stub-description">{{ entry.description }}</p>
+    <span class="blog-stub-created-at">{{ entry.created_at }}</span>
     {% if entry.tags|length > 0 %}
         <span> • </span>
         <div class="blog-tags blog-stub-tags">
@@ -12,7 +13,7 @@
         </div>
     {% endif %}
     {% if entry.comments_enabled %}
-        <div>
+        <div class="blog-stub-comments">
             <a href={{ entry.url }}#commento data-page-id="{{ entry.url }}">0 comments</a>
         </div>
     {% endif %}

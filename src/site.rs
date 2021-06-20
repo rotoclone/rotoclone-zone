@@ -33,6 +33,7 @@ pub struct Site {
 pub struct FrontMatter {
     slug: Option<String>,
     title: Option<String>,
+    description: Option<String>,
     template: Option<String>,
     tags: Option<Vec<String>>,
     created_at: Option<DateTime<Utc>>,
@@ -59,6 +60,7 @@ pub struct AssociatedFile {
 #[derive(Debug, PartialEq)]
 pub struct BlogEntry {
     pub title: String,
+    pub description: String,
     pub metadata: PageMetadata,
     pub tags: Vec<String>,
     pub created_at: DateTime<Utc>,
@@ -188,6 +190,7 @@ fn parse_entry_dir(dir: &DirEntry, html_dir: &Path) -> anyhow::Result<BlogEntry>
     Ok(BlogEntry {
         metadata,
         title: front_matter.title.unwrap_or_else(|| "".to_string()),
+        description: front_matter.description.unwrap_or_else(|| "".to_string()),
         tags: front_matter.tags.unwrap_or_default(),
         created_at,
         updated_at: front_matter.updated_at,

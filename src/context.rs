@@ -17,6 +17,7 @@ const BLOG_FEED_SIZE: usize = 20;
 #[derive(Serialize)]
 pub struct BlogEntryStub {
     pub title: String,
+    pub description: String,
     pub tags: Vec<String>,
     pub url: String,
     pub created_at: String,
@@ -28,6 +29,7 @@ impl BlogEntry {
     fn to_stub(&self) -> BlogEntryStub {
         BlogEntryStub {
             title: self.title.clone(),
+            description: self.description.clone(),
             tags: self.tags.clone(),
             url: format!("/blog/posts/{}", self.metadata.slug),
             created_at: format_datetime(self.created_at),
@@ -156,7 +158,7 @@ impl Site {
         Ok(BlogEntryContext {
             base: BaseContext {
                 title: entry.title.clone(),
-                meta_description: entry.title.clone(),
+                meta_description: entry.description.clone(),
             },
             slug: entry.metadata.slug.clone(),
             tags: entry.tags.clone(),

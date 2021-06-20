@@ -50,7 +50,7 @@
 
 body {
     font-family: var(--font-main);
-    font-size: 13pt;
+    font-size: var(--font-size);
     color: var(--color-maintext);
     padding: 0;
     margin: 0;
@@ -227,7 +227,7 @@ img {
 
 .caption {
     font-style: oblique;
-    font-size: 11pt;
+    font-size: calc(var(--font-size) - 2pt);
     color: var(--color-fadedtext);
     margin-top: 0;
 }
@@ -314,11 +314,30 @@ img {
 }
 
 .blog-stub .blog-stub-title a {
+    color: var(--color-link);
     text-decoration: none;
+}
+
+.blog-stub .blog-stub-description {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .blog-stub .blog-stub-tags {
     display: inline;
+}
+
+.blog-stub a {
+    color: var(--color-fadedlink);
+}
+
+.blog-stub a:hover {
+    color: var(--color-link-hover);
+}
+
+.blog-stub-tags, .blog-stub-created-at, .blog-stub-comments {
+    font-size: calc(var(--font-size) - 1pt);
+    color: var(--color-fadedtext);
 }
 
 .blog-metadata {
@@ -510,6 +529,7 @@ hr.content-footer-hr {
 
 :root {
     --content-width: 80em;
+    --font-size: 13pt;
 
     /* https://paletton.com/#uid=33-0u0kPwDppxNnzvOxPYrIQDls */
     --color-main-blue: #0563BD;

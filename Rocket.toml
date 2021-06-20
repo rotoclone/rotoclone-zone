@@ -1,3 +1,4 @@
 [default]
 address = "0.0.0.0"
 port = 8000
+site_content_base_dir = "../rotoclone-zone-content"
