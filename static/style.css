@@ -226,7 +226,7 @@ img {
 }
 
 .caption {
-    font-style: oblique;
+    font-style: italic;
     font-size: calc(var(--font-size) - 2pt);
     color: var(--color-fadedtext);
     margin-top: 0;
@@ -560,6 +560,7 @@ hr.content-footer-hr {
     --color-170: rgb(170, 170, 170);
     --color-150: rgb(150, 150, 150);
     --color-140: rgb(140, 140, 140);
+    --color-120: rgb(120, 120, 120);
     --color-100: rgb(100, 100, 100);
     --color-75: rgb(75, 75, 75);
     --color-65: rgb(65, 65, 65);
@@ -615,7 +616,7 @@ body {
     --color-pagebg: var(--color-40);
     --color-contentbg: /*var(--color-50);*/ none;
     --color-maintext: var(--color-195);
-    --color-fadedtext: var(--color-150);
+    --color-fadedtext: var(--color-170);
     --color-navtext: var(--color-235);
     --color-footertext: var(--color-235);
     --color-footericon: var(--color-235);
@@ -626,7 +627,7 @@ body {
     --color-navbg: var(--color-primary);
     --color-navhover: var(--color-white-15pct);
     --color-link: rgba(var(--color-main-yellow-triple), 0.8);
-    --color-fadedlink: rgba(var(--color-main-yellow-triple), 0.6);
+    --color-fadedlink: rgba(var(--color-main-yellow-triple), 0.7);
     --color-link-hover: var(--color-main-yellow);
     --color-upvote: var(--color-main-green);
     --color-downvote: var(--color-red);
@@ -645,7 +646,7 @@ body.light-theme {
     --color-pagebg: var(--color-245);
     --color-contentbg: /*var(--color-245);*/ none;
     --color-maintext: var(--color-60);
-    --color-fadedtext: var(--color-140);
+    --color-fadedtext: var(--color-120);
     --color-navtext: var(--color-235);
     --color-footertext: var(--color-235);
     --color-footericon: var(--color-235);
@@ -656,7 +657,7 @@ body.light-theme {
     --color-navbg: var(--color-primary);
     --color-navhover: var(--color-white-15pct);
     --color-link: rgba(var(--color-main-blue-triple), 0.8);
-    --color-fadedlink: rgba(var(--color-main-blue-triple), 0.6);
+    --color-fadedlink: rgba(var(--color-main-blue-triple), 0.7);
     --color-link-hover: var(--color-main-blue);
     --color-upvote: var(--color-main-green);
     --color-downvote: var(--color-red);
