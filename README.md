@@ -1,6 +1,6 @@
 # rotoclone-zone
 
-The source code for my personal website
+The source code for [rotoclone.zone](https://www.rotoclone.zone)
 
 ## Building for Raspberry Pi from Windows
 1. Get linker from https://gnutoolchains.com/raspberry/
