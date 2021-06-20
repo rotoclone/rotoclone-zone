@@ -6,7 +6,7 @@
             <img src="/images/me.jpg">
             <p class="caption">Oh man look at how cool I am in my sunglasses</p>
         </div>
-        <p>Wow you want to learn more about me, I'm flattered. Well let's see...my name is Steven and I'm a human person. I made this website. I wrote it in <a href="https://www.rust-lang.org/">Rust</a> because I like Rust. Maybe someday I'll get around to writing a blog post about why I like Rust so I can get lots of upvotes on the Rust subreddit. Anyway, I created this website mostly to post development logs for a video game I'm making, but I post about other stuff too.</p>
+        <p>Wow you want to learn more about me, I'm flattered. Well let's see...my name is Steven. I made this website. I wrote it in <a href="https://www.rust-lang.org/">Rust</a> because I like Rust. Maybe someday I'll get around to writing a blog post about why I like Rust so I can get lots of upvotes on the Rust subreddit. Anyway, I created this website mostly to post development logs for a video game I'm making, but I post about other stuff too.</p>
         <p>If you want to get in touch with me, feel free to send an electronic mail to steven<span style="display: none">florp</span>@<span style="display: none">glorp</span>rotoclone.zone.</p>
     </div>
     <hr class="content-footer-hr" />
