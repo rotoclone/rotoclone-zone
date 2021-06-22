@@ -12,7 +12,6 @@
         <link href="/site.webmanifest" rel="manifest"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="/style.css" rel="stylesheet">
-        <script async defer data-website-id="0fb9897a-2078-4060-ab2e-5e8244f8e3cc" data-domains="rotoclone.zone,www.rotoclone.zone" src="https://www.rotoclone.zone/umami/rotoclone_umami.js"></script>
         <title>{{ base.title }}</title>
         <meta name="description" content="{{ base.meta_description }}">
     </head>
