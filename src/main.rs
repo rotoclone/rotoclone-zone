@@ -62,7 +62,7 @@ fn get_blog_entry(entry_name: String, updating_site: &State<UpdatingSite>) -> Op
     entry.map(|x| {
         Template::render(
             x.metadata.template_name.clone(),
-            site.build_blog_entry_context(&x)
+            site.build_blog_entry_context(x)
                 .unwrap_or_else(|e| panic!("error rendering blog entry {}: {}", entry_name, e)),
         )
     })

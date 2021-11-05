@@ -148,7 +148,7 @@ fn parse_entry_dir(dir: &DirEntry, html_dir: &Path) -> anyhow::Result<BlogEntry>
             )
         })?;
 
-    let html_content_file = write_content_as_html(&html_dir, dir.file_name(), &content_markdown)
+    let html_content_file = write_content_as_html(html_dir, dir.file_name(), &content_markdown)
         .with_context(|| {
             format!(
                 "error writing content of {} as HTML",
@@ -183,7 +183,7 @@ fn parse_entry_dir(dir: &DirEntry, html_dir: &Path) -> anyhow::Result<BlogEntry>
         html_content_file,
         slug: front_matter
             .slug
-            .unwrap_or_else(|| default_slug_for_file(&dir)),
+            .unwrap_or_else(|| default_slug_for_file(dir)),
         template_name: front_matter
             .template
             .unwrap_or_else(|| DEFAULT_BLOG_ENTRY_TEMPLATE_NAME.to_string()),
