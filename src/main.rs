@@ -1,6 +1,6 @@
 use std::num::NonZeroUsize;
 
-use rocket::fs::{relative, FileServer, NamedFile, Options};
+use rocket::fs::{FileServer, NamedFile, Options};
 use rocket::{response::Redirect, State};
 use rocket_dyn_templates::Template;
 use std::path::PathBuf;
@@ -146,7 +146,7 @@ fn rocket() -> rocket::Rocket<rocket::Build> {
                 get_blog_feed,
             ],
         )
-        .mount("/", FileServer::from(relative!("static")).rank(10))
+        .mount("/", FileServer::from("static").rank(10))
         .register("/", catchers![not_found])
         .attach(Template::fairing());
 
