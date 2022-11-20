@@ -2,6 +2,7 @@ use anyhow::{bail, Context};
 use chrono::{DateTime, Utc};
 use pulldown_cmark::{html, Options, Parser};
 use serde::Deserialize;
+use std::fmt::Write as _;
 use std::{
     ffi::OsString,
     fs::{create_dir_all, DirEntry, File, OpenOptions},
@@ -42,7 +43,7 @@ pub struct FrontMatter {
     external_discussions: Option<Vec<ExternalDiscussion>>,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct PageMetadata {
     source_file: PathBuf,
     pub associated_files: Vec<AssociatedFile>,
@@ -51,13 +52,13 @@ pub struct PageMetadata {
     pub template_name: String,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct AssociatedFile {
     pub relative_path: PathBuf,
     pub full_path: PathBuf,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct BlogEntry {
     pub title: String,
     pub description: String,
@@ -69,7 +70,7 @@ pub struct BlogEntry {
     pub external_discussions: Vec<ExternalDiscussion>,
 }
 
-#[derive(Debug, PartialEq, Deserialize)]
+#[derive(Debug, PartialEq, Eq, Deserialize)]
 pub struct ExternalDiscussion {
     pub name: String,
     pub url: String,
@@ -198,7 +199,7 @@ fn parse_entry_dir(dir: &DirEntry, html_dir: &Path) -> anyhow::Result<BlogEntry>
         comments_enabled: front_matter
             .comments_enabled
             .unwrap_or(DEFAULT_COMMENTS_ENABLED),
-        external_discussions: front_matter.external_discussions.unwrap_or_else(Vec::new),
+        external_discussions: front_matter.external_discussions.unwrap_or_default(),
     })
 }
 
@@ -280,7 +281,8 @@ fn extract_front_matter_and_content(
         } else if line == FRONT_MATTER_DELIMITER {
             done_with_front_matter = true;
         } else {
-            front_matter_string.push_str(&format!("{}\n", line));
+            writeln!(front_matter_string, "{}", line)
+                .map_err(|err| std::io::Error::new(std::io::ErrorKind::Other, err))?;
         }
     }
 
