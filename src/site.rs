@@ -191,8 +191,8 @@ fn parse_entry_dir(dir: &DirEntry, html_dir: &Path) -> anyhow::Result<BlogEntry>
     };
     Ok(BlogEntry {
         metadata,
-        title: front_matter.title.unwrap_or_else(|| "".to_string()),
-        description: front_matter.description.unwrap_or_else(|| "".to_string()),
+        title: front_matter.title.unwrap_or_default(),
+        description: front_matter.description.unwrap_or_default(),
         tags: front_matter.tags.unwrap_or_default(),
         created_at,
         updated_at: front_matter.updated_at,
